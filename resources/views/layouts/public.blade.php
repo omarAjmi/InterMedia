@@ -12,7 +12,20 @@
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
- 
+	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+	<!--//booststrap end-->
+	<!-- font-awesome icons -->
+	<link href="/css/font-awesome.css" rel="stylesheet">
+	<!-- //font-awesome icons -->
+	<link href="/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+	<!-- easy-responsive-tabs -->
+	<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+	<link href="/css/msg.css" rel='stylesheet' type='text/css' media="all">
+	
+	<!--//stylesheets-->
+	{{-- <link href="//fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">       --}}
+	<script src="/js/jquery-1.11.1.min.js"></script>
 <body style="background: #F7F7F7">
 	<div class="header-outs_page">
 		<div class="w3-agile-logo">
@@ -96,9 +109,7 @@
 		</div>
 	</div>
 
-	<div class="container-contact100">
-		<div class="contact100-map" ></div>
-        @yield('content')
+	@yield('content')
     </div>
 	<!--footer-->
       <footer>
@@ -121,8 +132,36 @@
          </div>
       </footer>
       <!-- //footer-->
+	  <!-- service for responsive tabs -->
+      <script src="/js/easy-responsive-tabs.js"></script>
+      <script>
+         $(document).ready(function () {
+			$('#verticalTab').easyResponsiveTabs({
+				type: 'vertical',
+				width: 'auto',
+				fit: true
+			});
+         });
+      </script>
+	  <script >
+         $(document).ready(function () {
+         	var defaults = {
+         		containerID: 'toTop', // fading element id
+         		containerHoverID: 'toTopHover', // fading element hover id
+         		scrollSpeed: 100,
+         		easingType: 'linear'
+         	};
+         	$(document).UItoTop({
+         		easingType: 'easeOutQuart'
+         	});
+         });
+      </script>
     <script src="/js/jquery.min.js"></script>
-    
+    <script src="/js/bootstrap.js"></script>
+      <!--// bootstrap-->
+      <!-- jQuery-Photo-filter-lightbox-Gallery-plugin -->
+      <script src="/js/jquery-1.7.2.js"></script>
+      <script src="/js/jquery.quicksand.js"></script>
 	<script src="/js/main.js"></script>
 </body>
 </html>
