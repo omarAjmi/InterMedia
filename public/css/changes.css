@@ -1,0 +1,174 @@
+input[type="reset"] {
+    background: #343434;
+    width: 100%;
+    border: 0;
+    padding: 10px 15px;
+    color: #ffffff;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+	outline: none;
+	margin-top: 3%;
+}
+
+h4{
+	display: inline;
+	 word-wrap: break-word;
+
+}
+.form select{
+	outline: none;
+    display: block;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    margin: 0 0 20px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    font-weight: 400;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    font-size: 14px;
+}
+.ajout{
+ margin-left: 83%;
+ background: #5cb85c;
+ color: white;
+}
+.consulter{
+margin-left: 78%;
+margin-right: 1%;
+margin-top: -8%;
+float: left;
+ background: #5cb85c;
+ color: white;
+}
+.dan{
+	margin-top: -15%;
+	margin-left: 88%;
+}
+.imge{
+	width: 17%;
+	height: 17%;
+}
+ .dropdown-admin{
+ 	margin-top: 7%;
+ }
+ .dropdown-admin button{
+ 	background-color: transparent;
+ 	border:transparent;
+ 	color: white;
+ }
+  .dropdown button{
+ 	background-color: transparent;
+ 	border:transparent;
+ 	color: white;
+ }
+@media only screen and (max-width: 320px) {
+.women_main li{
+  margin-bottom: 5%;
+}
+.ajout{
+ margin-left: 25%;
+ background: #5cb85c;
+ color: white;
+}
+.consulter{
+
+margin-left: 0%;
+float: left;
+ background: #5cb85c;
+ color: white;
+ margin-top: 3%
+}
+.dan{
+	margin-left: 50%;
+	margin-top: -30%;
+
+	width: 80px;
+	height: 33px;
+}
+.imge{
+	width: 67%;
+	height: 67%;
+}
+h4{
+	width: 100%;
+	display: block;
+	margin-left: 7%;
+}
+
+}
+@media only screen and (max-width: 766px) and (min-width: 322px) {
+.women_main li{
+  margin-bottom: 5%;
+}
+.ajout{
+ margin-left: 40%;
+ background: #5cb85c;
+ color: white;
+}
+.consulter{
+
+margin-left: 10%;
+float: left;
+ background: #5cb85c;
+ color: white;
+ margin-top: 3%
+}
+.dan{
+	margin-left:10%;
+	margin-top: 3%;
+
+	width: 35%;
+	height: 33px;
+}
+.imge{
+	width: 70%;
+	height: 70%;
+	margin-left: 10%
+}
+h4{
+	width: 100%;
+	display: block;
+	margin-left: 7%;
+}
+
+}
+@media only screen and (max-width: 1030px)and (min-width: 768px) {
+.women_main li{
+  margin-bottom: 5%;
+}
+.ajout{
+ margin-left: 65%;
+ background: #5cb85c;
+ color: white;
+}
+.consulter{
+
+margin-left: 10%;
+float: left;
+ background: #5cb85c;
+ color: white;
+ margin-top: 3%
+}
+.dan{
+	margin-left: 0%;
+	margin-top: 3%;
+
+	width: 100px;
+	height: 33px;
+}
+.imge{
+	width: 80%;
+	height: 80%;
+	margin-left: 7%
+}
+h4{
+	width: 100%;
+	display: block;
+	margin-left: 7%;
+}
+
+}
