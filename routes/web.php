@@ -72,6 +72,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::delete('promotions/{id}', ['as' => 'admin.promotions.delete', 'uses' => 'AdminPromotionsCrudController@delete']);
 });
+/////////////////////////////////////////Users Routes/////////////////////////////////////////////
+Route::group(['prefix' => 'users', 'middleware' => ['auth', 'authacc'], 'namespace' => 'Client'], function () {
+
+    Route::get('{id}', ['as' => 'user.profile', 'uses' => 'UsersCrudController@profile']);
+
+    Route::patch('{id}', ['as' => 'user.update', 'uses' => 'UsersCrudController@update']);
+
+    Route::get('{id}/orders', ['as' => 'user.orders', 'uses' => 'UsersCrudController@orders']);
+});
+/////////////////////////////////////////Users Routes/////////////////////////////////////////////
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
