@@ -6,6 +6,7 @@ use App\Order;
 use App\Client;
 use App\Technician;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 

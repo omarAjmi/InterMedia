@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Promotion;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 
