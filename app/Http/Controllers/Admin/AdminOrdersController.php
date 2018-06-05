@@ -8,7 +8,10 @@ use App\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateOrderRequest;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use App\Device;
+use App\Breakdown;
 
 class AdminOrdersController extends Controller
 {
@@ -41,6 +44,26 @@ class AdminOrdersController extends Controller
     public function create(Request $request)
     {
         dd(['CREATE', $request]);
+        $order = Order::create([
+            'client' => $request->client,
+            'technician' => $request->technician,
+            'nature' => $request->nature,
+            'return_date' => $request->return_date,
+            'varified' => true
+        ]);
+
+        $device = Device::create([
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'color' => $request->color,
+            'accessories' => $request->accessories
+        ]);
+
+        $bd = Breakdown::create([
+            'title' => $request->title,
+            'order_id' => $order->id,
+            'device_id' => $device->id
+        ]);
     }
 
     public function update(int $id, Request $request)

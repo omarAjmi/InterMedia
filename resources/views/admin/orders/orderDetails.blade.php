@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+{{-- {{ dd($errors) }} --}}
 <div class="content">
     <div class="women_main">
         <!-- start content -->

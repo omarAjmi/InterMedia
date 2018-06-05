@@ -42,14 +42,14 @@
                                 </div>
                                 <div class="form">
                                     <img src="/storage/uploads/users/{{ $tech->details->image }}" style="width: 40%;height: 40%;margin-left: 10%">
-                                    <h3>Nom: </h3>
-                                    <h3>Prénom: </h3>
-                                    <h3>cin: </h3>
-                                    <h3>Email: </h3>
-                                    <h3>Adresse: </h3>
-                                    <h3>Telephone: </h3>
-                                    <h3>Post: </h3>
-                                    <h3>Bio: </h3>
+                                    <h3>Nom: {{ $tech->details->last_name }}</h3>
+                                    <h3>Prénom: {{ $tech->details->first_name }}</h3>
+                                    <h3>cin: {{ $tech->cin }}</h3>
+                                    <h3>Email: {{ $tech->details->email }}</h3>
+                                    <h3>Adresse: {{ $tech->details->address }}</h3>
+                                    <h3>Telephone: {{ $tech->details->phone }}</h3>
+                                    <h3>Post:{{ $tech->post}}</h3>
+                                    <h3>Bio: {{ $tech->bio }}</h3>
                                 </div>
                                 <div class="form">
                                     <form method="POST" action="{{ route('admin.updateTechnician', $tech->user_id) }}">
@@ -114,10 +114,10 @@
                             </div>
 
                             <div class="form">
-                                <h3>Ajouter un client</h3>
+                                <h3>Ajouter un technicien</h3>
                                 <form method="POST" action="{{ route('admin.createTechnician') }}">
                                     @csrf
-                                    <img src="/storage/uploads/promotions/2.jpg" style="width: 30%;height: 30%;margin-left: 10%">
+                                    <img src="/images/repair.png" style="width: 30%;height: 30%;margin-left: 10%">
                                     <input type="file" name="file" class="form-control-file" style="margin: 2%">
                                     <input type="text" name="nom" placeholder="Nom" required>
                                     <input type="text" name="prenom" placeholder="Prénom" required>

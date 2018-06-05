@@ -2,10 +2,6 @@
 
 @section('content')
     <div class="content">
-        <!-- <form class="form-inline" action="" method="GET"> -->
-            <input type="text" name="query" id="query">
-            <!-- <input class="btn btn-info" type="submit" value="Trouver"> -->
-        <!-- </form> -->
         <a class="btn  ajout "   data-toggle="modal" data-target="#modalAjout" href="#" >
             <i class="fa fa-plus"></i> Ajouter un client
         </a>
