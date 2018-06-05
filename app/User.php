@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Intervention\Image\Facades\Image;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -45,5 +46,19 @@ class User extends Authenticatable
     public function technician()
     {
         return $this->hasOne('App\Technician');
+    }
+
+    /**
+     * upload l'image du profile
+     *
+     * @param integer $id
+     * @param array $photo
+     * @return void
+     */
+    private function updateImage(array $photo)
+    {
+        $filename = $this->id . '.' . $photo->getClientOriginalExtension();
+        Image::make($photo)->resize(128, 128)->save(public_path('storage/uploads/users/' . $filename));
+        return $filename;
     }
 }
