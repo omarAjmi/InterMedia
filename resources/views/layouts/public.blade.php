@@ -66,16 +66,35 @@
 					</h2>
 				</div>
 				<div class="col-md-4 col-sm-4 col-xs-4 w3-header-top-right-text">
-					<p>
 						@if(Auth::guest())
 							<a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a>
 						@else
-							<form class="form-inline" action="{{ route('logout') }}" method="post">
-								@csrf
-								<input type="submit" value="Se deconnecter">
-							</form>
+							<div class="dropdown pull-right" >
+								<button class="dropdown-toggle " style="color: white" type="button" data-toggle="dropdown" style="">
+									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+									<span class="caret"></span></button>
+								<ul class="dropdown-menu" style="">
+									<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
+									Profil
+									</a></li>
+									<li><a  href="{{ route('order.new') }}" class="dropdown-item" >
+									Nouveau Commandes
+									</a></li>
+									<li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
+									Mes commandes
+									</a></li>
+									<li> <a class="dropdown-item" href="{{ route('logout') }}"
+									onclick="event.preventDefault();
+									document.getElementById('logout-form').submit();">
+									{{ __('Logout') }}
+									</a>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+									</form>
+									</li>
+								</ul>
+							</div>
 						@endif
-						<span class="fa fa-phone" aria-hidden="true"></span> (+216)73 448 601</p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

@@ -114,9 +114,6 @@
 								<li><a href="{{ url('/') }}#gallery" class="scroll">Promotions</a></li>
 								<li><a href="{{ url('/') }}#testimonials" class="scroll">Témoignages</a></li>
 								<li><a href="{{ url('/') }}#contact" class="scroll">Contactez nous</a></li>
-								<!-- <li>
-								<a href="#" class="log" data-toggle="modal" data-target="#myModal">Login</a>
-								</li>
 	-->                     </ul>
 						</div>
 					</div>
