@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'address', 'phone'
     ];
 
     /**
@@ -24,6 +24,26 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'admin'
     ];
+
+    /**
+     * obtient le client correspondent au user | null si n'est pas un client
+     *
+     * @return App\Client
+     */
+    public function client()
+    {
+        return $this->hasOne('App\Client');
+    }
+
+    /**
+     * obtient le technicien correspondent au user | null si n'est pas un tech
+     *
+     * @return App\Technician
+     */
+    public function technician()
+    {
+        return $this->hasOne('App\Technician');
+    }
 }
