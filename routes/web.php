@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'welcome', 'uses' => 'WelcomeController@index']);
+Route::get('/', ['as' => 'welcome', 'uses' => 'WelcomeController@welcome']);
 
 /////////////////////////////////////////Admin Routes/////////////////////////////////////////////
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'], function () {

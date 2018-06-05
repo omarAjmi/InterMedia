@@ -380,6 +380,6 @@ margin-right: 7px;
 }
 .ScrollStyle
 {
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: scroll;
 }

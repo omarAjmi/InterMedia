@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Client;
-use App\Technician;
-use Illuminate\Http\Request;
 use App\Promotion;
+use App\Technician;
 
-class WelcomeConntroller extends Controller
+class WelcomeController extends Controller
 {
     public function welcome()
     {
