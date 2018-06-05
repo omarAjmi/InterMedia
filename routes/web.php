@@ -74,3 +74,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::delete('promotions/{id}', ['as' => 'admin.promotions.delete', 'uses' => 'AdminPromotionsCrudController@delete']);
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
