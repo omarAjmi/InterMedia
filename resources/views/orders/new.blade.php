@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-	<html>
+	<html lang="{{ env('APP_LOCALE') }}">
 		<head>
+			<title>Inter-Media Informatique</title>
+			<!--meta tags -->
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="keywords" content="vente, maintenance, vente et maintenance, matériel informatique, composants, accessoires, ordinateurs Gaming, Stations, CAD, PAO, 3D, Multi-monitoring, Vente en gros et en détails, produits informatique, smartphone, réparation smartphone, accessoires informatique, monastir" />
 			<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
 			<script src="/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 			<script src="/js/bootstrap.min.js"></script>
@@ -62,16 +67,13 @@
 									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
 									<span class="caret"></span></button>
 								<ul class="dropdown-menu" style="">
-									<li><a class="dropdown-item" href="{{ route('welcome') }}">
-									Acceuil
-									</a></li>
-									<li><a class="dropdown-item" >
+									<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
 									Profil
 									</a></li>
-									<li><a class="dropdown-item" >
-									Commandes
+									<li><a  href="{{ route('order.new') }}" class="dropdown-item" >
+									Nouveau Commandes
 									</a></li>
-									<li><a class="dropdown-item" href="{{ route('order.new') }}">
+									<li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
 									Mes commandes
 									</a></li>
 									<li> <a class="dropdown-item" href="{{ route('logout') }}"
