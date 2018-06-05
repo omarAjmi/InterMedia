@@ -15,9 +15,12 @@ Route::get('/', ['as' => 'welcome', 'uses' => 'WelcomeController@welcome']);
 
 /////////////////////////////////////////Admin Routes/////////////////////////////////////////////
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'], function () {
-
+    /***********************Index routes**************************/
     Route::get('/', ['as' => 'admin', 'uses' => 'AdminIndexController@index']);
+    /***********************Index routes**************************/
 
+
+    /***********************technicians routes**************************/
     Route::get('techniciens', ['as' => 'admin.technicians', 'uses' => 'AdminTechsCrudController@technicians']);
 
     Route::get('techniciens/{id}', ['as' => 'admin.techDetails', 'uses' => 'AdminTechsCrudController@technician']);
@@ -33,8 +36,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
     Route::patch('technician/{id}/', ['as' => 'admin.unmakeAdmin', 'uses' => 'AdminTechsCrudController@unmakeAdminn']);
 
     Route::delete('technician/{id}', ['as' => 'admin.deleteTechnician', 'uses' => 'AdminTechsCrudController@delete']);
+    /***********************technicians routes**************************/
 
-
+    /***********************clients routes**************************/
     Route::get('clients', ['as' => 'admin.clients', 'uses' => 'AdminClientsController@browse']);
 
     Route::get('clients/{id}/orders', ['as' => 'admin.clientOrders', 'uses' => 'AdminClientsController@orders']);
@@ -44,8 +48,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
     Route::patch('clients/{id}', ['as' => 'admin.updateClient', 'uses' => 'AdminClientsController@update']);
 
     Route::delete('clients/{id}', ['as' => 'admin.deleteClient', 'uses' => 'AdminClientsController@delete']);
+    /***********************clients routes**************************/
 
 
+    /***********************orders routes**************************/
     Route::get('orders', ['as' => 'admin.orders', 'uses' => 'AdminOrdersController@browse']);
 
     Route::get('orders/new', ['as' => 'admin.orderNew', 'uses' => 'AdminOrdersController@new']);
@@ -64,7 +70,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::delete('order/{id}', ['as' => 'admin.orderDelete', 'uses' => 'AdminOrdersController@delete']);
 
+    Route::get('closed', ['as' => 'admin.order.filter.closed', 'uses' => 'AdminOrdersFilters@closed']);
 
+    Route::get('not_closed', ['as' => 'admin.order.filter.notClosed', 'uses' => 'AdminOrdersFilters@notClosed']);
+
+    Route::get('verified', ['as' => 'admin.order.filter.verified', 'uses' => 'AdminOrdersFilters@verified']);
+
+    Route::get('not_verified', ['as' => 'admin.order.filter.notVerified', 'uses' => 'AdminOrdersFilters@notVerified']);
+
+    Route::get('payed', ['as' => 'admin.order.filter.payed', 'uses' => 'AdminOrdersFilters@payed']);
+
+    Route::get('not_payed', ['as' => 'admin.order.filter.notPayed', 'uses' => 'AdminOrdersFilters@notPayed']);
+    /***********************orders routes**************************/
+
+
+    /***********************promotions routes**************************/
     Route::get('promotions', ['as' => 'admin.promotions', 'uses' => 'AdminPromotionsCrudController@browse']);
 
     Route::post('promotions', ['as' => 'admin.promotions.create', 'uses' => 'AdminPromotionsCrudController@create']);
@@ -72,6 +92,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
     Route::patch('promotions/{id}', ['as' => 'admin.promotions.update', 'uses' => 'AdminPromotionsCrudController@update']);
 
     Route::delete('promotions/{id}', ['as' => 'admin.promotions.delete', 'uses' => 'AdminPromotionsCrudController@delete']);
+    /***********************promotions routes**************************/
 });
 /////////////////////////////////////////Admin Routes/////////////////////////////////////////////
 
@@ -108,7 +129,7 @@ Route::group(['prefix' => 'orders', 'middleware' => ['auth'], 'namespace' => 'Cl
 
 
 /////////////////////////////////////////Discussions Routes/////////////////////////////////////////////
-Route::group(['prefix' => 'discussion', 'middleware'=>'auth'], function () {
+Route::group(['prefix' => 'discussion', 'middleware'=>'auth', 'namespace' => 'Client'], function () {
     Route::post('{id}/reply', ['as' => 'discussion.reply', 'uses' => 'DiscussionsCrudController@reply']);
 });
 /////////////////////////////////////////Discussions Routes/////////////////////////////////////////////
