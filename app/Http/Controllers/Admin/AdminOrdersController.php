@@ -64,6 +64,14 @@ class AdminOrdersController extends Controller
             'order_id' => $order->id,
             'device_id' => $device->id
         ]);
+
+        Payment::create([
+            'order_id' => $order->id,
+            'cost' => $request->cost,
+            'deposit' => $request->deposit
+        ]);
+
+        Discussion::create(['order_id' => $order->id]);
     }
 
     public function update(int $id, Request $request)

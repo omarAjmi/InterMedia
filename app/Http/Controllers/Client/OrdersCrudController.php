@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateOrderRequest;
 
 class OrdersCrudController extends Controller
 {
@@ -50,7 +51,7 @@ class OrdersCrudController extends Controller
      * @param Request $request
      * @return void
      */
-    public function create(Request $request)
+    public function create(CreateOrderRequest $request)
     {   
         $order = Order::create([
             'client_id' => Auth::id(),
