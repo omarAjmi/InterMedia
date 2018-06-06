@@ -151,6 +151,7 @@
          </div>
       </footer>
       <!-- //footer-->
+	  
 	  <!-- service for responsive tabs -->
       <script src="/js/easy-responsive-tabs.js"></script>
       <script>

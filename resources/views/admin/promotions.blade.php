@@ -102,7 +102,7 @@
                     <div class="modal-body">
                         <div class="w3_login_module">
                             <div class="module form-module">
-                                <div class="toggle" style="background-color: white;border-top: 5px solid #0aca89;">
+                                <div class="toggle" style="background-color: white;border-top: 5px solid #0aca89;display: none;">
 
                                 </div>
                                 <div class="form">

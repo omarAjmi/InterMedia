@@ -6,6 +6,7 @@ use App\Client;
 use App\Technician;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
+use App\Order;
 
 
 class AuthUnseenMessagesViewComposer
@@ -28,7 +29,17 @@ class AuthUnseenMessagesViewComposer
                 }
             }
         }
-        return $view->with(['msgsCount' => $msgsCount]);
+        if ($view->name() === 'layouts.admin' ) {
+            $unverifiedOrders = Order::where('verified', false)->count();
+            return $view->with([
+                'msgsCount' => $msgsCount,
+                'unverifiedOrders' => $unverifiedOrders
+            ]);
+        } else {
+            return $view->with([
+                'msgsCount' => $msgsCount
+            ]);
+        }
         
     }
 }

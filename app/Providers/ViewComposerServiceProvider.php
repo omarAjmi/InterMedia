@@ -16,6 +16,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         view()->composer([
                             'welcome',
                             'layouts.public',
+                            'layouts.admin',
                             'users.profile',
                             'users.orders',
                             'orders.new',

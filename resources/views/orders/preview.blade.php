@@ -35,7 +35,7 @@
                                 <form method="POST" action="{{ route('discussion.reply', $order->discussion->id) }}">
                                 @csrf
                                     <textarea name="context" placeholder="Nouveau message..." ></textarea>
-                                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i>Envoiyer</button>
+                                    <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i>Envoyer</button>
                                 </form>
                             </div>
                         </div>
