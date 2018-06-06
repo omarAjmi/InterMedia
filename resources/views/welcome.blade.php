@@ -133,7 +133,7 @@
                         <div class="container">
                            <div class="slider-info">
                               <h4><span class="first-clr">N</span>ous <span class="first-clr">V</span>endons <span class="first-clr">L</span>e <span class="first-clr">M</span>eilleurs</h4>
-                              <p>Chez Inter Media, nous nous assurons que vous obtenez les trois meilleurs (qualité, prix et service). gabe.schoen@gmail.com </p>
+                              <p>Chez Inter Media, nous nous assurons que vous obtenez les trois meilleurs (qualité, prix et service).</p>
                            </div>
                         </div>
                      </div>
