@@ -69,7 +69,7 @@
                @else
                <div class="dropdown pull-right" >
                         <button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
-                            <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                            <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="badge"> {{ $msgsCount }}</span>
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="">
                             <li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
@@ -79,7 +79,7 @@
                                            Nouveau Commande
                                         </a></li>
                               <li><a href="{{ route('user.orders', Auth::id()) }}" class="dropdown-item" >
-                                           Mes commandes: {{ $msgsCount }}
+                                           Mes commandes:<span class="badge"> {{ $msgsCount }}</span>
                                         </a></li>
                             <li> <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

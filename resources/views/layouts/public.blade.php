@@ -70,29 +70,29 @@
 							<a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a>
 						@else
 							<div class="dropdown pull-right" >
-								<button class="dropdown-toggle " style="color: white" type="button" data-toggle="dropdown" style="">
-									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-									<span class="caret"></span></button>
-								<ul class="dropdown-menu" style="">
-									<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
-									Profil
-									</a></li>
-									<li><a  href="{{ route('order.new') }}" class="dropdown-item" >
-									Nouveau Commandes
-									</a></li>
-									<li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
-									Mes commandes
-									</a></li>
-									<li> <a class="dropdown-item" href="{{ route('logout') }}"
-									onclick="event.preventDefault();
-									document.getElementById('logout-form').submit();">
-									{{ __('Logout') }}
-									</a>
-									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-									@csrf
-									</form>
-									</li>
-								</ul>
+								<button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+                            <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="badge"> {{ $msgsCount }}</span>
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="">
+                            <li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
+                                           Profil
+                                        </a></li>
+                              <li><a class="dropdown-item"  href="{{ route('order.new') }}" >
+                                           Nouveau Commande
+                                        </a></li>
+                              <li><a href="{{ route('user.orders', Auth::id()) }}" class="dropdown-item" >
+                                           Mes commandes:<span class="badge"> {{ $msgsCount }}</span>
+                                        </a></li>
+                            <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                            </li>
+                        </ul>
 							</div>
 						@endif
 				</div>

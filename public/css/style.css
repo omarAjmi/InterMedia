@@ -19,6 +19,9 @@ font-family: 'Open Sans', sans-serif;
     border: transparent;
     color: white;
 }
+.badge {
+    background-color: #C00C0D;
+}
 
 body a {
     outline: none;

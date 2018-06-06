@@ -64,7 +64,7 @@
 						<div class="col-md-4 col-sm-4 col-xs-4 w3-header-top-right-text">
 							<div class="dropdown pull-right" >
 								<button class="dropdown-toggle " style="color: white" type="button" data-toggle="dropdown" style="">
-									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="badge"> {{ $msgsCount }}</span>
 									<span class="caret"></span></button>
 								<ul class="dropdown-menu" style="">
 									<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
@@ -74,7 +74,7 @@
 									Nouveau Commandes
 									</a></li>
 									<li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
-									Mes commandes
+									Mes commandes:<span class="badge"> {{ $msgsCount }}</span>
 									</a></li>
 									<li> <a class="dropdown-item" href="{{ route('logout') }}"
 									onclick="event.preventDefault();
