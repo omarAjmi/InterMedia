@@ -65,7 +65,7 @@
                         Nouveau Commandes
                         </a></li>
                         <li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
-                        Mes commandes:@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
+                        Mes commandes @if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
                         </a></li>
                         <li> <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

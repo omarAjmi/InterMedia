@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateOrderRequest extends FormRequest
+class CreateOrderAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +35,7 @@ class CreateOrderRequest extends FormRequest
             'model' => 'required|max:255|string',
             'tech' => 'required|integer',
             'color' => 'required|string|max:7|min:7',
-            'accessories' => 'required||max:255|string',
+            'accessories' => 'max:255|string',
             'nature' => 'required',
             'return_date' => 'required|after_or_equal:' . now()->toDateTimeString(),
             'cost' => 'required',

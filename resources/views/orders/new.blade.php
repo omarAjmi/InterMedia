@@ -74,7 +74,7 @@
 									Nouveau Commandes
 									</a></li>
 									<li><a class="dropdown-item" href="{{ route('user.orders', Auth::id()) }}">
-									Mes commandes:@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
+									Mes commandes @if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
 									</a></li>
 									<li> <a class="dropdown-item" href="{{ route('logout') }}"
 									onclick="event.preventDefault();
@@ -139,7 +139,7 @@
 									</td>
 									<td><div class="wrap-input100 validate-input" data-validate="champ requis">
 
-										<input class="input100" type="text" name="title" placeholder="">
+										<input class="input100" type="text" name="breakdown" placeholder="">
 											<span class="focus-input100"></span>
 										</div>
 										</td></tr>
@@ -154,7 +154,7 @@
 										</td>
 										<td>
 										<div class="wrap-input100 validate-input" data-validate = "champ requis">
-										<input class="input100" type="text" name="device_brand" placeholder="">
+										<input class="input100" type="text" name="brand" placeholder="">
 										<span class="focus-input100"></span>
 										</div>
 										</td></tr>
@@ -168,7 +168,7 @@
 										</td>
 										<td><div class="wrap-input100 validate-input" data-validate="champ requis">
 
-										<input class="input100" type="text" name="device_model" placeholder="">
+										<input class="input100" type="text" name="model" placeholder="">
 										<span class="focus-input100"></span>
 										</div>
 										</td></tr>
@@ -187,7 +187,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#ededc0">
+										<input type="radio" name="color" value="#ededc0">
 										<span class="checkmark" style=" background-color: #ededc0;
 										"></span>
 
@@ -196,7 +196,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#000000">
+										<input type="radio" name="color" value="#000000">
 										<span class="checkmark" style=" background-color: #000000;
 										"></span>
 
@@ -205,7 +205,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#0000FF">
+										<input type="radio" name="color" value="#0000FF">
 										<span class="checkmark" style=" background-color: #0000FF;
 										"></span>
 
@@ -214,7 +214,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#A52A2A">
+										<input type="radio" name="color" value="#A52A2A">
 										<span class="checkmark" style=" background-color: #A52A2A;
 										"></span>
 
@@ -223,7 +223,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#FFD700">
+										<input type="radio" name="color" value="#FFD700">
 										<span class="checkmark" style=" background-color: #FFD700;
 										"></span>
 
@@ -232,7 +232,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#008000">
+										<input type="radio" name="color" value="#008000">
 										<span class="checkmark" style=" background-color: #008000;
 										"></span>
 
@@ -241,7 +241,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#DAA520">
+										<input type="radio" name="color" value="#DAA520">
 										<span class="checkmark" style=" background-color: #DAA520;
 										"></span>
 
@@ -261,7 +261,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#FFC0CB">
+										<input type="radio" name="color" value="#FFC0CB">
 										<span class="checkmark" style=" background-color: #FFC0CB;
 										"></span>
 										</label>
@@ -270,7 +270,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#800080">
+										<input type="radio" name="color" value="#800080">
 										<span class="checkmark" style=" background-color: #800080;
 										"></span>
 
@@ -279,7 +279,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#FF0000">
+										<input type="radio" name="color" value="#FF0000">
 										<span class="checkmark" style=" background-color: #FF0000;
 										"></span>
 
@@ -288,7 +288,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#FFA500">
+										<input type="radio" name="color" value="#FFA500">
 										<span class="checkmark" style=" background-color: #FFA500;
 										"></span>
 
@@ -297,7 +297,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#C0C0C0">
+										<input type="radio" name="color" value="#C0C0C0">
 										<span class="checkmark" style=" background-color: #C0C0C0;
 										"></span>
 
@@ -306,7 +306,7 @@
 										<td >
 
 										<label class="container">
-										<input type="radio" name="device_color" value="#FFFFFF">
+										<input type="radio" name="color" value="#FFFFFF">
 										<span class="checkmark " style=" background-color: #FFFFFF;border: 0.5px solid black;border-radius: 50%
 										"></span>
 
@@ -324,7 +324,7 @@
 										</td>
 										<td><div class="wrap-input100 validate-input" data-validate="">
 
-										<input type="text" name="device_accessories" value="chargeur" class="input100" data-role="tagsinput" >
+										<input type="text" name="accessories" value="chargeur" class="input100" data-role="tagsinput" >
 										<span class="focus-input100"></span>
 										</div>
 										</td></tr>

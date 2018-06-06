@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\CreateClientRequest;
+// use App\Http\Requests\CreateClientPublicRequest;
 
 class UsersCrudController extends Controller
 {
@@ -39,7 +39,7 @@ class UsersCrudController extends Controller
      * @param integer $id
      * @return void
      */
-    public function update(CreateClientRequest $request, int $id)
+    public function update(Request $request, int $id)
     {
         $user = User::find($id);
         $user->first_name = $request->first_name;

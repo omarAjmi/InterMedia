@@ -2,14 +2,15 @@
 
 namespace App;
 
+use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -55,7 +56,7 @@ class User extends Authenticatable
      * @param array $photo
      * @return void
      */
-    private function updateImage(array $photo)
+    public function updateImage(UploadedFile $photo)
     {
         $filename = $this->id . '.' . $photo->getClientOriginalExtension();
         Image::make($photo)->resize(128, 128)->save(public_path('storage/uploads/users/' . $filename));

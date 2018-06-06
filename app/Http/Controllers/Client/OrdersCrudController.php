@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\CreateOrderRequest;
+use App\Http\Requests\CreateOrderPublicRequest;
 
 class OrdersCrudController extends Controller
 {
@@ -57,21 +57,21 @@ class OrdersCrudController extends Controller
      * @param Request $request
      * @return void
      */
-    public function create(CreateOrderRequest $request)
+    public function create(CreateOrderPublicRequest $request)
     {   
         $order = Order::create([
             'client_id' => Auth::id(),
         ]);
         $device = Device::create([
-            'brand' => $request->device_brand,
-            'model' => $request->device_model,
-            'color' => $request->device_color,
-            'accessories' => $request->device_accessories
+            'brand' => $request->brand,
+            'model' => $request->model,
+            'color' => $request->color,
+            'accessories' => $request->accessories
         ]);
         Breakdown::create([
             'order_id' => $order->id,
             'device_id' => $device->id,
-            'title' => $request->title
+            'title' => $request->breakdown
         ]);
         Payment::create([
             'order_id' => $order->id
