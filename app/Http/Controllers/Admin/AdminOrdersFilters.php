@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Admin;
 
 use App\Order;
 use App\Http\Controllers\Controller;
@@ -10,7 +10,7 @@ class AdminOrdersFilters extends Controller
 {
     public function verified()
     {
-        $orders = Order::where('verified', true)->sortByDesc('created_at');
+        $orders = Order::where('verified', true)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -21,7 +21,7 @@ class AdminOrdersFilters extends Controller
 
     public function closed()
     {
-        $orders = Order::where('closed', true)->sortByDesc('created_at');
+        $orders = Order::where('closed', true)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -31,7 +31,7 @@ class AdminOrdersFilters extends Controller
     }
     public function notVerified()
     {
-        $orders = Order::where('verified', false)->sortByDesc('created_at');
+        $orders = Order::where('verified', false)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -42,7 +42,7 @@ class AdminOrdersFilters extends Controller
 
     public function notClosed()
     {
-        $orders = Order::where('closed', false)->sortByDesc('created_at');
+        $orders = Order::where('closed', false)->get()->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -53,7 +53,7 @@ class AdminOrdersFilters extends Controller
 
     public function payed()
     {
-        $orders = Order::where('verified', false)->sortByDesc('created_at');
+        $orders = Order::with('payment')->where('payment.payed', true)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -64,7 +64,7 @@ class AdminOrdersFilters extends Controller
 
     public function notPayed()
     {
-        $orders = Order::with('payment')->sortByDesc('created_at');
+        $orders = Order::with('payment')->where('payment.payed', false)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);

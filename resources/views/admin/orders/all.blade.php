@@ -28,7 +28,7 @@
             @else
                 <h3>pas encore de commandes</h3>
             @endif
-            {{ $orders->links() }}
+            {{ $orders->setPath(url()->current())->render() }}
         <!-- end content -->
         </div>
     </div>

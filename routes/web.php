@@ -56,6 +56,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::get('orders/new', ['as' => 'admin.orderNew', 'uses' => 'AdminOrdersController@new']);
 
+    Route::get('orders/closed', ['as' => 'admin.order.filter.closed', 'uses' => 'AdminOrdersFilters@closed']);
+
+    Route::get('orders/not_closed', ['as' => 'admin.order.filter.notClosed', 'uses' => 'AdminOrdersFilters@notClosed']);
+
+    Route::get('orders/verified', ['as' => 'admin.order.filter.verified', 'uses' => 'AdminOrdersFilters@verified']);
+
+    Route::get('orders/not_verified', ['as' => 'admin.order.filter.notVerified', 'uses' => 'AdminOrdersFilters@notVerified']);
+
+    Route::get('orders/payed', ['as' => 'admin.order.filter.payed', 'uses' => 'AdminOrdersFilters@payed']);
+
+    Route::get('orders/not_payed', ['as' => 'admin.order.filter.notPayed', 'uses' => 'AdminOrdersFilters@notPayed']);
+
     Route::get('orders/{id}', ['as' => 'admin.orderDetails', 'uses' => 'AdminOrdersController@preview']);
 
     Route::get('orders/{id}/invoice', ['as' => 'admin.invoice', 'uses' => 'AdminOrdersController@invoice']);
@@ -69,18 +81,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
     Route::patch('order/verify/{id}', ['as' => 'admin.verifyOrder', 'uses' => 'AdminOrdersController@verifyOrder']);
 
     Route::delete('order/{id}', ['as' => 'admin.orderDelete', 'uses' => 'AdminOrdersController@delete']);
-
-    Route::get('closed', ['as' => 'admin.order.filter.closed', 'uses' => 'AdminOrdersFilters@closed']);
-
-    Route::get('not_closed', ['as' => 'admin.order.filter.notClosed', 'uses' => 'AdminOrdersFilters@notClosed']);
-
-    Route::get('verified', ['as' => 'admin.order.filter.verified', 'uses' => 'AdminOrdersFilters@verified']);
-
-    Route::get('not_verified', ['as' => 'admin.order.filter.notVerified', 'uses' => 'AdminOrdersFilters@notVerified']);
-
-    Route::get('payed', ['as' => 'admin.order.filter.payed', 'uses' => 'AdminOrdersFilters@payed']);
-
-    Route::get('not_payed', ['as' => 'admin.order.filter.notPayed', 'uses' => 'AdminOrdersFilters@notPayed']);
     /***********************orders routes**************************/
 
 
