@@ -12,13 +12,6 @@ use Intervention\Image\Facades\Image;
 
 class AdminTechsCrudController extends Controller
 {
-    /**
-     * Constructeur
-     */
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
 
     public function technicians()
     {

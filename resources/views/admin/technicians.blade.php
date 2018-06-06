@@ -115,17 +115,17 @@
 
                             <div class="form">
                                 <h3>Ajouter un technicien</h3>
-                                <form method="POST" action="{{ route('admin.createTechnician') }}">
+                                <form method="POST" action="{{ route('admin.createTechnician') }}" enctype="multipart/form-data">
                                     @csrf
                                     <img src="/images/repair.png" style="width: 30%;height: 30%;margin-left: 10%">
-                                    <input type="file" name="file" class="form-control-file" style="margin: 2%">
-                                    <input type="text" name="nom" placeholder="Nom" required>
-                                    <input type="text" name="prenom" placeholder="Prénom" required>
+                                    <input type="file" name="image" class="form-control-file" style="margin: 2%">
+                                    <input type="text" name="last_name" placeholder="Nom" required>
+                                    <input type="text" name="first_name" placeholder="Prénom" required>
                                     <input type="text" name="cin" placeholder="Cin" required>
                                     <input type="text" name="email" placeholder="Email" required>
-                                    <input type="text" name="adresse" placeholder="Adresse" required>
-                                    <input type="text" name="phone" placeholder="Phone" required>
-                                    <select name="client" >
+                                    <input type="text" name="address" placeholder="Adresse" required>
+                                    <input type="text" name="phone" placeholder="Téléphone" required>
+                                    <select name="post" >
                                         <option selected disabled>Poste</option>
                                         @foreach (['Technicien Hardware','Technicien Software','Technicien Informatique','Ingenieur Informatique'] as $job)
                                             <option value="{{ $job }}">{{ $job }}</option>
