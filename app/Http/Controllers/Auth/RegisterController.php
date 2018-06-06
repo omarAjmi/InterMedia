@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
+use App\Client;
 
 class RegisterController extends Controller
 {
@@ -49,8 +51,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|max:8',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -63,10 +67,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user =  User::create([
+            'last_name' => $data['last_name'],
+            'first_name' => $data['first_name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        Client::create(['user_id'=>$user->id]);
+        Mail::send('emails.welcomeEmail', [], function ($message) use ($user){
+            $message->to($user->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Bienvenue');
+        });
+        return $user;
     }
 }
