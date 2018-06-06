@@ -63,7 +63,18 @@ class UsersCrudController extends Controller
      */
     public function orders(int $id)
     {
+        $ordersList = collect();
         $orders = Client::where('user_id', $id)->first()->orders;
-        return view('users.orders')->with(['orders' => $orders]);
+        foreach ($orders as $order) {
+            $count = 0;
+            foreach ($order->discussion->history as $msg) {
+                if (!$msg->seen and $msg->sender_id !== Auth::id()) {
+                    $count++;
+                }
+            }
+            $ordersList->push(['data'=>$order, 'count'=>$count]);
+        }
+        // dd($ordersList);
+        return view('users.orders')->with(['orders' => $ordersList]);
     }
 }

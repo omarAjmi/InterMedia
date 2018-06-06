@@ -12,7 +12,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'nature', 'return_date', 'verified', 'client_id', 'technician_id'
+        'nature', 'return_date', 'verified', 'client_id', 'technician_id', 'closed'
     ];
 
     /**

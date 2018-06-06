@@ -31,7 +31,13 @@ class OrdersCrudController extends Controller
      */
     public function preview(int $id)
     {
-        $order = Order::with(['breakdown','discussion'])->find($id);
+        $order = Order::with(['breakdown.device','discussion.history'])->find($id);
+        foreach ($order->discussion->history as $msg) {
+            if($msg->sender_id !== Auth::id() and !$msg->seen) {
+                $msg->seen = true;
+                $msg->save();
+            }
+        }
         return view('orders.preview')->with(['order' => $order]);
     }
 

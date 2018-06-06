@@ -134,6 +134,9 @@
                 @foreach ($orders as $key => $order)
                     <li class="resp-tab-item resp-tab-active">
                         <span class="fa fa-desktop" aria-hidden="true"></span>commande {{ $x = $key+1 }}:
+                        @if ($order['count'] > 0)
+                        <span>{{ $order['count'] }}</span>
+                        @endif
                     </li>
                 @endforeach
             </ul>
@@ -142,18 +145,18 @@
                     <div class="tab{{ $key+1 }}">
                         <div class="services-right-agileits">
                             <div class="col-md-5 col-sm-5 col-xs-5 img-left">
-                                <img src="/storage/uploads/users/{{ $order->client->details->image }}" alt="" class="img-r">
+                                <img src="/storage/uploads/users/{{ $order['data']->client->details->image }}" alt="" class="img-r">
                             </div>
                             <div class="col-md-7 col-sm-7 col-xs-7 ser-img-wthree">
                                 <h4>Commande {{ $key+1 }}:</h4>
-                                <p>  Date : {{ $order->created_at }}<br>
-                                    Panne: {{ $order->breakdown->title }}<br>
-                                    Marque: {{ $order->breakdown->device->brand }}<br>
-                                    Model: {{ $order->breakdown->device->model }}<br>
-                                    Couleur: {{ $order->breakdown->device->color }} <br>
-                                    Accessoires : {{ $order->breakdown->device->accessories }}<br>
+                                <p>  Date : {{ $order['data']->created_at }}<br>
+                                    Panne: {{ $order['data']->breakdown->title }}<br>
+                                    Marque: {{ $order['data']->breakdown->device->brand }}<br>
+                                    Model: {{ $order['data']->breakdown->device->model }}<br>
+                                    Couleur: {{ $order['data']->breakdown->device->color }} <br>
+                                    Accessoires : {{ $order['data']->breakdown->device->accessories }}<br>
                                 </p>
-                                <a href="{{ route('order.preview', $order->id) }}" id="addClass"><button class="btn btn-primary" style="border-radius: 25px;border-color: transparent;"><span class="fa fa-comments"></span> Voir discussion</button> </a>
+                                <a href="{{ route('order.preview', $order['data']->id) }}" id="addClass"><button class="btn btn-primary" style="border-radius: 25px;border-color: transparent;"><span class="fa fa-comments"></span> Voir discussion</button> </a>
                             </div>
                         </div>
                     </div>
