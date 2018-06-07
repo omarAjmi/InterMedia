@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-	<title>Inter-Media Informatique</title>
-	<!--meta tags -->
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="keywords" content="vente, maintenance, vente et maintenance, matériel informatique, composants, accessoires, ordinateurs Gaming, Stations, CAD, PAO, 3D, Multi-monitoring, Vente en gros et en détails, produits informatique, smartphone, réparation smartphone, accessoires informatique, monastir" />
-         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-	<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
-	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-	<!--//booststrap end-->
-	<!-- font-awesome icons -->
-	<link href="/css/font-awesome.css" rel="stylesheet">
-	<!-- //font-awesome icons -->
-	<link href="/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
-	<!-- easy-responsive-tabs -->
-	<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
-	<link href="/css/msg.css" rel='stylesheet' type='text/css' media="all">
-	
-	<!--//stylesheets-->
-	{{-- <link href="//fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
-	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">       --}}
-	<script src="/js/jquery-1.11.1.min.js"></script>
+	<html lang="{{ env('APP_LOCALE') }}">
+	<head>
+		<title>Inter-Media Informatique</title>
+		<!--meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="vente, maintenance, vente et maintenance, matériel informatique, composants, accessoires, ordinateurs Gaming, Stations, CAD, PAO, 3D, Multi-monitoring, Vente en gros et en détails, produits informatique, smartphone, réparation smartphone, accessoires informatique, monastir" />
+			<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/util.css">
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
+		<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+		<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+		<!--//booststrap end-->
+		<!-- font-awesome icons -->
+		<link href="/css/font-awesome.css" rel="stylesheet">
+		<!-- //font-awesome icons -->
+		<link href="/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+		<!-- easy-responsive-tabs -->
+		<link href="/css/style.css" rel='stylesheet' type='text/css' media="all">
+		<link href="/css/msg.css" rel='stylesheet' type='text/css' media="all">
+		
+		<!--//stylesheets-->
+		{{-- <link href="//fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+		<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">       --}}
+		<script src="/js/jquery-1.11.1.min.js"></script>
 <body style="background: #F7F7F7">
 	<div class="header-outs_page">
 		<div class="w3-agile-logo">
