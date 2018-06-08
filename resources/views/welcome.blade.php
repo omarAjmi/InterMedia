@@ -211,7 +211,7 @@
                         <span class="fa fa-desktop" aria-hidden="true"></span>Vente
                      </li>
                      <li class="resp-tab-item" >
-                        <span class="fa fa-desktop" aria-hidden="true"></span> Réparation et Maintenance
+                        <span class="fa fa-desktop" aria-hidden="true"></span>Maintenance
                      </li>
                      <li class="resp-tab-item" >
                         <span class="fa fa-desktop" aria-hidden="true"></span> Classic Series
@@ -224,7 +224,7 @@
                      <div class="tab1">
                         <div class="services-right-agileits">
                            <div class="col-md-5 col-sm-5 col-xs-5 img-left">
-                              <img src="images/b3.jpg" alt="" class="img-r" style="width: 100%;height:200%">
+                              <img src="images/b3.jpg" alt="" class="img-r" style="width: 300px; height:300px">
                            </div>
                            <div class="col-md-7 col-sm-7 col-xs-7 ser-img-wthree">
                               <h4>Soft Furniture</h4>
@@ -239,13 +239,12 @@
                      <div class="tab2" >
                         <div class="services-right-agileits">
                            <div class="col-md-5 col-sm-5 col-xs-5 img-left">
-                              <img src="images/b2.jpg" alt="" class="img-r" style="width: 100%;height:200%">
+                              <img src="images/fix.gif?5" alt="" class="img-r" style="height: 300px; width: 300px;">
                            </div>
                            <div class="col-md-7 col-sm-7 col-xs-7 ser-img-wthree">
-                              <h4>Bathrooms</h4>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                 ut labore et dolore magna aliqua sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                 minim veniam, quis. Lorem ipsum dolor .
+                              <h4>Réparation et Maintenance</h4>
+                              <p>la réparation immédiate de téléphones mobiles, Smartphones et Tablettes des marques SAMSUNG, APPLE, SONY, NOKIA, LG, BLACKBERRY, HTC, HUAWEI, EVERTEK, ALCATEL...<br>
+                              Nous effectuons tous types de réparations – panne, casse, mise à jour logiciel, réparation mécanique ou désoxydation sur place.
                               </p>
                            </div>
                         </div>
