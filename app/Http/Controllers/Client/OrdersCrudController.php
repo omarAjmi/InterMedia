@@ -68,7 +68,7 @@ class OrdersCrudController extends Controller
             'color' => $request->color,
             'accessories' => $request->accessories
         ]);
-        Breakdown::create([
+        $bd = Breakdown::create([
             'order_id' => $order->id,
             'device_id' => $device->id,
             'title' => $request->breakdown
@@ -77,7 +77,12 @@ class OrdersCrudController extends Controller
             'order_id' => $order->id
         ]);
         Discussion::create(['order_id'=>$order->id]);
-        Session::flash('success', 'ordre est ajoute');
+        
+        Mail::send('emails.OrderCreatedEmail', ['title'=>$bd->title], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande Creé');
+        });
         return redirect(route('user.orders',['id'=>Auth::id()]));
     }
 

@@ -12,6 +12,7 @@ use App\Http\Requests\CreateOrderRequest;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use App\Device;
 use App\Breakdown;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOrdersController extends Controller
 {
@@ -71,6 +72,12 @@ class AdminOrdersController extends Controller
         ]);
 
         Discussion::create(['order_id' => $order->id]);
+
+        Mail::send('emails.OrderCreatedEmail', [], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande Creé');
+        });
     }
 
     public function update(int $id, Request $request)
@@ -98,6 +105,12 @@ class AdminOrdersController extends Controller
         $payment->cost = $request->cost;
         $payment->deposit = $request->deposit;
         $payment->save();
+
+        Mail::send('emails.OrderUpdatedEmail', [], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande a été mis à jour');
+        });
         return back();        
     }
 
@@ -106,14 +119,27 @@ class AdminOrdersController extends Controller
         $order = Order::find($id);
         $order->verified = true;
         $order->save();
+
+        Mail::send('emails.OrderVerifiedEmail', ['title' => $order->breakdown->title], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande Verifeé');
+        });
         return back();
     }
 
     public function setAsPayed(int $id)
     {
-        $payment = Order::find($id)->payment;
+        $order = Order::find($id);
+        $payment = $order->payment;
         $payment->payed = true;
         $payment->save();
+
+        Mail::send('emails.OrderPayedEmail', ['title'=>$order->breakdown->title], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande Payé');
+        });
         return back();
     }
 
@@ -122,6 +148,12 @@ class AdminOrdersController extends Controller
         $order = Order::find($id);
         $order->closed = true;
         $order->save();
+
+        Mail::send('emails.OrderClosedEmail', ['title' => $order->breakdown->title], function ($message) use ($order) {
+            $message->to($order->client->details->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Commande Terminé');
+        });
         return back();
     }
 

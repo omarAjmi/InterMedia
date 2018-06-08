@@ -136,5 +136,3 @@ Route::group(['prefix' => 'discussion', 'middleware'=>'auth', 'namespace' => 'Cl
 });
 /////////////////////////////////////////Discussions Routes/////////////////////////////////////////////
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
