@@ -12,6 +12,9 @@
                     <div class="pull-right">
                         <a href="{{ route('admin.invoice', ['id'=>$order->id]) }}" class="btn btn-success">Generer Fiche Technique</a>
                     </div>
+                    <div class="pull-right">
+                        <a href="{{ route('order.preview', $order->id) }}" class="btn btn-success">Voir Discussion</a>
+                    </div>
                     <form action="{{ route('admin.orderUpdate', ['id'=>$order->id]) }}" method="POST">                    
                         <input type="hidden" name="_method" value="PATCH">
                 @else
@@ -289,6 +292,15 @@
                 </form>
             @else
                 <a href="#" class="btn btn-success">Commande Paye</a>
+            @endif
+            @if (!$order->closed)
+                <form action="{{ route('admin.setOrderClosed', ['id'=>$order->id]) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input class="btn btn-default" type="submit" value="Marquer Comme Complete">
+                </form>
+            @else
+                <a href="#" class="btn btn-success">Commande Complete</a>
             @endif
         @endif
         

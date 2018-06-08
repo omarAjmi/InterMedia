@@ -19,7 +19,6 @@ class AdminClientsController extends Controller
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $clients = $clients->sortBy('details.first_name');
-        // dd($clients->sortBy('details.last_name'));
         $currentPageResults = $clients->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $paginatedResults = new Paginator($currentPageResults, count($clients), $perPage);
         return view('admin.clients')->with('clients', $paginatedResults);
@@ -44,6 +43,11 @@ class AdminClientsController extends Controller
         Client::create([
             'user_id' => $user->id
         ]);
+        Mail::send('emails.welcomeEmail', [], function ($message) use ($user) {
+            $message->to($user->email);
+            $message->from(env('MAIL_USERNAME'));
+            $message->subject('Bienvenue');
+        });
         return back();
     }
 
@@ -51,7 +55,12 @@ class AdminClientsController extends Controller
     {
         $client = Client::where('user_id', $id)->first();
         $orders = $client->orders;
-        return view('admin.orders.all')->with(['orders' => $orders]);
+        $currentPage = Paginator::resolveCurrentPage();
+        $perPage = 6;
+        $collection = collect($orders);
+        $currentPageResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedResults = new Paginator($currentPageResults, count($collection), $perPage);
+        return view('admin.orders.all')->with(['orders' => $paginatedResults]);
     }
 
     /**

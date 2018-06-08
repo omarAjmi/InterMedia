@@ -78,6 +78,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::patch('orders/{id}/set_as_payed', ['as' => 'admin.setOrderPayed', 'uses' => 'AdminOrdersController@setAsPayed']);
 
+    Route::patch('orders/{id}/set_as_closed', ['as' => 'admin.setOrderClosed', 'uses' => 'AdminOrdersController@setAsClosed']);
+
     Route::patch('order/verify/{id}', ['as' => 'admin.verifyOrder', 'uses' => 'AdminOrdersController@verifyOrder']);
 
     Route::delete('order/{id}', ['as' => 'admin.orderDelete', 'uses' => 'AdminOrdersController@delete']);

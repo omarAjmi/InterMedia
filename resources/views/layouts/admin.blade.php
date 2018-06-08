@@ -48,7 +48,7 @@
                         <h1><a href="{{ route('welcome') }}"><span class="first-clr">I</span>nter <span class="first-clr">M</span>edia</a></h1>
                         <h2><a href="{{ route('welcome') }}"><span class="first-clr">M</span>onastir</a></h2>
                     </div>
-                    <div class="clearfix"> </div>
+				<div class="clearfix"> </div>
                     
                 </div>
         

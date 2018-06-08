@@ -14,7 +14,7 @@
                             <img src="/storage/uploads/users/{{ $tech->details->image }}" class="imge">
                             <h4 >{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
                             <a data-toggle="modal" data-target="#dataModal{{$key}}" class="btn consulter">Consulter</a>
-                            <form action="{{ route('admin.deleteTechnician', $tech->id) }}" method="POST">
+                            <form action="{{ route('admin.deleteTechnician', $tech->user_id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input class="btn btn-danger dan" type="submit" value="Suprimer">

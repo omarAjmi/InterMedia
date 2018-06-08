@@ -66,35 +66,35 @@
 					</h2>
 				</div>
 				<div class="col-md-4 col-sm-4 col-xs-4 w3-header-top-right-text">
-						@if(Auth::guest())
-							<a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a>
-						@else
-							<div class="dropdown pull-right" >
-								<button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
-                            <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu" style="">
-                            <li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
-                                           Profil
-                                        </a></li>
-                              <li><a class="dropdown-item"  href="{{ route('order.new') }}" >
-                                           Nouveau Commande
-                                        </a></li>
-                              <li><a href="{{ route('user.orders', Auth::id()) }}" class="dropdown-item" >
-                                           Mes commandes @if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
-                                        </a></li>
-                            <li> <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                            </li>
-                        </ul>
-							</div>
-						@endif
+					@if(Auth::guest())
+						<a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a>
+					@else
+						<div class="dropdown pull-right" >
+							<button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+						<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu" style="">
+							<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
+										Profil
+										</a></li>
+							<li><a class="dropdown-item"  href="{{ route('order.new') }}" >
+										Nouveau Commande
+										</a></li>
+							<li><a href="{{ route('user.orders', Auth::id()) }}" class="dropdown-item" >
+										Mes commandes @if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
+										</a></li>
+							<li> <a class="dropdown-item" href="{{ route('logout') }}"
+									onclick="event.preventDefault();
+													document.getElementById('logout-form').submit();">
+										{{ __('Logout') }}
+									</a>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										@csrf
+									</form>
+							</li>
+						</ul>
+						</div>
+					@endif
 				</div>
 				<div class="clearfix"> </div>
 			</div>
