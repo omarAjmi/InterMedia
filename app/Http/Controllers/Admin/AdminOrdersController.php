@@ -43,7 +43,6 @@ class AdminOrdersController extends Controller
 
     public function create(Request $request)
     {
-        dd(['CREATE', $request]);
         $order = Order::create([
             'client' => $request->client,
             'technician' => $request->technician,
@@ -76,7 +75,30 @@ class AdminOrdersController extends Controller
 
     public function update(int $id, Request $request)
     {
-        dd(['UPDATE', $request]);
+        // dd($request->toArray());
+        $order = Order::find($id);
+        $order->technician_id = $request->technician;
+        $order->nature = $request->nature;
+        $order->return_date = $request->return_date;
+        $order->verified = true;
+        $order->save();
+
+        $device = $order->breakdown->device;
+        $device->brand = $request->brand;
+        $device->model = $request->model;
+        $device->color = $request->color;
+        $device->accessories = $request->accessories;
+        $device->save();
+
+        $bd = $order->breakdown;
+        $bd->title = $request->title;
+        $bd->save();
+
+        $payment = $order->payment;
+        $payment->cost = $request->cost;
+        $payment->deposit = $request->deposit;
+        $payment->save();
+        return back();        
     }
 
     public function verifyOrder(int $id)
@@ -84,7 +106,6 @@ class AdminOrdersController extends Controller
         $order = Order::find($id);
         $order->verified = true;
         $order->save();
-        Session::flash('success', 'Commande Verifie');
         return back();
     }
 
@@ -93,7 +114,14 @@ class AdminOrdersController extends Controller
         $payment = Order::find($id)->payment;
         $payment->payed = true;
         $payment->save();
-        Session::flash('success', 'Commande est paye');
+        return back();
+    }
+
+    public function setAsClosed(int $id)
+    {
+        $order = Order::find($id);
+        $order->closed = true;
+        $order->save();
         return back();
     }
 
