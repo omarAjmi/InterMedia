@@ -45,7 +45,7 @@
                   <p> <a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a></p>
                 @elseif(!is_null(Auth::user()->technician) and  Auth::user()->technician->admin)
                     <div class="dropdown pull-right" >
-                        <button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+                        <button class="dropdown-toggle but" style="overflow:hidden" type="button" data-toggle="dropdown" style="">
                             <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="">
@@ -68,7 +68,7 @@
                     </div>
                @else
                <div class="dropdown pull-right" >
-                        <button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+                        <button class="dropdown-toggle but" style="overflow:hidden" type="button" data-toggle="dropdown" style="">
                             <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="">
@@ -224,7 +224,7 @@
                      <div class="tab1">
                         <div class="services-right-agileits">
                            <div class="col-md-5 col-sm-5 col-xs-5 img-left">
-                              <img src="images/b3.jpg" alt="" class="img-r" style="width: 300px; height:300px">
+                              <img src="images/b3.jpg" alt="" class="img-r" style="">
                            </div>
                            <div class="col-md-7 col-sm-7 col-xs-7 ser-img-wthree">
                               <h4>Soft Furniture</h4>
@@ -239,7 +239,7 @@
                      <div class="tab2" >
                         <div class="services-right-agileits">
                            <div class="col-md-5 col-sm-5 col-xs-5 img-left">
-                              <img src="images/fix.gif?5" alt="" class="img-r" style="height: 300px; width: 300px;">
+                              <img src="images/fix.gif?5" alt="" class="img-r" >
                            </div>
                            <div class="col-md-7 col-sm-7 col-xs-7 ser-img-wthree">
                               <h4>Réparation et Maintenance</h4>
@@ -392,7 +392,7 @@
                             </div>
                             <div class="names">
                             <h4>{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
-                            <h6>{{ $tech->post }}</h6>
+                            <h6><i class="fa fa-wrench"></i>{{ $tech->post }}</h6>
                             <p>{{ $tech->bio }}</p>
                             </div>
                         </div>
@@ -639,7 +639,7 @@
    </script>
       <!-- //contact-->
       <!--footer-->
-      <footer>
+      <footer style="position: absolute;">
          <div class="container">
             <div class="col-md-7 header-side">
                <p>© 

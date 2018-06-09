@@ -42,14 +42,14 @@
                                 </div>
                                 <div class="form">
                                     <img src="/storage/uploads/users/{{ $tech->details->image }}" style="width: 40%;height: 40%;margin-left: 10%">
-                                    <h3>Nom: {{ $tech->details->last_name }}</h3>
-                                    <h3>Prénom: {{ $tech->details->first_name }}</h3>
-                                    <h3>cin: {{ $tech->cin }}</h3>
-                                    <h3>Email: {{ $tech->details->email }}</h3>
-                                    <h3>Adresse: {{ $tech->details->address }}</h3>
-                                    <h3>Telephone: {{ $tech->details->phone }}</h3>
-                                    <h3>Post:{{ $tech->post}}</h3>
-                                    <h3>Bio: {{ $tech->bio }}</h3>
+                                    <h3><span>Nom:</span> {{ $tech->details->last_name }}</h3>
+                                    <h3><span>Prénom:</span> {{ $tech->details->first_name }}</h3>
+                                    <h3><span>cin:</span> {{ $tech->cin }}</h3>
+                                    <h3><span>Email:</span> {{ $tech->details->email }}</h3>
+                                    <h3><span>Adresse:</span> {{ $tech->details->address }}</h3>
+                                    <h3><span>Telephone:</span> {{ $tech->details->phone }}</h3>
+                                    <h3><span>Post:</span>{{ $tech->post}}</h3>
+                                    <h3><span>Bio:</span> {{ $tech->bio }}</h3>
                                 </div>
                                 <div class="form">
                                     <form method="POST" action="{{ route('admin.updateTechnician', $tech->user_id) }}">

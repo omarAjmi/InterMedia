@@ -11,13 +11,15 @@
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="/js/jquery.nicescroll.js"></script>
 <script src="/js/bootstrap.js"></script>
-<script src="/js/moment-2.2.1.js"></script>
+<script src="/js/moment.js"></script>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <!-- Bootstrap Core CSS -->
 <link href="/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="/css/bootstrap-datetimepicker.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS -->
 <link href="/css/style-admin.css" rel='stylesheet' type='text/css' />
 <link href="/css/changes.css" rel='stylesheet' type='text/css' />
+
 
 <!-- Graph CSS -->
 <link href="/css/font-awesome.css" rel="stylesheet"> 
@@ -48,12 +50,38 @@
                         <h1><a href="{{ route('welcome') }}"><span class="first-clr">I</span>nter <span class="first-clr">M</span>edia</a></h1>
                         <h2><a href="{{ route('welcome') }}"><span class="first-clr">M</span>onastir</a></h2>
                     </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 pull-right" style="margin-top: -5%;width: 100%;">
+                    <div class="dropdown pull-right" >
+                        <button class="dropdown-toggle but" style="overflow:hidden" type="button" data-toggle="dropdown" style="width: 100%">
+                            <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="">
+                           <li><a class="dropdown-item" href="{{ route('welcome') }}">
+                                            Acceuil
+                                        </a></li>
+                            <li><a class="dropdown-item" href="{{ route('admin') }}">
+                                            Site Admin
+                                        </a></li>
+                            <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 				<div class="clearfix"> </div>
                     
                 </div>
-        
-            </div>
+               
+             
             <div class="clearfix"></div>
+
         <!-- /top_bg -->
         </div>
 			<!--`content-inner-->
@@ -108,6 +136,15 @@ $(".sidebar-icon").click(function() {
 	toggle = !toggle;
 });
 </script>
+
 <script src="/js/bootstrap-tagsinput.min.js"></script>
+
+    <script src="/js/bootstrap-tagsinput-angular.min.js"></script>
+
+
+
+<!--===============================================================================================-->
+    <script src="/js/main.js"></script>
+
 </body>
 </html>

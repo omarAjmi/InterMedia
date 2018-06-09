@@ -112,7 +112,7 @@
 							<span class="icon-bar"></span>
 						</button>
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
+					<div id="navbar" class="navbar-collapse collapse" style="width: 100%;margin-left: 5%;">
 						<ul class="nav navbar-nav ">
 							<li><a href="{{ url('/') }}" class="scroll">Acceuil</a></li>
 							<li><a href="{{ url('/') }}#about " class="scroll">À propos</a></li>

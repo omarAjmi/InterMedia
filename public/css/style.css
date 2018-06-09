@@ -1220,9 +1220,9 @@ h6.description{
     color: #000;
 }
 .profile h6 {
-    font-size: 16px;
+    font-size: 18px;
     margin-top: 8px;
-    color: #ff5722;
+    
 }
 .profile .img-box{
 	opacity: 1;
@@ -1235,7 +1235,20 @@ h6.description{
     background-color: rgba(0, 0, 0, 0.3);
 }
 .names h4,h6{
-  padding-left: 35%;
+  padding-left: 15%;
+  padding-top: 1%;
+}
+.names h6{
+  font-size: 16px;
+   margin-top: 8px;
+  color: #7f0e0e;
+}
+
+.names p{
+    text-align: justify;
+   text-justify: inter-word;
+    margin: 1.5%;
+    word-wrap: break-word;
 }
 .img-box ul{
 	position: absolute;
@@ -2354,7 +2367,18 @@ h3.title {
     padding: 0em 1em;
 }
 }
+.img-left img{
+  width: 300px; 
+  height:300px;
+}
 @media(max-width:640px){
+  .img-left img{
+  width: 100%; 
+  height:100%;
+}
+.but  {
+  margin-top: -8%;
+}
 .header-outs {
     min-height: 471px;
 }
@@ -2376,6 +2400,7 @@ h3.title {
 .img-left {
     width: 100%;
 }
+
 .ser-img-wthree{
     width: 100%;
     padding-top: 30px;

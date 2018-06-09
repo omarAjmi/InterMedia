@@ -60,12 +60,12 @@
                                 </div>
                                 <div class="form">
                                         <img src="/storage/uploads/users/{{ $client->details->image }}" style="width: 40%;height: 40%;margin-left: 10%">
-                                        <h3>Nom: {{ $client->details->last_name }}</h3>
-                                        <h3>Prénom: {{ $client->details->first_name }}</h3>
-                                        <h3>Email: {{ $client->details->email }}</h3>
-                                        <h3>Adresse: {{ $client->details->address }}</h3>
-                                        <h3>Telephone: {{ $client->details->phone }}</h3>
-                                        <a class="btn btn-info" href="{{ route('admin.clientOrders', $client->user_id) }}">Commandes</a>
+                                        <h3><span>Nom:</span> {{ $client->details->last_name }}</h3>
+                                        <h3><span>Prénom:</span> {{ $client->details->first_name }}</h3>
+                                        <h3><span>Email:</span> {{ $client->details->email }}</h3>
+                                        <h3><span>Adresse:</span>{{ $client->details->address }}</h3>
+                                        <h3><span>Telephone:</span> {{ $client->details->phone }}</h3>
+                                        <a class="btn button-submit" href="{{ route('admin.clientOrders', $client->user_id) }}">Commandes</a>
                                 </div>
                                 <div class="form">
                                     <form method="POST" action="{{ route('admin.updateClient', $client->user_id) }}" enctype="multipart/form-data">

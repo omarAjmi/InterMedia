@@ -1,6 +1,6 @@
 @extends('layouts.public')
 @section('content')
-    <div class="container">
+    <div >
         <div class="row">
             <div class="comments-container">
                 <ul id="comments-list" class="comments-list ScrollStyle">

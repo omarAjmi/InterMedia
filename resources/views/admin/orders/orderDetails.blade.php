@@ -10,15 +10,15 @@
                 <h3>Details:</h3>
                 @if (!is_null($order))
                     <div class="pull-right">
-                        <a href="{{ route('admin.invoice', ['id'=>$order->id]) }}" class="btn btn-success">Generer Fiche Technique</a>
+                        <a href="{{ route('admin.invoice', ['id'=>$order->id]) }}" class="btn button-submit" style="margin-left: 1%"><i class="fa fa-print"> </i>&nbsp;Generer Fiche Technique</a>
                     </div>
                     <div class="pull-right">
-                        <a href="{{ route('order.preview', $order->id) }}" class="btn btn-success">Voir Discussion</a>
+                        <a href="{{ route('order.preview', $order->id) }}" class="btn button-submit"><i class="fa fa-comments"></i></a>
                     </div>
                     <form action="{{ route('admin.orderUpdate', ['id'=>$order->id]) }}" method="POST">                    
                         <input type="hidden" name="_method" value="PATCH">
                 @else
-                    <form action="{{ route('admin.orderCreate') }}" method="POST">  
+            <form action="{{ route('admin.orderCreate') }}" method="POST">  
                 @endif
                 @csrf
                 <select name="client" >
@@ -32,21 +32,21 @@
                     @endforeach
                 </select>
                 @if (!is_null($order))
-                    <input type="text" name="title" placeholder="Panne" required="" value="{{ $order->breakdown->title }}">
+                    <input type="text" name="title" placeholder="Panne" required="" value="{{ $order->breakdown->title }}" style="width: 100%;border: 1px solid #d9d9d9;">
                 @else
-                    <input type="text" name="title" placeholder="Panne" required="">
+                    <input type="text" name="title" placeholder="Panne" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
                 @endif
 
                 @if (!is_null($order))
-                    <input type="text" name="brand" placeholder="Marque" required="" value="{{ $order->breakdown->device->brand }}">
+                    <input type="text" name="brand" placeholder="Marque" required="" value="{{ $order->breakdown->device->brand }}"  style="width: 100%;border: 1px solid #d9d9d9;">
                 @else
-                    <input type="text" name="brand" placeholder="Marque" required="">
+                    <input type="text" name="brand" placeholder="Marque" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
                 @endif
 
                 @if (!is_null($order))
-                    <input type="text" name="model" placeholder="Model" required="" value="{{ $order->breakdown->device->model }}">
+                    <input type="text" name="model" placeholder="Model" required="" value="{{ $order->breakdown->device->model }}"  style="width: 100%;border: 1px solid #d9d9d9;">
                 @else
-                    <input type="text" name="model" placeholder="Model" required="">
+                    <input type="text" name="model" placeholder="Model" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
                 @endif
 
                 <select name="technician">
@@ -146,7 +146,7 @@
                                     <span class="checkmark" style=" background-color: #DAA520;
                                 "></span>
                                 </label>
-                            </td
+                            </td>
                         </tr>
 
                         <tr>
@@ -229,9 +229,21 @@
                     </tbody>
                 </table>
                 @if (!is_null($order))
-                    <input type="text" name="accessories" data-role="tagsinput" placeholder="Accessoires" required="" value="{{ $order->breakdown->device->accessories }}">
+                <div class="wrap-input100 validate-input in-tag" data-validate="">
+
+                   
+                    <input type="text" name="accessories"   data-role="tagsinput"  required="" value="{{ $order->breakdown->device->accessories }}" style="border: 0">
+                    <span class="focus-input100"></span>
+                </div>
+               
                 @else
-                    <input type="text" name="accessories" data-role="tagsinput" placeholder="Accessoires" required="">
+                    <div class="wrap-input100 validate-input in-tag" data-validate="">
+
+                   
+                    <input type="text" name="accessories"   data-role="tagsinput"  required="" style="border: 0">
+                    <span class="focus-input100"></span>
+                </div>
+                   
                 @endif                
                 <select name="nature" >
                         <option selected disabled>Nature</option>
@@ -249,32 +261,19 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
+                 <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker').datetimepicker();
+            });
+        </script>
                 @if (!is_null($order))
                     <input type="submit" value="Enregistrer">
                 @else
                     <input type="submit" value="Creer">
                 @endif
-                <script type="text/javascript">
-                /**$(function () {
-                    $("#datetimepicker").datetimepicker({
-                        format: 'LT',
-                        locale: 'fr'
-                    });
-                });
-                </script>
-            </div>
-            <div class="form-mod_p" >
-                <h3>Payment:</h3>
-                @if (!is_null($order))
-                    <input type="text" name="cost" placeholder="Montant" required="" value="{{ $order->payment->cost }}">
-                    <input type="text" name="deposit" placeholder="Avance" required="" value="{{ $order->payment->deposit }}">
-                @else
-                    <input type="text" name="cost" placeholder="Montant" required="">
-                    <input type="text" name="deposit" placeholder="Avance" required="">
-                @endif
-            </div>
+                   
         </form>
-        @if (!is_null($order))
+                 @if (!is_null($order))
             @if ( !$order->verified)                
                 <form action="{{ route('admin.verifyOrder', ['id'=>$order->id]) }}" method="POST">
                     @csrf
@@ -282,7 +281,7 @@
                     <input class="btn btn-default" type="submit" value="Verifie Commande">
                 </form>
             @else
-                <a href="#" class="btn btn-success">Commande Verifie</a>
+                <a class="btn button-submit" style="background-color: #449d44">Commande Verifie</a>
             @endif
             @if (!$order->payment->payed)
                 <form action="{{ route('admin.setOrderPayed', ['id'=>$order->id]) }}" method="POST">
@@ -291,7 +290,7 @@
                     <input class="btn btn-default" type="submit" value="Marquer Comme payee">
                 </form>
             @else
-                <a href="#" class="btn btn-success">Commande Paye</a>
+                <a  class="btn button-submit" style="background-color: #449d44">Commande Paye</a>
             @endif
             @if (!$order->closed)
                 <form action="{{ route('admin.setOrderClosed', ['id'=>$order->id]) }}" method="POST">
@@ -300,9 +299,23 @@
                     <input class="btn btn-default" type="submit" value="Marquer Comme Complete">
                 </form>
             @else
-                <a href="#" class="btn btn-success">Commande Complete</a>
+                <a  class="btn button-submit" style="background-color: #449d44">Commande Complete</a>
             @endif
         @endif
+               
+            </div>
+         
+       <div class="form-mod_p" >
+                <h3>Payment:</h3>
+                @if (!is_null($order))
+                    <input type="text" name="cost" placeholder="Montant" required="" value="{{ $order->payment->cost }}" style="width: 100%">
+                    <input type="text" name="deposit" placeholder="Avance" required="" value="{{ $order->payment->deposit }}" style="width: 100%">
+                @else
+                    <input type="text" name="cost" placeholder="Montant" required="" style="width: 100%">
+                    <input type="text" name="deposit" placeholder="Avance" required="" style="width: 100%">
+                @endif
+            </div>
+        
         
         </div>
     </div>

@@ -14,7 +14,7 @@
                             <div>
                                 <img class="imge" src="/storage/uploads/users/{{ $order->client->details->image }}">
                                 <h4 >{{ $order->breakdown->title }}</h4>
-                                <h5 >{{ $order->created_at->toFormattedDateString() }}, {{ $order->created_at->toTimeString() }}</h5>
+                                <h5 style="color: #7f0e0e;font-weight: bolder; ">{{ $order->created_at->toFormattedDateString() }}, {{ $order->created_at->toTimeString() }}</h5>
                                 <a href="{{ route('admin.orderDetails', ['id'=>$order->id]) }}" class="btn btn-success consulter" >Consulter</a>
                                 <form action="{{ route('admin.orderNew', ['id'=>$order->id]) }}" method="POST">
                                     @csrf

@@ -45,7 +45,7 @@
                                             <div class="form">
                                                 <h3>{{ $promotion->title }}</h3>
                                                 <img src="/storage/uploads/promotions/{{ $promotion->image }}" style="width: 70%;height: 70%;margin-left: 10%">
-                                                <h3>Categorie: <span>{{ $promotion->category }}</span></h3>
+                                                <h3><span>Categorie: </span>{{ $promotion->category }}</h3>
                                             </div>
                                         <div class="form ">
                                             <form method="POST" action="{{ route('admin.promotions.update', $promotion->id) }}" enctype="multipart/form-data">
