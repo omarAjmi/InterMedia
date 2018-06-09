@@ -136,3 +136,19 @@ Route::group(['prefix' => 'discussion', 'middleware'=>'auth', 'namespace' => 'Cl
 });
 /////////////////////////////////////////Discussions Routes/////////////////////////////////////////////
 Auth::routes();
+
+Route::get('emails/1', function(){
+    return view('emails.OrderCreatedEmail')->with(['title'=>'blablablabla']);
+});
+Route::get('emails/2', function(){
+    return view('emails.OrderUpdatedEmail')->with(['title' => 'blablablabla']);
+});
+Route::get('emails/3', function(){
+    return view('emails.OrderPayedEmail')->with(['title' => 'blablablabla']);
+});
+Route::get('emails/4', function(){
+    return view('emails.OrderClosedEmail')->with(['title' => 'blablablabla']);
+});
+Route::get('emails/5', function(){
+    return view('emails.welcomeEmail')->with(['title' => 'blablablabla']);
+});

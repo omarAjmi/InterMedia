@@ -112,9 +112,9 @@
 							<table width="480" align="right" class="resp-full-table" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td width="100%" class="resp-full-td" valign="top" style="text-align : justify;">
-										<a href="#" style="outline:none; text-decoration:none"><span style="font-size:25px; font-weight: bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131;">{{ $title }}</span></a><br />
+										<a href="#" style="outline:none; text-decoration:none"><span style="font-size:25px; font-weight: bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131;">Panne: {{ $title }}</span></a><br />
 										<hr align="left" style="width:100px; margin-left:0px; text-align:left; background-color:#C00C0D; color:#C00C0D; height: 2px; border: 0 none;" />
-										<span style="font-size:16px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131">
+										<span style="line-height: 30px; font-size:16px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131">
                                             Votre commande a été vérifiée, signifie que votre panne est en cours de réparation, Nous vous recommander de revisiter notre site  web de temps en temps pour rester en contact avec nos techniciens . <br>
                                             N'hesiter pas a poser vos question, nous somme a votre service.
                                         </span>

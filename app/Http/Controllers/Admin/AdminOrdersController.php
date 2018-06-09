@@ -86,7 +86,7 @@ class AdminOrdersController extends Controller
         $order = Order::find($id);
         $order->technician_id = $request->technician;
         $order->nature = $request->nature;
-        $order->return_date = $request->return_date;
+        $order->return_date = \Carbon\Carbon::parse($request->return_date);
         $order->verified = true;
         $order->save();
 
@@ -106,7 +106,7 @@ class AdminOrdersController extends Controller
         $payment->deposit = $request->deposit;
         $payment->save();
 
-        Mail::send('emails.OrderUpdatedEmail', [], function ($message) use ($order) {
+        Mail::send('emails.OrderUpdatedEmail', ['title'=>$bd->title], function ($message) use ($order) {
             $message->to($order->client->details->email);
             $message->from(env('MAIL_USERNAME'));
             $message->subject('Commande a été mis à jour');
