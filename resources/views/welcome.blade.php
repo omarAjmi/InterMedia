@@ -45,7 +45,7 @@
                   <p> <a id="login" href="#" class="log" data-toggle="modal" data-target="#myModal">Se connecter</a></p>
                 @elseif(!is_null(Auth::user()->technician) and  Auth::user()->technician->admin)
                     <div class="dropdown pull-right" >
-                        <button class="dropdown-toggle but" style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+                        <button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
                             <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="">
@@ -68,7 +68,7 @@
                     </div>
                @else
                <div class="dropdown pull-right" >
-                        <button class="dropdown-toggle but" style="overflow:hidden" type="button" data-toggle="dropdown" style="">
+                        <button class="dropdown-toggle " style="overflow:hidden" type="button" data-toggle="dropdown" style="">
                             <img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}@if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="">
@@ -639,7 +639,7 @@
    </script>
       <!-- //contact-->
       <!--footer-->
-      <footer style="position: absolute;">
+      <footer >
          <div class="container">
             <div class="col-md-7 header-side">
                <p>© 

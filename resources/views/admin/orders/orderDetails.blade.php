@@ -6,7 +6,7 @@
     <div class="women_main">
         <!-- start content -->
         <div>
-            <div class=" form-mod ">
+            <div class=" form-mod " >
                 <h3>Details:</h3>
                 @if (!is_null($order))
                     <div class="pull-right">
@@ -17,11 +17,15 @@
                     </div>
                     <form action="{{ route('admin.orderUpdate', ['id'=>$order->id]) }}" method="POST">                    
                         <input type="hidden" name="_method" value="PATCH">
+                        <br><br>
                 @else
-            <form action="{{ route('admin.orderCreate') }}" method="POST">  
+            <form action="{{ route('admin.orderCreate') }}" method="POST" >  
                 @endif
                 @csrf
-                <select name="client" >
+
+                <label class="col-sm-2 control-label" for="formGroupInputSmall"> client:</label>
+                <div class="col-sm-10">
+                <select name="client" id="class_type" class="form-control input-lg"  >
                     <option selected disabled>Assignier au client</option>
                     @foreach ($clients as $client)
                         @if (!is_null($order) and $client->user_id == $order->client->user_id)
@@ -31,24 +35,45 @@
                         @endif
                     @endforeach
                 </select>
+                  </div>
+    
                 @if (!is_null($order))
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Panne:</label>
+                <div class="col-sm-10">
                     <input type="text" name="title" placeholder="Panne" required="" value="{{ $order->breakdown->title }}" style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @else
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Panne:</label>
+                <div class="col-sm-10">
                     <input type="text" name="title" placeholder="Panne" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @endif
 
                 @if (!is_null($order))
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Marque:</label>
+                <div class="col-sm-10">
                     <input type="text" name="brand" placeholder="Marque" required="" value="{{ $order->breakdown->device->brand }}"  style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @else
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Marque:</label>
+                <div class="col-sm-10">
                     <input type="text" name="brand" placeholder="Marque" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @endif
 
                 @if (!is_null($order))
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Model:</label>
+                <div class="col-sm-10">
                     <input type="text" name="model" placeholder="Model" required="" value="{{ $order->breakdown->device->model }}"  style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @else
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Model:</label>
+                <div class="col-sm-10">
                     <input type="text" name="model" placeholder="Model" required=""  style="width: 100%;border: 1px solid #d9d9d9;">
+                </div>
                 @endif
-
+                <label class="col-sm-2 control-label" for="formGroupInputSmall"> Technicien:</label>
+                <div class="col-sm-10">
                 <select name="technician">
                     <option selected disabled>Assigner au technicien</option>
                     @foreach ($techs as $tech)
@@ -59,11 +84,12 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
                 <table style="width:100%;position: relative;margin-bottom: 10%">
                     <tbody >
                         <tr style="margin-bottom: 50px">
                             <td style="width: 15%;">
-                                <label style="font-family: SourceSansPro-Bold;position: relatives;padding-top: 50%">Couleur :</label>
+                                <label style="position: relatives;padding-top: 50%;padding-left: 20%">Couleur:</label>
                             </td>
                             <td>
                                 <label class="container">
@@ -227,24 +253,30 @@
                             </td>
                         </tr>
                     </tbody>
+
                 </table>
                 @if (!is_null($order))
-                <div class="wrap-input100 validate-input in-tag" data-validate="">
+               
 
-                   
+                    <label class="col-sm-2 control-label" for="formGroupInputSmall"> Accessoire:</label>
+                <div class="col-sm-10">
+                     <div class="wrap-input100 validate-input in-tag" data-validate="">
                     <input type="text" name="accessories"   data-role="tagsinput"  required="" value="{{ $order->breakdown->device->accessories }}" style="border: 0">
                     <span class="focus-input100"></span>
                 </div>
-               
+               </div>
                 @else
-                    <div class="wrap-input100 validate-input in-tag" data-validate="">
-
                    
+                    <label class="col-sm-2 control-label" for="formGroupInputSmall"> Accesoires:</label>
+                <div class="col-sm-10">
+                    <div class="wrap-input100 validate-input in-tag" data-validate="">
                     <input type="text" name="accessories"   data-role="tagsinput"  required="" style="border: 0">
                     <span class="focus-input100"></span>
                 </div>
-                   
-                @endif                
+                </div>   
+                @endif          
+                 <label class="col-sm-2 control-label" for="formGroupInputSmall"> Nature:</label>
+                <div class="col-sm-10">
                 <select name="nature" >
                         <option selected disabled>Nature</option>
                     @foreach (['Facturable', 'Non Facturable'] as $nature)
@@ -255,12 +287,16 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
+            <label class="col-sm-2 control-label" for="formGroupInputSmall"> date:</label>
+                <div class="col-sm-10">
                 <div class="input-group date" id="datetimepicker">
                     <input type='text' name="return_date" class="form-control"/>
                     <span class="input-group-addon" style="background-color: white;border: none" >
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
+            </div>
                  <script type="text/javascript">
             $(function () {
                 $('#datetimepicker').datetimepicker();

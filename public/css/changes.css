@@ -27,6 +27,16 @@
     text-transform: uppercase;
     outline: none;
 }
+@media only screen and (max-width: 766px){
+.button-submit{
+
+    font-size: 0.7em;
+   
+}
+.form-mod input[type="submit"], .form-mod_p input[type="submit"]{
+	  font-size: 0.7em;
+}
+}
 .button-submit:hover{
 	background: #0aca89;
 }

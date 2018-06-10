@@ -598,7 +598,7 @@ nav.navbar.navbar-default.navbar-fixed-top {
     border: none;
     margin: 0px;
     background: rgba(255, 255, 255, 0);
-    border-top: 1px solid #fff;
+   
 }
 .navbar-nav {
     float: none;
@@ -1653,7 +1653,11 @@ box-shadow: -1px -2px 25px -4px rgba(0,0,0,0.57);
 	/*-- //contact --*/
 /*--footer--*/
 footer {
-    background:rgb(0, 0, 0);
+  background: black;
+    
+    max-width: 100%;
+
+    height: 200px;
 }
 
 footer p {
@@ -2245,6 +2249,10 @@ div#navbar {
 }
 .navbar-toggle {
     background: #C00C0D;
+
+    float: left;
+    margin-top: -30px;
+    margin-left: 20px;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: #C00C0D;
@@ -2299,6 +2307,7 @@ ul.nav.navbar-nav {
 @media(max-width:736px){
 	.head-wl {
     width: 100%;
+    
 }
 .header-outs {
     min-height: 493px;
@@ -2309,6 +2318,8 @@ ul.nav.navbar-nav {
 }
 .slider-info {
     padding: 11em 0 0;
+        margin-top: -20%;
+
 }
 .slider-info p {
 	

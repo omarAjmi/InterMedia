@@ -13,6 +13,19 @@
     user-select: none;
 }
 
+.cont {
+    display: inline-block;
+  width: 100%;
+    padding-left: 35px;
+    margin-bottom: 70px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 /* Hide the browser's default radio button */
 .container input {
     position: absolute;
@@ -402,12 +415,18 @@ textarea.input100 {
   .wrap-contact100 {
     padding: 72px 50px 25px 50px;
   }
+
 }
 
 @media (max-width: 576px) {
   .wrap-contact100 {
     padding: 72px 15px 25px 15px;
   }
+  .container-contact100-form-btn {
+  width: 90px;
+  
+
+}
 }
 
 
