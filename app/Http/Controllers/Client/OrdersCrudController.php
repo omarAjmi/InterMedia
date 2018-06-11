@@ -18,13 +18,6 @@ use App\Http\Requests\CreateOrderPublicRequest;
 class OrdersCrudController extends Controller
 {
     /**
-     * Constructor
-     */
-    function __construct()
-    {
-        // $this->middleware('authacctoorder')->only(['preview']);
-    }
-    /**
      * prevue du commande
      *
      * @return view

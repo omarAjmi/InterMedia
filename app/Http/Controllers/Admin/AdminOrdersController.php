@@ -82,8 +82,7 @@ class AdminOrdersController extends Controller
 
     public function update(int $id, Request $request)
     {
-        // dd($request->toArray());
-        $order = Order::findOrFail($id);
+        $order = Order::with(['breakdown.device', 'payment'])->findOrFail($id);
         $order->technician_id = $request->technician;
         $order->nature = $request->nature;
         $order->return_date = \Carbon\Carbon::parse($request->return_date);

@@ -217,7 +217,7 @@
                             </td>
                             <td>
                                 <label class="container">
-                                    @if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffa500')orderAdd
+                                    @if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffa500')
                                         <input type="radio" value="#ffa500" checked="checked" name="color">
                                     @else
                                         <input type="radio" value="#ffa500" name="color">

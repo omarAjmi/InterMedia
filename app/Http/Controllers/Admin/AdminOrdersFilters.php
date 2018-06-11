@@ -42,7 +42,7 @@ class AdminOrdersFilters extends Controller
 
     public function notClosed()
     {
-        $orders = Order::where('closed', false)->get()->get()->sortByDesc('created_at');
+        $orders = Order::where('closed', false)->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -53,7 +53,9 @@ class AdminOrdersFilters extends Controller
 
     public function payed()
     {
-        $orders = Order::with('payment')->where('payment.payed', true)->get()->sortByDesc('created_at');
+        $orders = Order::with(['payment' => function ($query) {
+            $query->where('payed', true);
+        }])->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
@@ -64,7 +66,9 @@ class AdminOrdersFilters extends Controller
 
     public function notPayed()
     {
-        $orders = Order::with('payment')->where('payment.payed', false)->get()->sortByDesc('created_at');
+        $orders = Order::with(['payment' => function($query){
+            $query->where('payed', false);
+        }])->get()->sortByDesc('created_at');
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);
