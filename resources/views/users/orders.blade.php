@@ -53,10 +53,10 @@
                </div>
                <div class="col-md-4 col-sm-4 col-xs-4 w3-header-top-right-text">
                   <div class="dropdown pull-right" >
-								<button class="dropdown-toggle " style="color: white" type="button" data-toggle="dropdown" style="">
+								<button class="dropdown-toggle " style="color: white" type="button" data-toggle="dropdown">
 									<img style="border-radius: 50%; height: 40px;width: 40px;" src="/storage/uploads/users/{{ Auth::user()->image }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} @if (!is_null($msgsCount))<span class="badge"> {{ $msgsCount }}</span>@endif
 									<span class="caret"></span></button>
-								<ul class="dropdown-menu" style="">
+								<ul class="dropdown-menu" >
 									<li><a href="{{ route('user.profile', Auth::id()) }}" class="dropdown-item" >
 									Profil
 									</a></li>
@@ -153,10 +153,15 @@
                                     Panne: {{ $order['data']->breakdown->title }}<br>
                                     Marque: {{ $order['data']->breakdown->device->brand }}<br>
                                     Model: {{ $order['data']->breakdown->device->model }}<br>
-                                    Couleur: {{ $order['data']->breakdown->device->color }} <br>
+                                    Couleur: <img src="/images/colors/{{ str_replace('#','',$order['data']->breakdown->device->color) }}.png" alt="couleur" style="border-radius: 50%"> <br>
                                     Accessoires : {{ $order['data']->breakdown->device->accessories }}<br>
                                 </p>
-                                <a href="{{ route('order.preview', $order['data']->id) }}" id="addClass"><button class="btn btn-primary" style="border-radius: 25px;border-color: transparent;"><span class="fa fa-comments"></span> Voir discussion</button> </a>
+                                <a href="{{ route('order.preview', $order['data']->id) }}" id="addClass"><button class="btn btn-primary" style="border-radius: 25px;border-color: transparent;"><span class="fa fa-comments"></span> Voir discussion</button></a>
+
+                                <a href="{{ route('order.edit', $order['data']->id) }}" >
+                                    <button class="btn btn-primary" style="border-radius: 25px;border-color: transparent;">
+                                        <span class="fa fa-pencil"></span>Modifier</button>
+                                </a>
                             </div>
                         </div>
                     </div>

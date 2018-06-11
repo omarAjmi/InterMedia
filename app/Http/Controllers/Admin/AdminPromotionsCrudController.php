@@ -42,7 +42,7 @@ class AdminPromotionsCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {     
-        $promotion = Promotion::find($id);
+        $promotion = Promotion::findOrFail($id);
         $promotion->title = $request->title;
         $promotion->category = $request->category;
         if($request->has('image')) {
@@ -60,7 +60,7 @@ class AdminPromotionsCrudController extends Controller
      */
     public function delete(int $id)
     {
-        $promotion = Promotion::find($id);
+        $promotion = Promotion::findOrFail($id);
         $promotion->delete();
         Session::flash('success', 'promotion est suprime');
         return redirect('/admin');

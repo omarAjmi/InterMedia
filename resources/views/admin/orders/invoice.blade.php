@@ -133,7 +133,7 @@
        
     <div class="container">
     
-        <table class="table table-striped" >
+        <table class="table table-striped fich" >
             <thead>
                 <th >FICHE TEHNIQUE</th>
             </thead>

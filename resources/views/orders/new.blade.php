@@ -114,7 +114,7 @@
 								<li><a href="{{ url('/') }}#gallery" class="scroll">Promotions</a></li>
 								<li><a href="{{ url('/') }}#testimonials" class="scroll">Témoignages</a></li>
 								<li><a href="{{ url('/') }}#contact" class="scroll">Contactez nous</a></li>
-	-->                     </ul>
+		                     </ul>
 						</div>
 					</div>
 					</nav>
@@ -123,254 +123,253 @@
 
 
 			<div class="container-contact100">
-				<div class="contact100-map" > </div>
+				<div class="contact100-map" ></div>
+					<div class="wrap-contact100">
+						@if (is_null($order))
+							<form class="contact100-form validate-form" action="{{ route('order.create') }}" method="POST">
+						@else
+							<form class="contact100-form validate-form" action="{{ route('order.update', $order->breakdown->id) }}" method="POST">
+								<input type="hidden" name="_method" value="PATCH">
+						@endif
+							@csrf
+							<span class="contact100-form-title">Nouvelle Commande</span>
+							<table style="width: 100%">
+								<tbody>
+									<tr>
+										<td>
+											<label style="font-family: SourceSansPro-Bold;padding: 5%">Panne :</label>
+										</td>
+										<td>
+											<div class="wrap-input100 validate-input" data-validate="champ requis">
+												@if (is_null($order))													
+													<input class="input100" type="text" name="breakdown" placeholder="">
+												@else
+													<input class="input100" type="text" name="breakdown" value="{{ $order->breakdown->title }}">
+												@endif
 
-				<div class="wrap-contact100">
-					<form class="contact100-form validate-form" action="{{ route('order.create') }}" method="POST">
-						@csrf
-						<span class="contact100-form-title">
-						Nouvelle Commande
-						</span>
-						<table style="width: 100%">
-							<tbody>
-								<tr>
-									<td>
-				<label style="font-family: SourceSansPro-Bold;padding: 5%">Panne :</label>
-			</td>
-			<td><div class="wrap-input100 validate-input" data-validate="champ requis">
+												<span class="focus-input100"></span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
-				<input class="input100" type="text" name="breakdown" placeholder="">
-					<span class="focus-input100"></span>
+							<table style="width: 100%">
+								<tbody>
+									<tr>
+										<td>
+											<label style="font-family: SourceSansPro-Bold;padding: 1%">Marque :</label>
+										</td>
+										<td>
+											<div class="wrap-input100 validate-input" data-validate = "champ requis">
+											@if (is_null($order))
+												<input class="input100" type="text" name="brand" placeholder="">
+											@else
+												<input class="input100" type="text" name="brand" value="{{ $order->breakdown->device->brand }}">
+											@endif
+													<span class="focus-input100"></span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table style="width: 100%">
+								<tbody>
+									<tr>
+										<td>
+											<label style="font-family: SourceSansPro-Bold;padding: 5%">model :</label>
+										</td>
+										<td>
+											<div class="wrap-input100 validate-input" data-validate="champ requis">
+											@if (is_null($order))
+												<input class="input100" type="text" name="model" placeholder="">
+											@else
+												<input class="input100" type="text" name="model" value="{{ $order->breakdown->device->model }}">
+											@endif
+												
+												<span class="focus-input100"></span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<table style="width:100%;position: relative;margin-bottom: 10%">
+								<tbody >
+									<tr style="margin-bottom: 50px">
+										<td style="width: 15%;">
+											<label style="font-family: SourceSansPro-Bold;position: relatives;padding-top: 50%">Couleur :</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#ededc0">
+												<span class="checkmark" style=" background-color: #ededc0;
+												"></span>
+
+											</label>
+										</td>	
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#000000">
+												<span class="checkmark" style=" background-color: #000000;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#0000FF">
+												<span class="checkmark" style=" background-color: #0000FF;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#A52A2A">
+												<span class="checkmark" style=" background-color: #A52A2A;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#FFD700">
+												<span class="checkmark" style=" background-color: #FFD700;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#008000">
+												<span class="checkmark" style=" background-color: #008000;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#DAA520">
+												<span class="checkmark" style=" background-color: #DAA520;
+												"></span>
+
+											</label>
+										</td>
+									</tr>
+
+									<tr>
+										<td style="width: 15%;">
+
+
+
+											<label style="font-family: SourceSansPro-Bold;position: relatives;">&nbsp;</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#FFC0CB">
+												<span class="checkmark" style=" background-color: #FFC0CB;
+												"></span>
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#800080">
+												<span class="checkmark" style=" background-color: #800080;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#FF0000">
+												<span class="checkmark" style=" background-color: #FF0000;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#FFA500">
+												<span class="checkmark" style=" background-color: #FFA500;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#C0C0C0">
+												<span class="checkmark" style=" background-color: #C0C0C0;
+												"></span>
+
+											</label>
+										</td>
+										<td >
+											<label class="container">
+												<input type="radio" name="color" value="#FFFFFF">
+												<span class="checkmark " style=" background-color: #FFFFFF;border: 0.5px solid black;border-radius: 50%
+												"></span>
+
+											</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table style="width: 100%;">
+								<tbody>
+									<tr>
+										<td style="width: 20%">
+											<label style="font-family: SourceSansPro-Bold;">Accessoire :</label>
+										</td>
+										<td>
+											<div class="wrap-input100 validate-input" data-validate="">
+												@if (is_null($order))
+													<input type="text" name="accessories" value="chargeur" class="input100" data-role="tagsinput" >
+												@else
+ 													<input type="text" name="accessories" class="input100" data-role="tagsinput" value="{{ $order->breakdown->device->accessories }}">
+												@endif
+												<span class="focus-input100"></span>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div style="display:inline;">
+								<div class="container-contact100-form-btn">
+									<input type="submit" value="valider" class=" contact100-form-btn" style="background: #5BC0DE" />
+								</div>	
+
+								<div class="container-contact100-form-btn">
+									<input type="reset" value="Annuler"  class="contact100-form-btn" style="background:#c00c0d" />
+
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-				</td></tr>
-				</tbody>
-				</table>
-
-				<table style="width: 100%">
-				<tbody>
-				<tr>
-				<td>
-				<label style="font-family: SourceSansPro-Bold;padding: 1%">Marque :</label>
-				</td>
-				<td>
-				<div class="wrap-input100 validate-input" data-validate = "champ requis">
-				<input class="input100" type="text" name="brand" placeholder="">
-				<span class="focus-input100"></span>
-				</div>
-				</td></tr>
-				</tbody>
-				</table>
-				<table style="width: 100%">
-				<tbody>
-				<tr>
-				<td>
-				<label style="font-family: SourceSansPro-Bold;padding: 5%">model :</label>
-				</td>
-				<td><div class="wrap-input100 validate-input" data-validate="champ requis">
-
-				<input class="input100" type="text" name="model" placeholder="">
-				<span class="focus-input100"></span>
-				</div>
-				</td></tr>
-				</tbody>
-				</table>
-
-				<table style="width:100%;position: relative;margin-bottom: 10%">
-				<tbody >
-				<tr style="margin-bottom: 50px">
-				<td style="width: 15%;">
-
-
-
-				<label style="font-family: SourceSansPro-Bold;position: relatives;padding-top: 50%">Couleur :</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#ededc0">
-				<span class="checkmark" style=" background-color: #ededc0;
-				"></span>
-
-				</label>
-				</td>	
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#000000">
-				<span class="checkmark" style=" background-color: #000000;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#0000FF">
-				<span class="checkmark" style=" background-color: #0000FF;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#A52A2A">
-				<span class="checkmark" style=" background-color: #A52A2A;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#FFD700">
-				<span class="checkmark" style=" background-color: #FFD700;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#008000">
-				<span class="checkmark" style=" background-color: #008000;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#DAA520">
-				<span class="checkmark" style=" background-color: #DAA520;
-				"></span>
-
-				</label>
-				</td
-
-
-				</tr>
-
-				<tr>
-				<td style="width: 15%;">
-
-
-
-				<label style="font-family: SourceSansPro-Bold;position: relatives;">&nbsp;</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#FFC0CB">
-				<span class="checkmark" style=" background-color: #FFC0CB;
-				"></span>
-				</label>
-				</td>
-
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#800080">
-				<span class="checkmark" style=" background-color: #800080;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#FF0000">
-				<span class="checkmark" style=" background-color: #FF0000;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#FFA500">
-				<span class="checkmark" style=" background-color: #FFA500;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#C0C0C0">
-				<span class="checkmark" style=" background-color: #C0C0C0;
-				"></span>
-
-				</label>
-				</td>
-				<td >
-
-				<label class="container">
-				<input type="radio" name="color" value="#FFFFFF">
-				<span class="checkmark " style=" background-color: #FFFFFF;border: 0.5px solid black;border-radius: 50%
-				"></span>
-
-				</label>
-				</td>
-
-				</tr>
-				</tbody>
-				</table>
-				<table style="width: 100%;">
-				<tbody>
-				<tr>
-				<td style="width: 20%">
-				<label style="font-family: SourceSansPro-Bold;">Accessoire :</label>
-				</td>
-				<td><div class="wrap-input100 validate-input" data-validate="">
-
-				<input type="text" name="accessories" value="chargeur" class="input100" data-role="tagsinput" >
-				<span class="focus-input100"></span>
-				</div>
-				</td></tr>
-				</tbody>
-				</table>
-
-				<div style="display:inline;">
-				<div class="container-contact100-form-btn">
-				<input type="submit" value="valider" class=" contact100-form-btn" style="background: #5BC0DE" />
-				</div>	
-
-				<div class="container-contact100-form-btn">
-				<input type="reset" value="Annuler"  class="contact100-form-btn" style="background:#c00c0d" />
-
-				</div>
-				</div>
-
-
-				</form>
-
-
-				</div>
-				</div>
-
 				<script src="/js/jquery.min.js"></script> 
 				<script src="/js/bootstrap-tagsinput.min.js"></script>
 				<script src="/js/main.js"></script>
 
-  <footer>
-         <div class="cont ">
-            <div class="col-md-7 header-side">
-               <p>© 
-                  2018 InterMedia. All Rights Reserved 
-               </p>
-            </div>
-            <div class="col-md-5 header-side">
-               <div class="buttom-social-grd text-center">
-                  <ul>
-                     <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                     <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                     <li><a href="#"><span class="fa fa-rss"></span></a></li>
-                     <li><a href="#"><span class="fa fa-vk"></span></a></li>
-                  </ul>
-               </div>
-            </div>
-         </div>
-      </footer>
-				</body>
-				</html>
+				<footer>
+					<div class="cont ">
+						<div class="col-md-7 header-side">
+							<p>© 
+								2018 . All Rights Reserved <a href="{{ route('welcome') }}" target="_blank">Inter Media</a> Monastir
+							</p>
+						</div>
+						<div class="col-md-5 header-side">
+							<div class="buttom-social-grd text-center">
+								<ul>
+									<li><a href="#"><span class="fa fa-facebook"></span></a></li>
+									<li><a href="#"><span class="fa fa-twitter"></span></a></li>
+									<li><a href="#"><span class="fa fa-rss"></span></a></li>
+									<li><a href="#"><span class="fa fa-vk"></span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
+		</body>
+	</html>
