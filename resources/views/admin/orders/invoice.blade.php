@@ -7,28 +7,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="vente, maintenance, vente et maintenance, matériel informatique, composants, accessoires, ordinateurs Gaming, Stations, CAD, PAO, 3D, Multi-monitoring, Vente en gros et en détails, produits informatique, smartphone, réparation smartphone, accessoires informatique, monastir" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+       
+      
+        </head>
         <style>
-            table,th,td,table>*{
-                border: 1px solid;border-collapse:collapse;
-            }
-            table {
+          
+            .table {
+                width: 30%;
                 display: inline-table;
+                margin-right: 1%;
+            }
+            h1,h2{
+                text-align: center;
+            }
+            .list-group{
+                width: 75%;
+                margin-left: 9%;
+            }
+            span{
+                font-weight: 700;
             }
         </style>
 </head>
 <body>
-    <h1>SAV INTER MEDIA</h1>
-    <h2>IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
-    <P>
-        Tel: 27 400 851 / 56 172 172 <br>
-        CCB: LE MONANT DE DIAGNOSTIQUE SERA ETRE FACTURER 10 DT <br>
-        TVA: INTER MEDIA SE DEGAGE DE TOUTE RESONSBILITE <br>
-        RC: POR MATERIELS PLUS DE TROIS MOIS
-    </P>
-    <div class="container">
-        <table >
+    <h1 >SAV INTER MEDIA</h1>
+    <h2 >IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
+    <ul class="list-group">
+        <li class="list-group-item"> <span >Tel:</span> 27 400 851 / 56 172 172 </li>
+        <li class="list-group-item"><span >CCB:</span> LE MONANT DE DIAGNOSTIQUE SERA ETRE FACTURER 10 DT </li>
+        <li class="list-group-item"><span >TVA:</span> INTER MEDIA SE DEGAGE DE TOUTE RESONSBILITE </li>
+        <li class="list-group-item"><span >RC:</span> POR MATERIELS PLUS DE TROIS MOIS</li>
+    </ul>
+    <div class="container" style="border-bottom: 1px dashed black">
+        <table class="table table-striped">
             <thead>
-                <th style="background-color:darkgray;">FICHE TEHNIQUE</th>
+                <th >FICHE TEHNIQUE</th>
             </thead>
             <tbody>
                 <tr >
@@ -42,9 +56,9 @@
             </tbody>
         </table>
         
-        <table >
+        <table  class="table table-striped" >
             <thead>
-                <th style="background-color:darkgray">CLIENT</th>
+                <th >CLIENT</th>
             </thead>
             <tbody>
                 <tr >
@@ -70,9 +84,9 @@
             </tbody>
         </table>
 
-        <table >
+        <table  class="table table-striped" >
             <thead>
-                <th style="background-color:darkgray">Commande</th>
+                <th >Commande</th>
             </thead>
             <tbody>
                 <tr >
@@ -96,24 +110,22 @@
             </tbody>
         </table>
     </div>
-<span style="width: 100%;">---------------------------------------------------------------------------------------------------------------------------------</span>
+
     <h1>SAV INTER MEDIA</h1>
     <h2>IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
-    <P>
-        Tel: 27 400 851 / 56 172 172
-        <br> CCB: LE MONANT DE DIAGNOSTIQUE SERA ETRE FACTURER 10 DT
-        <br> TVA: INTER MEDIA SE DEGAGE DE TOUTE RESONSBILITE
-        <br> RC: POR MATERIELS PLUS DE TROIS MOIS
-    </P>
+
+           <ul class="list-group">
+        <li class="list-group-item"> <span >Tel:</span> 27 400 851 / 56 172 172 </li>
+        <li class="list-group-item"><span >CCB:</span> LE MONANT DE DIAGNOSTIQUE SERA ETRE FACTURER 10 DT </li>
+        <li class="list-group-item"><span >TVA:</span> INTER MEDIA SE DEGAGE DE TOUTE RESONSBILITE </li>
+        <li class="list-group-item"><span >RC:</span> POR MATERIELS PLUS DE TROIS MOIS</li>
+    </ul>
+       
     <div class="container">
-        <style>
-            table {
-                display: inline-table;
-            }
-        </style>
-        <table >
+    
+        <table class="table table-striped" >
             <thead>
-                <th style="background-color:darkgray">FICHE TEHNIQUE</th>
+                <th >FICHE TEHNIQUE</th>
             </thead>
             <tbody>
                 <tr >
@@ -127,9 +139,9 @@
             </tbody>
         </table>
     
-        <table >
+        <table class="table table-striped">
             <thead>
-                <th style="background-color:darkgray">CLIENT</th>
+                <th >CLIENT</th>
             </thead>
             <tbody>
                 <tr >
@@ -155,9 +167,9 @@
             </tbody>
         </table>
 
-        <table >
+        <table class="table table-striped" >
             <thead>
-                <th style="background-color:darkgray">Commnde</th>
+                <th >Commnde</th>
             </thead>
             <tbody>
                 <tr >
