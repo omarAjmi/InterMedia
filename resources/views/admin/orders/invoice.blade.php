@@ -16,9 +16,11 @@
             .table {
                 width: 30%;
                 display: inline-table;
-                margin-right: 1%;
+                margin-right: 2%;
+
             }
-            h1,h2{
+    
+            h3,h4{
                 text-align: center;
             }
             .list-group{
@@ -28,11 +30,19 @@
             span{
                 font-weight: 700;
             }
+            .fich{
+                width: 10%;
+                  margin-left: 10%;
+            }
+            li{
+                height: 30px;
+            }
+          
         </style>
 </head>
 <body>
-    <h1 >SAV INTER MEDIA</h1>
-    <h2 >IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
+    <h3 >SAV INTER MEDIA</h1>
+    <h4 >IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
     <ul class="list-group">
         <li class="list-group-item"> <span >Tel:</span> 27 400 851 / 56 172 172 </li>
         <li class="list-group-item"><span >CCB:</span> LE MONANT DE DIAGNOSTIQUE SERA ETRE FACTURER 10 DT </li>
@@ -40,7 +50,7 @@
         <li class="list-group-item"><span >RC:</span> POR MATERIELS PLUS DE TROIS MOIS</li>
     </ul>
     <div class="container" style="border-bottom: 1px dashed black">
-        <table class="table table-striped">
+        <table class="table table-striped fich">
             <thead>
                 <th >FICHE TEHNIQUE</th>
             </thead>
@@ -111,8 +121,8 @@
         </table>
     </div>
 
-    <h1>SAV INTER MEDIA</h1>
-    <h2>IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
+    <h3>SAV INTER MEDIA</h1>
+    <h4>IMMEUBLE BCHIR [EN FACE DE CENTRE MEDICAL RUSPINA]</h2>
 
            <ul class="list-group">
         <li class="list-group-item"> <span >Tel:</span> 27 400 851 / 56 172 172 </li>
