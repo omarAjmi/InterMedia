@@ -104,13 +104,12 @@ class OrdersCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // dd($request->toArray());
         $breakdown = Breakdown::findOrFail($id);
         $device = $breakdown->device;
         $breakdown->title = $request->breakdown;
         $device->model = $request->model;
         $device->brand = $request->brand;
-        // $device->color = $request->color;
+        $device->color = $request->color;
         $device->accessories = $request->accessories;
         $breakdown->save();
         $device->save();

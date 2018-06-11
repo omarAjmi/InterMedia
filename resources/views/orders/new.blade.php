@@ -198,117 +198,165 @@
 								<tbody >
 									<tr style="margin-bottom: 50px">
 										<td style="width: 15%;">
-											<label style="font-family: SourceSansPro-Bold;position: relatives;padding-top: 50%">Couleur :</label>
+											<label style="position: relatives;padding-top: 50%;padding-left: 20%">Couleur:</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#ededc0">
-												<span class="checkmark" style=" background-color: #ededc0;
-												"></span>
-
+											@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ededc0')
+												<input type="radio" value="#ededc0" checked="checked" name="color">
+											@else
+												<input type="radio" value="#ededc0" name="color">
+											@endif
+											<span class="checkmark" style=" background-color: #ededc0;
+											"></span>
 											</label>
 										</td>	
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#000000">
-												<span class="checkmark" style=" background-color: #000000;
-												"></span>
+											@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#000000')
+												<input type="radio" value="#000000" checked="checked" name="color">
+											@else
+												<input type="radio" value="#000000" name="color">
+											@endif
+											<span class="checkmark" style=" background-color: #000000;
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#0000FF">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#0000FF')
+													<input type="radio" value="#0000ff" checked="checked" name="color">
+												@else
+													<input type="radio" value="#0000ff" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #0000FF;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#A52A2A">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#a52a2a')
+													<input type="radio" value="#a52a2a" checked="checked" name="color">
+												@else
+													<input type="radio" value="#a52a2a" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #A52A2A;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+											<td>
 											<label class="container">
-												<input type="radio" name="color" value="#FFD700">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffd700')
+													<input type="radio" value="#ffd700" checked="checked" name="color">
+												@else
+													<input type="radio" value="#ffd700" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #FFD700;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#008000">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#008000')
+													<input type="radio" value="#008000" checked="checked" name="color">
+												@else
+													<input type="radio" value="#008000" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #008000;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#DAA520">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#daa520')
+													<input type="radio" value="#daa520" checked="checked" name="color">
+												@else
+													<input type="radio" value="#daa520" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #DAA520;
-												"></span>
-
+											"></span>
 											</label>
 										</td>
 									</tr>
 
 									<tr>
 										<td style="width: 15%;">
-
-
-
 											<label style="font-family: SourceSansPro-Bold;position: relatives;">&nbsp;</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#FFC0CB">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffc0cb')
+													<input type="radio" value="#ffc0cb" checked="checked" name="color">
+												@else
+													<input type="radio" value="#ffc0cb" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #FFC0CB;
-												"></span>
+											"></span>
 											</label>
 										</td>
-										<td >
+
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#800080">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#800080')
+													<input type="radio" value="#800080" checked="checked" name="color">
+												@else
+													<input type="radio" value="#800080" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #800080;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#FF0000">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ff0000')
+													<input type="radio" value="#ff0000" checked="checked" name="color">
+												@else
+													<input type="radio" value="#ff0000" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #FF0000;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#FFA500">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffa500')orderAdd
+													<input type="radio" value="#ffa500" checked="checked" name="color">
+												@else
+													<input type="radio" value="#ffa500" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #FFA500;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#C0C0C0">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#c0c0c0')
+													<input type="radio" value="#c0c0c0" checked="checked" name="color">
+												@else
+													<input type="radio" value="#c0c0c0" name="color">
+												@endif
 												<span class="checkmark" style=" background-color: #C0C0C0;
-												"></span>
+											"></span>
 
 											</label>
 										</td>
-										<td >
+										<td>
 											<label class="container">
-												<input type="radio" name="color" value="#FFFFFF">
+												@if (!is_null($order) and strtolower($order->breakdown->device->color) == '#ffffff')
+													<input type="radio" value="#ffffff" checked="checked" name="color">
+												@else
+													<input type="radio" value="#ffffff" name="color">
+												@endif
 												<span class="checkmark " style=" background-color: #FFFFFF;border: 0.5px solid black;border-radius: 50%
-												"></span>
+											"></span>
 
 											</label>
 										</td>
