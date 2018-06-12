@@ -12,7 +12,8 @@
                     <li >
                         <div>
                             <img src="/storage/uploads/users/{{ $tech->details->image }}" class="imge">
-                            <h4 >{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
+                            <h4>{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
+                            <h4>{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
                             <a data-toggle="modal" data-target="#dataModal{{$key}}" class="btn consulter">Consulter</a>
                             <form action="{{ route('admin.deleteTechnician', $tech->id) }}" method="POST">
                                 @csrf
@@ -58,7 +59,7 @@
                                                 <input type="submit" class="btn button-danger" value="Retirer des Admins">
                                             </form>
                                         @else
-                                            <form method="POST" action="{{ route('admin.unmakeAdmin', $tech->id) }}">
+                                            <form method="POST" action="{{ route('admin.makeAdmin', $tech->id) }}">
                                                 @csrf
                                                 <input type="hidden" value="PATCH" name="_method">
                                                 <input type="submit" class="btn button-submit" value="Ajouter aux Admins">

@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\Session;
 class UsersCrudController extends Controller
 {
     /**
-     * Constructor
-     */
-    function __construct()
-    {
-        $this->middleware('admin')->only(['add', 'create']);
-    }
-
-    /**
      * apercue le profile du client
      *
      * @param integer $id
@@ -51,7 +43,6 @@ class UsersCrudController extends Controller
             $user->image = $user->updateImage($request->file('image'));
         }
         $user->save();
-        Session::flash('success', 'Mis a jour est succeé!');
         return back();
     }
 
@@ -74,7 +65,6 @@ class UsersCrudController extends Controller
             }
             $ordersList->push(['data'=>$order, 'count'=>$count]);
         }
-        // dd($ordersList);
         return view('users.orders')->with(['orders' => $ordersList]);
     }
 }

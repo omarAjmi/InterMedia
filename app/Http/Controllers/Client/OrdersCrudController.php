@@ -18,13 +18,13 @@ use App\Http\Requests\CreateOrderPublicRequest;
 class OrdersCrudController extends Controller
 {
     /**
-     * prevue du commande
+     * prevue une commande
      *
      * @return view
      */
     public function preview(int $id)
     {
-        $order = Order::with(['breakdown.device','discussion.history'])->findOrFail($id);
+        $order = Order::with(['discussion.history'])->findOrFail($id);
         foreach ($order->discussion->history as $msg) {
             if($msg->sender_id !== Auth::id() and !$msg->seen) {
                 $msg->seen = true;

@@ -100,7 +100,7 @@
 						<td width="100%">
 							<table width="120" align="left" class="resp-full-table" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td width="100%" class="resp-full-td" style="text-align: center;"><a href="{{ route('user.orders', Auth::id()) }}"><img src="/images/chat.png" width="120px" style="border-radius:3px;" alt="Logo" border="0"></a>
+									<td width="100%" class="resp-full-td" style="text-align: center;"><a href=""><img src="/images/chat.png" width="120px" style="border-radius:3px;" alt="Logo" border="0"></a>
 									</td>
 								</tr>
 							</table>
@@ -116,8 +116,8 @@
 										<hr align="left" style="width:100px; margin-left:0px; text-align:left; background-color:#C00C0D; color:#C00C0D; height: 2px; border: 0 none;" />
 										<span style="line-height: 30px; font-size:16px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131">
                                             Vous êtes maintenant l'un de nos clients spéciaux, dont nous avons l'intention de prendre soin et de fournir les meilleurs services que nous leur offrons. <br><br>
-                                            <span style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;"><a href="" style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none;font-weight : 200; font-size: 16px;">Cliquez ici</a></span> pour aller sur notre site web et jeter un oeil à notre section promotions ou <span style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;">
-                                                <a href="" style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none;font-weight : 200; font-size: 16px;">Cliquez ici</a>
+                                            <span style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;"><a href="{{ route('welcome') }}" style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none;font-weight : 200; font-size: 16px;">Cliquez ici</a></span> pour aller sur notre site web et jeter un oeil à notre section promotions ou <span style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;">
+                                                <a href="{{ route('order.new') }}" style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none;font-weight : 200; font-size: 16px;">Cliquez ici</a>
                                             </span> pour émettre une commande de réparation puis venez nous rencontrer à notre boutique avec votre appareil cassé et nos experts s'en occuperont.
                                         </span>
 									</td>
@@ -127,7 +127,7 @@
 										<table align="right" border="0" cellspacing="0" cellpadding="0">
 										<tr>
 												<td style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;">
-													<a style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none; display:block; font-weight : 200; font-size: 16px;" href="{{ route('user.orders', Auth::id()) }}">Voir Commande</a>
+													<a style="font-family:'helvetica neue', helvetica, arial, sans-serif; color:#ffffff; text-align: center; text-decoration: none; display:block; font-weight : 200; font-size: 16px;" href="{{ route('user.orders',['id'=>Auth::user()]) }}">Voir Commande</a>
 												</td>
 											</tr>
 										</table>

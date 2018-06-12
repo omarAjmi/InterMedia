@@ -116,10 +116,11 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth', 'authacc'], 'namespa
 
 /////////////////////////////////////////Orders Routes/////////////////////////////////////////////
 Route::group(['prefix' => 'orders', 'middleware' => ['auth'], 'namespace' => 'Client'], function () {
+    
     Route::get('send', ['as' => 'order.send', 'uses' => 'OrdersCrudController@send']);
 
-    Route::get('new', ['as' => 'order.new', 'uses' => 'OrdersCrudController@new']);
-
+    Route::get('new', ['as' => 'order.new','uses' => 'OrdersCrudController@new']);
+    
     Route::get('{id}', ['as' => 'order.preview', 'uses' => 'OrdersCrudController@preview']);
 
     Route::get('{id}/edit', ['as' => 'order.edit', 'uses' => 'OrdersCrudController@edit']);
