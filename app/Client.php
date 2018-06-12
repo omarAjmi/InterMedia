@@ -12,7 +12,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id'
+        'id'
     ];
 
     /**
@@ -22,7 +22,7 @@ class Client extends Model
      */
     public function details()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\User', 'id', 'id');
     }
 
     /**
@@ -32,7 +32,7 @@ class Client extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Order', 'client_id', 'user_id');
+        return $this->hasMany('App\Order', 'client_id', 'id');
     }
 
     /**
@@ -42,7 +42,7 @@ class Client extends Model
      */
     public function breakdowns()
     {
-        return $this->hasManyThrough('App\Breakdown', 'App\Order', 'client_id', 'order_id', 'user_id', 'id');
+        return $this->hasManyThrough('App\Breakdown', 'App\Order', 'client_id', 'order_id', 'id', 'id');
     }
 
     /**
@@ -52,7 +52,7 @@ class Client extends Model
      */
     public function payments()
     {
-        return $this->hasManyThrough('App\Payment', 'App\Order', 'client_id', 'order_id', 'user_id', 'id');
+        return $this->hasManyThrough('App\Payment', 'App\Order', 'client_id', 'order_id', 'id', 'id');
     }
 
     /**
@@ -62,6 +62,6 @@ class Client extends Model
      */
     public function technicians()
     {
-        return $this->hasManythrough('App\Technician', 'App\Order', 'client_id', 'id', 'user_id', 'technician_id');
+        return $this->hasManythrough('App\Technician', 'App\Order', 'client_id', 'id', 'id', 'technician_id');
     }
 }

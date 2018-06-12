@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Order;
 use App\Client;
+use App\Device;
+use App\Payment;
+use App\Breakdown;
 use App\Technician;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreateOrderRequest;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use App\Device;
-use App\Breakdown;
 use Illuminate\Support\Facades\Mail;
 
 class AdminOrdersController extends Controller
@@ -80,6 +81,14 @@ class AdminOrdersController extends Controller
         });
     }
 
+    public function updatePayment(int $id, Request $request)
+    {
+        $payment = Payment::find($id);
+        $payment->cost = $request->cost;
+        $payment->deposit = $request->deposit;
+        $payment->save();
+        return back();
+    }
     public function update(int $id, Request $request)
     {
         $order = Order::with(['breakdown.device', 'payment'])->findOrFail($id);
@@ -99,11 +108,6 @@ class AdminOrdersController extends Controller
         $bd = $order->breakdown;
         $bd->title = $request->title;
         $bd->save();
-
-        $payment = $order->payment;
-        $payment->cost = $request->cost;
-        $payment->deposit = $request->deposit;
-        $payment->save();
 
         Mail::send('emails.OrderUpdatedEmail', ['title'=>$bd->title], function ($message) use ($order) {
             $message->to($order->client->details->email);

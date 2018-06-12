@@ -16,7 +16,7 @@ class ClientsTableSeeder extends Seeder
 
         for ($i=1; $i <= 24; $i++) { 
             App\Client::create([
-                'user_id' => $i+5
+                'id' => $i+5
             ]);
         }
     }

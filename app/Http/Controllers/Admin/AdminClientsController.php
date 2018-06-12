@@ -41,7 +41,7 @@ class AdminClientsController extends Controller
             'password' => Hash::make('12345678'),
         ]);
         Client::create([
-            'user_id' => $user->id
+            'id' => $user->id
         ]);
         Mail::send('emails.welcomeEmail', [], function ($message) use ($user) {
             $message->to($user->email);
@@ -53,7 +53,7 @@ class AdminClientsController extends Controller
 
     public function orders(int $id)
     {
-        $client = Client::where('user_id', $id)->first();
+        $client = Client::find($id);
         $orders = $client->orders;
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
@@ -71,7 +71,7 @@ class AdminClientsController extends Controller
      */
     public function update(int $id, Request $request)
     {
-        $client = Client::where('user_id', $id)->first();
+        $client = Client::find($id);
         $clientdetails = $client->details;
         $clientdetails->first_name = $request->first_name;
         $clientdetails->last_name = $request->last_name;
@@ -79,7 +79,7 @@ class AdminClientsController extends Controller
         $clientdetails->address = $request->address;
         $clientdetails->phone = $request->phone;
         if ($request->has('image')) {
-            $clientdetails->image = $this->uploadImage($client->user_id, $request);
+            $clientdetails->image = $this->uploadImage($client->id, $request);
         }
         $clientdetails->save();
         return back();

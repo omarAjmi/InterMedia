@@ -14,14 +14,14 @@ class CreateTechniciansTable extends Migration
     public function up()
     {
         Schema::create('technicians', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
+            $table->integer('id')->unsigned();
             $table->string('cin');
             $table->string('post');
             $table->boolean('admin')->default(false);
             $table->text('bio');
             $table->timestamps();
-            $table->primary('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->primary('id');
+            $table->foreign('id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

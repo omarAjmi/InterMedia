@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
-        Client::create(['user_id'=>$user->id]);
+        Client::create(['id'=>$user->id]);
         Mail::send('emails.welcomeEmail', [], function ($message) use ($user){
             $message->to($user->email);
             $message->from(env('MAIL_USERNAME'));

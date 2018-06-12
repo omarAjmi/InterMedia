@@ -39,7 +39,7 @@ class AdminTechsCrudController extends Controller
             $user->save();
         }
         Technician::create([
-            'user_id' => $user->id,
+            'id' => $user->id,
             'cin' => $request->cin,
             'post' => $request->post,
             'bio' => $request->bio
@@ -56,7 +56,7 @@ class AdminTechsCrudController extends Controller
      */
     public function makeAdminn(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $tech->admin = true;
         $tech->save();
         Session::flash('success', 'Admin ajoute');
@@ -71,7 +71,7 @@ class AdminTechsCrudController extends Controller
      */
     public function unmakeAdminn(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $tech->admin = false;
         $tech->save();
         Session::flash('success', 'Admin ajoute');
@@ -86,7 +86,7 @@ class AdminTechsCrudController extends Controller
      */
     public function technician(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         return view('admin.technician')->with(['technician'=>$tech]);
     }
 
@@ -100,7 +100,7 @@ class AdminTechsCrudController extends Controller
     public function update(Request $request, int $id)
     {
         // dd($request);
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $techDetails = $tech->details;
         $techDetails->first_name = $request->first_name;
         $techDetails->last_name = $request->last_name;
@@ -125,7 +125,7 @@ class AdminTechsCrudController extends Controller
      */
     public function delete(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $techDetails = $tech->details;
         $tech->delete();
         $techDetails->delete();

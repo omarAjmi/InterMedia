@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i=0; $i < 30; $i++) { 
+        // for ($i=0; $i < 30; $i++) { 
             App\User::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
@@ -25,6 +25,6 @@ class UsersTableSeeder extends Seeder
                 'image' => $faker->randomElement(['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', 'default.png']),
                 'phone' => "50506854"
             ]);
-        }
+        // }
     }
 }

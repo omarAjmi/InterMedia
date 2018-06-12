@@ -69,6 +69,11 @@ class AdminOrdersFilters extends Controller
         $orders = Order::with(['payment' => function($query){
             $query->where('payed', false);
         }])->get()->sortByDesc('created_at');
+        foreach ($orders as $key => $order) {
+            if (is_null($order->payment)) {
+                $orders->forget($key);
+            }
+        }
         $currentPage = Paginator::resolveCurrentPage();
         $perPage = 6;
         $collection = collect($orders);

@@ -32,7 +32,7 @@ class Order extends Model
      */
     public function client()
     {
-        return $this->belongsTo('App\Client', 'client_id', 'user_id');
+        return $this->belongsTo('App\Client', 'client_id', 'id');
     }
 
     /**
@@ -42,7 +42,7 @@ class Order extends Model
      */
     public function technician()
     {
-        return $this->belongsTo('App\Technician', 'technician_id', 'user_id');
+        return $this->belongsTo('App\Technician', 'technician_id', 'id');
     }
 
     public function discussion()

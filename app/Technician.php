@@ -12,7 +12,7 @@ class Technician extends Model
      * @var array
      */
     protected $fillable = [
-        'cin', 'bio', 'user_id', 'post', 'admin'
+        'cin', 'bio', 'id', 'post', 'admin'
     ];
 
     /**
@@ -22,7 +22,7 @@ class Technician extends Model
      */
     public function orders()
     {
-        return $this->hasMany('App\Order', 'technician_id', 'user_id');
+        return $this->hasMany('App\Order', 'technician_id', 'id');
     }
 
     /**
@@ -32,6 +32,6 @@ class Technician extends Model
      */
     public function details()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\User', 'id', 'id');
     }
 }

@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::patch('technician/{id}/define_admin', ['as' => 'admin.makeAdmin', 'uses' => 'AdminTechsCrudController@makeAdminn']);
 
-    Route::patch('technician/{id}/', ['as' => 'admin.unmakeAdmin', 'uses' => 'AdminTechsCrudController@unmakeAdminn']);
+    Route::patch('technician/{id}/undefine_admin', ['as' => 'admin.unmakeAdmin', 'uses' => 'AdminTechsCrudController@unmakeAdminn']);
 
     Route::delete('technician/{id}', ['as' => 'admin.deleteTechnician', 'uses' => 'AdminTechsCrudController@delete']);
     /***********************technicians routes**************************/
@@ -81,6 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
     Route::patch('orders/{id}/set_as_closed', ['as' => 'admin.setOrderClosed', 'uses' => 'AdminOrdersController@setAsClosed']);
 
     Route::patch('order/verify/{id}', ['as' => 'admin.verifyOrder', 'uses' => 'AdminOrdersController@verifyOrder']);
+
+    Route::patch('update_payment/{id}', ['as' => 'order.updatePayment', 'uses' => 'AdminOrdersController@updatePayment']);
 
     Route::delete('order/{id}', ['as' => 'admin.orderDelete', 'uses' => 'AdminOrdersController@delete']);
     /***********************orders routes**************************/

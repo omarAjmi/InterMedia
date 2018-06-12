@@ -64,7 +64,7 @@ class UsersCrudController extends Controller
     public function orders(int $id)
     {
         $ordersList = collect();
-        $orders = Client::where('user_id', $id)->first()->orders;
+        $orders = Client::find($id)->orders;
         foreach ($orders as $order) {
             $count = 0;
             foreach ($order->discussion->history as $msg) {

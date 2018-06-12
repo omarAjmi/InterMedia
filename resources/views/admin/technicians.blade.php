@@ -14,7 +14,7 @@
                             <img src="/storage/uploads/users/{{ $tech->details->image }}" class="imge">
                             <h4 >{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
                             <a data-toggle="modal" data-target="#dataModal{{$key}}" class="btn consulter">Consulter</a>
-                            <form action="{{ route('admin.deleteTechnician', $tech->user_id) }}" method="POST">
+                            <form action="{{ route('admin.deleteTechnician', $tech->id) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input class="btn btn-danger dan" type="submit" value="Suprimer">
@@ -50,9 +50,24 @@
                                     <h3><span>Telephone:</span> {{ $tech->details->phone }}</h3>
                                     <h3><span>Post:</span>{{ $tech->post}}</h3>
                                     <h3><span>Bio:</span> {{ $tech->bio }}</h3>
+                                    
+                                        @if ($tech->admin)
+                                            <form method="POST" action="{{ route('admin.unmakeAdmin', $tech->id) }}">
+                                                @csrf
+                                                <input type="hidden" value="PATCH" name="_method">
+                                                <input type="submit" class="btn button-danger" value="Retirer des Admins">
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('admin.unmakeAdmin', $tech->id) }}">
+                                                @csrf
+                                                <input type="hidden" value="PATCH" name="_method">
+                                                <input type="submit" class="btn button-submit" value="Ajouter aux Admins">
+                                            </form>
+                                        @endif
+                                    
                                 </div>
                                 <div class="form">
-                                    <form method="POST" action="{{ route('admin.updateTechnician', $tech->user_id) }}">
+                                    <form method="POST" action="{{ route('admin.updateTechnician', $tech->id) }}">
                                         @csrf
                                         <img src="/storage/uploads/users/{{ $tech->details->image }}" style="width: 30%;height: 30%;margin-left: 10%">
                                         <input type="file" name="image" class="form-control-file" style="margin: 2%">

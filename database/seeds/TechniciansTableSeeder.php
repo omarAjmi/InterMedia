@@ -14,10 +14,11 @@ class TechniciansTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i <= 5; $i++) { 
+        // for ($i = 1; $i <= 5; $i++) { 
             App\Technician::create([
-                'user_id' =>  $i,
+                'id' =>  2,
                 'cin' => $faker->ean8 ,
+                'admin'=>1,
                 'post' => $faker->randomElement([
                     'Technicien Hardware',
                     'Technicien Software',
@@ -26,6 +27,6 @@ class TechniciansTableSeeder extends Seeder
                     ]),
                 'bio' => $faker->text($maxNbChars = 200)
             ]);
-        }
+        // }
     }
 }

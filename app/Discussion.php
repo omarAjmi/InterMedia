@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Discussion extends Model
@@ -14,6 +15,8 @@ class Discussion extends Model
     protected $fillable = [
         'order_id'
     ];
+
+    public $unreadMsgs;
 
     /**
      * obtient la commande du discussion
@@ -53,5 +56,15 @@ class Discussion extends Model
     public function history()
     {
         return $this->hasMany('App\Message', 'discussion_id');
+    }
+
+    public function countUnread()
+    {
+        $this->unreadMsgs = 0;
+        foreach ($this->history as $msg) {
+            if ($msg->sender_id !== Auth::id() and !$msg->seen) {
+                $this->unreadMsgs++;
+            }
+        }
     }
 }

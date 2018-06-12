@@ -36,7 +36,7 @@ class User extends Authenticatable
      */
     public function client()
     {
-        return $this->hasOne('App\Client');
+        return $this->hasOne('App\Client', 'id');
     }
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
      */
     public function technician()
     {
-        return $this->hasOne('App\Technician');
+        return $this->hasOne('App\Technician', 'id');
     }
 
     /**
