@@ -18,20 +18,13 @@ use App\Http\Requests\CreateOrderPublicRequest;
 class OrdersCrudController extends Controller
 {
     /**
-     * Constructor
-     */
-    function __construct()
-    {
-        // $this->middleware('authacctoorder')->only(['preview']);
-    }
-    /**
      * prevue du commande
      *
      * @return view
      */
     public function preview(int $id)
     {
-        $order = Order::with(['breakdown.device','discussion.history'])->find($id);
+        $order = Order::with(['breakdown.device','discussion.history'])->findOrFail($id);
         foreach ($order->discussion->history as $msg) {
             if($msg->sender_id !== Auth::id() and !$msg->seen) {
                 $msg->seen = true;
@@ -48,7 +41,18 @@ class OrdersCrudController extends Controller
      */
     public function new()
     {
-        return view('orders.new');
+        return view('orders.new')->with(['order'=>null]);
+    }
+
+    /**
+     * formulaire pour modifier une  commande
+     *
+     * @return view
+     */
+    public function edit(int $id)
+    {
+        $order = Order::with(['breakdown.device'])->findOrFail($id);
+        return view('orders.new')->with(['order'=>$order]);
     }
 
     /**
@@ -87,26 +91,21 @@ class OrdersCrudController extends Controller
     }
 
     /**
-     * formulaire pour modifier une  commande
-     *
-     * @return view
-     */
-    public function edit(int $id)
-    {
-        $order = Order::find($id);
-        return view('orders.preview')->with(['order' => $order]);
-    }
-
-    /**
      * modifier une  commande
      *
      * @return view
      */
     public function update(Request $request, int $id)
     {
-        $breakdown = Breakdown::find($id);
-        $breakdown->title = $request->title;
-        Session::flash('success', 'ordre est edite');
+        $breakdown = Breakdown::findOrFail($id);
+        $device = $breakdown->device;
+        $breakdown->title = $request->breakdown;
+        $device->model = $request->model;
+        $device->brand = $request->brand;
+        $device->color = $request->color;
+        $device->accessories = $request->accessories;
+        $breakdown->save();
+        $device->save();
         return back();
     }
 
@@ -117,22 +116,8 @@ class OrdersCrudController extends Controller
      */
     public function delete(int $id)
     {
-        $order = Order::find($id);
-        foreach ($order->breakdowns as $breakdown) {
-            $breakdown->delete();
-        }
-        $payment = $order->payment;
-        $payment->delete();
+        $order = Order::findOrFail($id);
         $order->delete();
-        Session::flash('success', 'ordre est suprime');
         return redirect('/');
-    }
-
-    public function send()
-    {
-        Mail::send('email.test', [], function($message){
-            $message->to('devanewage@outlook.com');
-            $message->subject('djsd,sdj,n');
-        });
     }
 }

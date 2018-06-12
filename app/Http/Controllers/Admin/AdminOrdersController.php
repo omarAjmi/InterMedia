@@ -38,7 +38,7 @@ class AdminOrdersController extends Controller
     {
         $clients = Client::with('details')->get();
         $techs = Technician::with('details')->get();
-        $order = Order::with(['breakdown', 'client', 'technician', 'payment'])->find($id);
+        $order = Order::with(['breakdown', 'client', 'technician', 'payment'])->findOrFail($id);
         return view('admin.orders.orderDetails')->with(['order' => $order, 'clients' => $clients, 'techs' => $techs]);
     }
 
@@ -82,8 +82,7 @@ class AdminOrdersController extends Controller
 
     public function update(int $id, Request $request)
     {
-        // dd($request->toArray());
-        $order = Order::find($id);
+        $order = Order::with(['breakdown.device', 'payment'])->findOrFail($id);
         $order->technician_id = $request->technician;
         $order->nature = $request->nature;
         $order->return_date = \Carbon\Carbon::parse($request->return_date);
@@ -116,7 +115,7 @@ class AdminOrdersController extends Controller
 
     public function verifyOrder(int $id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $order->verified = true;
         $order->save();
 
@@ -130,7 +129,7 @@ class AdminOrdersController extends Controller
 
     public function setAsPayed(int $id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $payment = $order->payment;
         $payment->payed = true;
         $payment->save();
@@ -145,7 +144,7 @@ class AdminOrdersController extends Controller
 
     public function setAsClosed(int $id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
         $order->closed = true;
         $order->save();
 
@@ -159,7 +158,7 @@ class AdminOrdersController extends Controller
 
     public function invoice(int $id)
     {
-        $order = Order::with(['client', 'payment', 'breakdown'])->find($id);
+        $order = Order::with(['client', 'payment', 'breakdown'])->findOrFail($id);
         return view('admin.orders.invoice')->with(['order' => $order]);
     }
 }

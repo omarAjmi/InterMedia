@@ -120,6 +120,8 @@ Route::group(['prefix' => 'orders', 'middleware' => ['auth'], 'namespace' => 'Cl
 
     Route::get('{id}', ['as' => 'order.preview', 'uses' => 'OrdersCrudController@preview']);
 
+    Route::get('{id}/edit', ['as' => 'order.edit', 'uses' => 'OrdersCrudController@edit']);
+
     Route::post('create', ['as' => 'order.create', 'uses' => 'OrdersCrudController@create']);
 
     Route::patch('{id}', ['as' => 'order.update', 'uses' => 'OrdersCrudController@update']);

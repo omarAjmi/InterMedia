@@ -28,7 +28,7 @@ class UsersCrudController extends Controller
      */
     public function profile(int $id)
     {
-        $user = User::with(['client', 'technician'])->find($id);
+        $user = User::with(['client', 'technician'])->findOrFail($id);
         return view('users.profile')->with(['user' => $user]);
     }
 
@@ -41,7 +41,7 @@ class UsersCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
