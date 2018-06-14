@@ -26,7 +26,7 @@ class Promotion extends Model
      */
     public function uploadImage(int $id, UploadedFile $photo)
     {
-        $filename = $id . '.' . $photo->getClientOriginalExtension();
+        $filename = $this->id . '.' . $photo->getClientOriginalExtension();
         Image::make($photo)->resize(950, 950)->save(public_path('storage/uploads/promotions/' . $filename));
         return $filename;
     }

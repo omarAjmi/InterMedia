@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
     Route::get('techniciens/add', ['as' => 'admin.addTechnician', 'uses' => 'AdminTechsCrudController@add']);
 
+    Route::get('techniciens/{id}/orders', ['as' => 'admin.techniciansOrders', 'uses' => 'AdminTechsCrudController@orders']);
+
     Route::post('techniciens/create', ['as' => 'admin.createTechnician', 'uses' => 'AdminTechsCrudController@create']);
 
     Route::patch('techniciens/{id}', ['as' => 'admin.updateTechnician', 'uses' => 'AdminTechsCrudController@update']);
@@ -103,21 +105,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'namespace'=>'Admin'
 
 
 /////////////////////////////////////////Users Routes/////////////////////////////////////////////
-Route::group(['prefix' => 'users', 'middleware' => ['auth', 'authacc'], 'namespace' => 'Client'], function () {
+Route::group(['prefix' => 'users', 'middleware' => ['auth'], 'namespace' => 'Client'], function () {
 
     Route::get('{id}', ['as' => 'user.profile', 'uses' => 'UsersCrudController@profile']);
 
+    Route::get('{id}/orders', ['as' => 'user.orders', 'uses' => 'UsersCrudController@orders'])->middleware('authacc');
+    
+    Route::get('confirm/email', ['as' => 'user.confirm', 'uses' => 'UsersCrudController@confirmInscription'])->middleware('authacc');
+    
     Route::patch('{id}', ['as' => 'user.update', 'uses' => 'UsersCrudController@update']);
-
-    Route::get('{id}/orders', ['as' => 'user.orders', 'uses' => 'UsersCrudController@orders']);
 });
 /////////////////////////////////////////Users Routes/////////////////////////////////////////////
 
 
 /////////////////////////////////////////Orders Routes/////////////////////////////////////////////
-Route::group(['prefix' => 'orders', 'middleware' => ['auth'], 'namespace' => 'Client'], function () {
-    
-    Route::get('send', ['as' => 'order.send', 'uses' => 'OrdersCrudController@send']);
+Route::group(['prefix' => 'orders', 'middleware' => ['auth', 'authacc'], 'namespace' => 'Client'], function () {
 
     Route::get('new', ['as' => 'order.new','uses' => 'OrdersCrudController@new']);
     
@@ -159,4 +161,8 @@ Route::get('emails/5', function () {
 });
 Route::get('emails/6', function(){
     return view('emails.welcomeEmail')->with(['order' => App\Order::first()]);
+});
+
+Route::get('emails/7', function () {
+    return view('emails.confirmEmail')->with(['user' => App\User::first()]);
 });

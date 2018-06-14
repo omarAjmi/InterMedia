@@ -7,9 +7,9 @@ use App\Order;
 use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
-use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Facades\Session;
 
 class AdminClientsController extends Controller
@@ -42,6 +42,9 @@ class AdminClientsController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make('12345678'),
         ]);
+        if ($request->has('image')) {
+            $user->image =$user->uploadImage($request->file('image'));
+        }
         Client::create([ #creer un client a partir d'utilisateur
             'id' => $user->id
         ]);
@@ -82,7 +85,7 @@ class AdminClientsController extends Controller
         $clientdetails->address = $request->address;
         $clientdetails->phone = $request->phone;
         if ($request->has('image')) {
-            $clientdetails->image = $clientdetails->uploadImage($client->id, $request);
+            $clientdetails->image = $clientdetails->uploadImage($request->file('image'));
         }
         $clientdetails->save();
         Session::flash('success', "Client est mis à jour.");

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Order;
 use App\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,7 +17,8 @@ class AdminTechsCrudController extends Controller
     public function technicians()
     {
         $techs = Technician::with('details', 'orders')->get();
-        return view('admin.technicians')->with('techs', $techs);
+        $paginatedTechs = Order::pagination(6, $techs); #pagination des technicien
+        return view('admin.technicians')->with('techs', $paginatedTechs);
     }
 
     /**
@@ -35,7 +37,7 @@ class AdminTechsCrudController extends Controller
             'phone' => $request->phone
         ]);
         if($request->has('image')) {
-            $user->image = $this->updateImage($request, $user->id);
+            $user->image = $user->uploadImage($request->file('image'));
             $user->save();
         }
         Technician::create([
@@ -44,7 +46,15 @@ class AdminTechsCrudController extends Controller
             'post' => $request->post,
             'bio' => $request->bio
         ]);
-        return redirect(route('user.profile', ['id' => $user->id]));
+        Session::flash('success', 'Technicien est creé');
+        return back();
+    }
+
+    public function orders(int $id)
+    {
+        $tech = Technician::findOrFail($id); #retriver le technicien
+        $paginatedOrders = Order::pagination(6, $tech->orders); #pagination des commande du technicien
+        return view('admin.orders.all')->with(['orders' => $paginatedOrders]);
     }
 
     /**
@@ -58,6 +68,7 @@ class AdminTechsCrudController extends Controller
         $tech = Technician::findOrFail($id);
         $tech->admin = true;
         $tech->save();
+        Session::flash('success', 'Technicien ajouté aux admins');
         return back();
     }
 
@@ -72,6 +83,7 @@ class AdminTechsCrudController extends Controller
         $tech = Technician::findOrFail($id);
         $tech->admin = false;
         $tech->save();
+        Session::flash('success', 'Technicien retiré du admins');
         return back();
     }
 
@@ -92,12 +104,13 @@ class AdminTechsCrudController extends Controller
         $techDetails->address = $request->address;
         $techDetails->phone = $request->phone;
         if ($request->has('image')) {
-            $techDetails->image = $techDetails->updateImage($request, $tech->id);
+            $techDetails->image = $techDetails->uploadImage($request->file('image'));
         }
         $tech->cin = $request->cin;
         $tech->post = $request->post;
         $tech->save();
         $techDetails->save();
+        Session::flash('success', 'Technicien eté mis a jour.');
         return back();
     }
 
@@ -112,6 +125,7 @@ class AdminTechsCrudController extends Controller
         $tech = Technician::find($id);
         $techDetails = $tech->details;
         $techDetails->delete();
+        Session::flash('success', 'Technicien est suprimé');
         return back();
     }
 }

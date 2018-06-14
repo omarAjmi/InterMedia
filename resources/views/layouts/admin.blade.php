@@ -59,6 +59,9 @@
                            <li><a class="dropdown-item" href="{{ route('welcome') }}">
                                             Acceuil
                                         </a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.profile', Auth::id()) }}">
+                                            Profile
+                                        </a></li>
                             <li><a class="dropdown-item" href="{{ route('admin') }}">
                                             Site Admin
                                         </a></li>

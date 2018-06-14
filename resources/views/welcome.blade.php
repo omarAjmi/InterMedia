@@ -23,7 +23,7 @@
       <link href="css/changes.css" rel='stylesheet' type='text/css' media="all">
       <!--//stylesheets-->
    </head>
-   <body style="background: #F7F7F7">
+   <body style="background: #F7F7F7">       
       <div class="header-outs">
          <div class="w3-agile-logo">
             <div class=" head-wl">
@@ -36,7 +36,7 @@
                   </ul>
                </div>
                <div class="col-md-4 col-sm-4 col-xs-4 headder-w3">
-                  <h1><a href="{{url('/')}}"><span class="first-clr">I</span>nter <span class="first-clr">M</span>edia</a></h1>
+                  <h1><a href="{{ url('/')}}"><span class="first-clr">I</span>nter <span class="first-clr">M</span>edia</a></h1>
                   <h2><a href="{{url('/')}}"><span class="first-clr">M</span>onastir</a></h2>
                </div>
                <div class="col-md-4 col-sm-4 col-xs-4 w3-header-top-right-text">
@@ -51,6 +51,9 @@
                         <ul class="dropdown-menu" style="">
                            <li><a class="dropdown-item" href="{{ route('welcome') }}">
                                             Acceuil
+                                        </a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.profile', Auth::id()) }}">
+                                            Profile
                                         </a></li>
                             <li><a class="dropdown-item" href="{{ route('admin') }}">
                                             Site Admin
@@ -592,6 +595,11 @@
                         <h3>Vous avez un compte?</h3>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
+                            @if ($errors->has('email'))
+                                <label>
+                                    <span class="help-block"><strong>pièces d'identité non pas valides</strong></span>
+                                </label>
+                            @endif
                             <input type="text" name="email" placeholder="Email" required>
                             <input type="password" placeholder="Mot de passe" name="password" required>
                             <div class="checkbox">
@@ -606,11 +614,41 @@
                         <h3>Créer un compte</h3>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
+                            @if ($errors->has('email') and Session::has('registerFail') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('last_name') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="text" name="last_name" placeholder="Nom" required="">
+                            @if ($errors->has('email') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('first_name') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="text" name="first_name" placeholder="Prénom" required="">
+                            @if ($errors->has('email') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="email" name="email" placeholder="Addresse Email" required="">
+                            @if ($errors->has('email') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="text" name="phone" placeholder="Telephone" required="">
+                            @if ($errors->has('email') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="password" name="password" placeholder="Password" required="">
+                            @if ($errors->has('email') and Session::has('registerFail'))
+                                <label>
+                                    <span class="help-block"><strong>{{ $errors->first('password_confirmation') }}</strong></span>
+                                </label>
+                            @endif
                             <input type="password" name="password_confirmation" placeholder="Confirmer" required="">
                             <input type="submit" value="S'inscrire">
                             <input type="reset" value="Annuler">
@@ -620,6 +658,20 @@
                      </div>
                   </div>
                </div>
+            </section>
+         </div>
+      </div>
+   </div>
+
+
+<div class="modal video-modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModal">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
+            </div>
+            <section style="background-image: url(images/police.png)">
+               <h3>{{ Session::get('notConfirmed') }}</h3>
             </section>
          </div>
       </div>
@@ -716,6 +768,8 @@
          	});
          });
       </script>
+
+      
       <a href="#" id="toTop" class="stuoyal3w stieliga" style="display: block;">
       <span id="toTopHover" style="opacity: 0;"> </span>
       </a>
@@ -742,5 +796,34 @@
       <script src="js/script.js"></script>
       <script src="js/jquery.prettyPhoto.js" ></script>
       <!-- //jQuery-Photo-filter-lightbox-Gallery-plugin -->
+        @if (Session::has('notConfirmed'))
+            <script>
+                $('document').ready(function () {
+                    $('#confirmModal').modal('show');
+                })
+            </script>
+        @endif
+    @if (Session::has('registerFail') and $errors->count() > 0)
+        <script>
+            $('document').ready(function () {
+                $('#myModal').modal('show');
+                    // Switches the Icon
+                    $('.toggle').children('i').toggleClass('fa-pencil');
+                    // Switches the forms  
+                    $('.form').animate({
+                    height: "toggle",
+                    'padding-top': 'toggle',
+                    'padding-bottom': 'toggle',
+                    opacity: "toggle"
+                    }, "slow");
+            })
+        </script>
+    @elseif ($errors->count() > 0)
+        <script>
+            $('document').ready(function () {
+                $('#myModal').modal('show');
+            })
+        </script>
+    @endif
    </body>
 </html>

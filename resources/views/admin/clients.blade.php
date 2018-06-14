@@ -16,6 +16,7 @@
                 </div>
             @endif
             <!-- start content -->
+            @if($clients->isNotEmpty())
             <ul>
                 @foreach ($clients as $key=>$client)
                     <li >
@@ -32,6 +33,9 @@
                     </li>
                 @endforeach
             </ul>
+            @else
+                <h3>Pas des Clients</h3>
+            @endif
              {{ $clients->setPath(url()->current())->render() }}
         <!-- end content -->
         </div>

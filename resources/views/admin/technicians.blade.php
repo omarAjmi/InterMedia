@@ -6,13 +6,22 @@
             <i class="fa fa-plus"></i> Ajouter un technicien
         </a>
         <div class="women_main">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('fail'))
+                <div class="alert alert-danger">
+                    {{ session('fail') }}
+                </div>
+            @endif
             <!-- start content -->
+             @if($techs->isNotEmpty())
             <ul>
                 @foreach ($techs as $key=>$tech)
                     <li >
                         <div>
                             <img src="/storage/uploads/users/{{ $tech->details->image }}" class="imge">
-                            <h4>{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
                             <h4>{{ $tech->details->first_name }} {{ $tech->details->last_name }}</h4>
                             <a data-toggle="modal" data-target="#dataModal{{$key}}" class="btn consulter">Consulter</a>
                             <form action="{{ route('admin.deleteTechnician', $tech->id) }}" method="POST">
@@ -24,7 +33,11 @@
                     </li>
                 @endforeach
             </ul>
+            @else
+                <h3>Pas des Techniciens</h3>
+            @endif
         <!-- end content -->
+        {{ $techs->setPath(url()->current())->render() }}
         </div>
     </div>
 @foreach ($techs as $key=>$tech)
@@ -51,7 +64,7 @@
                                     <h3><span>Telephone:</span> {{ $tech->details->phone }}</h3>
                                     <h3><span>Post:</span>{{ $tech->post}}</h3>
                                     <h3><span>Bio:</span> {{ $tech->bio }}</h3>
-                                    
+                                    <a href="{{ route('admin.techniciansOrders', $tech->id) }}" class="btn button-submit">Commandes</a>
                                         @if ($tech->admin)
                                             <form method="POST" action="{{ route('admin.unmakeAdmin', $tech->id) }}">
                                                 @csrf
@@ -68,8 +81,9 @@
                                     
                                 </div>
                                 <div class="form">
-                                    <form method="POST" action="{{ route('admin.updateTechnician', $tech->id) }}">
+                                    <form method="POST" action="{{ route('admin.updateTechnician', $tech->id) }}" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="_method" value="PATCH">
                                         <img src="/storage/uploads/users/{{ $tech->details->image }}" style="width: 30%;height: 30%;margin-left: 10%">
                                         <input type="file" name="image" class="form-control-file" style="margin: 2%">
                                         <input type="text" name="last_name" placeholder="Nom" value="{{ $tech->details->last_name }}">

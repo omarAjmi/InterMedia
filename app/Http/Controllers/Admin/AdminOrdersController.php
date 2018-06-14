@@ -100,7 +100,7 @@ class AdminOrdersController extends Controller
             Session::flash('fail', "Ooops! Commade est creé mais email n' été pas envoyé, verifier votre connection.");
             return back(); #revien au lien precedent
         }
-        return route('admin.orderDetails', $order->id);
+        return redirect(route('admin.orderDetails', $order->id));
     }
 
     /**

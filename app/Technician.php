@@ -16,6 +16,14 @@ class Technician extends Model
     ];
 
     /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'admin'
+    ];
+    /**
      * obtient les pannes du technicien
      *
      * @return Illuminate\Database\Eloquent\Collection
@@ -33,5 +41,14 @@ class Technician extends Model
     public function details()
     {
         return $this->belongsTo('App\User', 'id', 'id');
+    }
+
+    public static function pagination(int $perPage, Collection $data)
+    {
+        $currentPage = Paginator::resolveCurrentPage();
+        $collection = collect($data);
+        $currentPageResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedResults = new Paginator($currentPageResults, count($collection), $perPage);
+        return $paginatedResults;
     }
 }

@@ -40,7 +40,7 @@ class UsersCrudController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         if ($request->has('image')) {
-            $user->image = $user->updateImage($request->file('image'));
+            $user->image = $user->UploadImage($request->file('image'));
         }
         $user->save();
         return back();
@@ -66,5 +66,19 @@ class UsersCrudController extends Controller
             $ordersList->push(['data'=>$order, 'count'=>$count]);
         }
         return view('users.orders')->with(['orders' => $ordersList]);
+    }
+
+    public function confirmInscription(Request $request)
+    {
+        $user = Auth::user();
+        if($request->confirm_hash == $user->confirm_hash)
+        {
+            // dd($request->all(), $user->confirm_hash);
+            $user->confirmed = 1;
+            $user->save();
+            return redirect('/');
+        } else {
+
+        }
     }
 }

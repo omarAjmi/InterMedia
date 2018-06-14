@@ -35,7 +35,7 @@ class AdminPromotionsCrudController extends Controller
                 'title' => $request->title,
                 'category' => $request->category,
             ]);
-            $promotion->image = $promotion->uploadImage($promotion->id, $request->file('image'));
+            $promotion->image = $promotion->uploadImage($request->file('image'));
             $promotion->save();
             Session::flash('success', "promotion est creé");
             return back();
@@ -57,7 +57,7 @@ class AdminPromotionsCrudController extends Controller
             $promotion->title = $request->title;
             $promotion->category = $request->category;
             if ($request->has('image')) {
-                $promotion->image = $promotion->uploadImage($id, $request->file('image'));
+                $promotion->image = $promotion->uploadImage($request->file('image'));
             }
             $promotion->save();
             Session::flash('success', "promotion est mis à jour");
