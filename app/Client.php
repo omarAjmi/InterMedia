@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class Client extends Model
 {
@@ -64,4 +66,14 @@ class Client extends Model
     {
         return $this->hasManythrough('App\Technician', 'App\Order', 'client_id', 'id', 'id', 'technician_id');
     }
+
+    public static function pagination(int $perPage, Collection $data)
+    {
+        $currentPage = Paginator::resolveCurrentPage();
+        $collection = collect($data);
+        $currentPageResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedResults = new Paginator($currentPageResults, count($collection), $perPage);
+        return $paginatedResults;
+    }
+    
 }

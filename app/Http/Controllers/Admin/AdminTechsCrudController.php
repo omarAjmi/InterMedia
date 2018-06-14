@@ -44,7 +44,6 @@ class AdminTechsCrudController extends Controller
             'post' => $request->post,
             'bio' => $request->bio
         ]);
-        Session::flash('success', 'Technicien ajoute');
         return redirect(route('user.profile', ['id' => $user->id]));
     }
 
@@ -56,10 +55,9 @@ class AdminTechsCrudController extends Controller
      */
     public function makeAdminn(int $id)
     {
-        $tech = Technician::find($id);
+        $tech = Technician::findOrFail($id);
         $tech->admin = true;
         $tech->save();
-        Session::flash('success', 'Admin ajoute');
         return back();
     }
 
@@ -71,23 +69,10 @@ class AdminTechsCrudController extends Controller
      */
     public function unmakeAdminn(int $id)
     {
-        $tech = Technician::find($id);
+        $tech = Technician::findOrFail($id);
         $tech->admin = false;
         $tech->save();
-        Session::flash('success', 'Admin ajoute');
         return back();
-    }
-
-    /**
-     * apercue du profile du technicien
-     *
-     * @param integer $id
-     * @return view
-     */
-    public function technician(int $id)
-    {
-        $tech = Technician::find($id);
-        return view('admin.technician')->with(['technician'=>$tech]);
     }
 
     /**
@@ -99,7 +84,6 @@ class AdminTechsCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // dd($request);
         $tech = Technician::find($id);
         $techDetails = $tech->details;
         $techDetails->first_name = $request->first_name;
@@ -108,7 +92,7 @@ class AdminTechsCrudController extends Controller
         $techDetails->address = $request->address;
         $techDetails->phone = $request->phone;
         if ($request->has('image')) {
-            $techDetails->image = $this->updateImage($request, $tech->id);
+            $techDetails->image = $techDetails->updateImage($request, $tech->id);
         }
         $tech->cin = $request->cin;
         $tech->post = $request->post;
@@ -127,23 +111,7 @@ class AdminTechsCrudController extends Controller
     {
         $tech = Technician::find($id);
         $techDetails = $tech->details;
-        $tech->delete();
         $techDetails->delete();
-        Session::flash('success', 'Technicien suprime');
         return back();
-    }
-    /**
-     * uplod du fichier image et retourner leur nom
-     *
-     * @param Request $request
-     * @param integer $id
-     * @return string
-     */
-    private function updateImage(Request $request, int $id) : string
-    {
-        $photo = $request->file('image');
-        $filename = $id . '.' . $photo->getClientOriginalExtension();
-        Image::make($photo)->resize(128, 128)->save(public_path('storage/uploads/users/' . $filename));
-        return $filename;
     }
 }

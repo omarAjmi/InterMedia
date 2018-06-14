@@ -143,17 +143,20 @@ Route::group(['prefix' => 'discussion', 'middleware'=>'auth', 'namespace' => 'Cl
 Auth::routes();
 
 Route::get('emails/1', function(){
-    return view('emails.OrderCreatedEmail')->with(['title'=>'blablablabla']);
+    return view('emails.OrderCreatedEmail')->with(['order'=>App\Order::first()]);
 });
 Route::get('emails/2', function(){
-    return view('emails.OrderUpdatedEmail')->with(['title' => 'blablablabla']);
+    return view('emails.OrderUpdatedEmail')->with(['order' => App\Order::first()]);
 });
 Route::get('emails/3', function(){
-    return view('emails.OrderPayedEmail')->with(['title' => 'blablablabla']);
+    return view('emails.OrderPayedEmail')->with(['order' => App\Order::first()]);
 });
 Route::get('emails/4', function(){
-    return view('emails.OrderClosedEmail')->with(['title' => 'blablablabla']);
+    return view('emails.OrderClosedEmail')->with(['order' => App\Order::first()]);
 });
-Route::get('emails/5', function(){
-    return view('emails.welcomeEmail')->with(['title' => 'blablablabla']);
+Route::get('emails/5', function () {
+    return view('emails.OrderVerifiedEmail')->with(['order' => App\Order::first()]);
+});
+Route::get('emails/6', function(){
+    return view('emails.welcomeEmail')->with(['order' => App\Order::first()]);
 });

@@ -82,7 +82,7 @@ class OrdersCrudController extends Controller
         ]);
         Discussion::create(['order_id'=>$order->id]);
         
-        Mail::send('emails.OrderCreatedEmail', ['title'=>$bd->title], function ($message) use ($order) {
+        Mail::send('emails.OrderCreatedEmail', ['title'=>$bd->title], function ($message) use ($order){
             $message->to($order->client->details->email);
             $message->from(env('MAIL_USERNAME'));
             $message->subject('Commande Creé');
@@ -106,6 +106,7 @@ class OrdersCrudController extends Controller
         $device->accessories = $request->accessories;
         $breakdown->save();
         $device->save();
+        //add mailing
         return back();
     }
 
@@ -118,6 +119,6 @@ class OrdersCrudController extends Controller
     {
         $order = Order::findOrFail($id);
         $order->delete();
-        return redirect('/');
+        return route('user.orders', Auth::id());
     }
 }

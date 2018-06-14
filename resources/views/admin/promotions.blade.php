@@ -6,6 +6,15 @@
             <i class="fa fa-plus"></i> Ajouter une promotion
         </a>
         <div class="women_main">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif (session('fail'))
+            <div class="alert alert-danger">
+                {{ session('fail') }}
+            </div>
+        @endif
             @if ($promotions->isNotEmpty())
                     <!-- start content -->
                 <ul>
