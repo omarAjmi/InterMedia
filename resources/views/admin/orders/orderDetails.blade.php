@@ -1,9 +1,17 @@
 @extends('layouts.admin')
 
 @section('content')
-{{-- {{ dd($errors) }} --}}
 <div class="content">
     <div class="women_main">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (session('fail'))
+        <div class="alert alert-danger">
+            {{ session('fail') }}
+        </div>
+    @endif
         <!-- start content -->
         <div>
             <div class=" form-mod " >
@@ -28,10 +36,10 @@
                 <select name="client" id="class_type" class="form-control input-lg"  >
                     <option selected disabled>Assignier au client</option>
                     @foreach ($clients as $client)
-                        @if (!is_null($order) and $client->user_id == $order->client->user_id)
-                            <option selected value="{{ $client->user_id }}">{{ $client->details->first_name }} {{ $client->details->last_name }}</option>
+                        @if (!is_null($order) and $client->id == $order->client->id)
+                            <option selected value="{{ $client->id }}">{{ $client->details->first_name }} {{ $client->details->last_name }}</option>
                         @else
-                            <option value="{{ $client->user_id }}">{{ $client->details->first_name }} {{ $client->details->last_name }}</option>
+                            <option value="{{ $client->id }}">{{ $client->details->first_name }} {{ $client->details->last_name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -77,10 +85,10 @@
                 <select name="technician">
                     <option selected disabled>Assigner au technicien</option>
                     @foreach ($techs as $tech)
-                        @if (!is_null($order) and $tech->user_id == $order->technician_id)
-                            <option selected value="{{ $tech->user_id }}">{{ $tech->details->first_name }} {{ $tech->details->last_name }}</option>
+                        @if (!is_null($order) and $tech->id == $order->technician_id)
+                            <option selected value="{{ $tech->id }}">{{ $tech->details->first_name }} {{ $tech->details->last_name }}</option>
                         @else
-                            <option value="{{ $tech->user_id }}">{{ $tech->details->first_name }} {{ $tech->details->last_name }}</option>
+                            <option value="{{ $tech->id }}">{{ $tech->details->first_name }} {{ $tech->details->last_name }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -291,20 +299,32 @@
             <label class="col-sm-2 control-label" for="formGroupInputSmall"> date:</label>
                 <div class="col-sm-10">
                 <div class="input-group date" id="datetimepicker">
-                    <input type='text' name="return_date" class="form-control"/>
+                        @if (!is_null($order))
+                            <input type='text' name="return_date" class="form-control"/>                            
+                        @else
+                            <input type='text' name="return_date" class="form-control"/>                            
+                        @endif
                     <span class="input-group-addon" style="background-color: white;border: none" >
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
-                 <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker').datetimepicker();
-            });
-        </script>
+                 
                 @if (!is_null($order))
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker').datetimepicker({
+                            defaultDate: "{{ $order->return_date }}"
+                        });
+                    });
+                </script>
                     <input type="submit" value="Enregistrer">
                 @else
+                    <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker').datetimepicker();
+                    });
+                </script>
                     <input type="submit" value="Creer">
                 @endif
                    
@@ -342,17 +362,23 @@
             </div>
          
        <div class="form-mod_p" >
-                <h3>Payment:</h3>
+            <h3>Payment:(en DT)</h3>
                 @if (!is_null($order))
+                    <form action="{{ route('order.updatePayment', $order->payment->id) }}" method="POST">
+                        <input type="hidden" name="_method" value="PATCH">
+                @endif
+
+                @csrf
+                 @if (!is_null($order))
                     <input type="text" name="cost" placeholder="Montant" required="" value="{{ $order->payment->cost }}" style="width: 100%">
-                    <input type="text" name="deposit" placeholder="Avance" required="" value="{{ $order->payment->deposit }}" style="width: 100%">
+                    <input type="text" name="deposit" placeholder="Avance" value="{{ $order->payment->deposit }}" style="width: 100%">
                 @else
                     <input type="text" name="cost" placeholder="Montant" required="" style="width: 100%">
-                    <input type="text" name="deposit" placeholder="Avance" required="" style="width: 100%">
+                    <input type="text" name="deposit" placeholder="Avance"style="width: 100%">
                 @endif
-            </div>
-        
-        
+                <input class="btn btn-default" type="submit" value="Enregistrer payment">
+            </form>
+        </div>
         </div>
     </div>
 </div>

@@ -59,6 +59,9 @@
                            <li><a class="dropdown-item" href="{{ route('welcome') }}">
                                             Acceuil
                                         </a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.profile', Auth::id()) }}">
+                                            Profile
+                                        </a></li>
                             <li><a class="dropdown-item" href="{{ route('admin') }}">
                                             Site Admin
                                         </a></li>
@@ -107,7 +110,7 @@
                     <a href="{{ route('admin.clients') }}"><i class="fa fa-users"></i> <span>Clients</span></a>
                 </li>
                 <li id="menu-academico" >
-                    <a href="{{ route('admin.orders') }}"><i class="fa fa-dropbox"></i> <span>Commandes @if (!is_null($unverifiedOrders))<span class="badge"> {{ $unverifiedOrders }}</span>@endif</span></a>
+                    <a href="{{ route('admin.orders') }}"><i class="fa fa-dropbox"></i> <span>Commandes @if ($unverifiedOrders > 0)<span class="badge"> {{ $unverifiedOrders }}</span>@endif</span></a>
                 </li>
                 <li id="menu-academico" >
                     <a href="{{ route('admin.promotions') }}"><i class="fa fa-file-text-o"></i> <span>Promotions</span></a>

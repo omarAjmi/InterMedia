@@ -17,9 +17,9 @@ class AuthUnseenMessagesViewComposer
         $msgsCount = null;
         if (Auth::check()) {
             if (!is_null(Auth::user()->client)) {
-                $orders = Client::where('user_id', Auth::id())->first()->orders;
+                $orders = Client::where('id', Auth::id())->first()->orders;
             } else {
-                $orders = Technician::where('user_id', Auth::id())->first()->orders;
+                $orders = Technician::where('id', Auth::id())->first()->orders;
             }
             foreach ($orders as $order) {
                 foreach ($order->discussion->history as $msg) {

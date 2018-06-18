@@ -6,25 +6,38 @@
             <i class="fa fa-plus"></i> Ajouter une promotion
         </a>
         <div class="women_main">
-            <!-- start content -->
-            <ul>
-                @foreach ($promotions as $key=>$promotion)
-                    <li >
-                        <div>
-                           <img class="imge" src="/storage/uploads/promotions/{{ $promotion->image }}">
-                            <h4 > {{ $promotion->title }} </h4>
-                           <a id="login" href="#" class="btn consulter" data-toggle="modal" data-target="#dataModal{{ $key }}">consulter</a>
-                            <form action="{{ route('admin.promotions.delete', ['id'=>$promotion->id]) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input class="btn btn-danger dan" type="submit" value="Suprimer">
-                            </form>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-            {{ $promotions->links() }}
-        <!-- end content -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif (session('fail'))
+            <div class="alert alert-danger">
+                {{ session('fail') }}
+            </div>
+        @endif
+            @if ($promotions->isNotEmpty())
+                    <!-- start content -->
+                <ul>
+                    @foreach ($promotions as $key=>$promotion)
+                        <li >
+                            <div>
+                            <img class="imge" src="/storage/uploads/promotions/{{ $promotion->image }}">
+                                <h4 > {{ $promotion->title }} </h4>
+                                <a id="login" href="#" class="btn consulter" data-toggle="modal" data-target="#dataModal{{ $key }}">consulter</a>
+                                <form action="{{ route('admin.promotions.delete', ['id'=>$promotion->id]) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input class="btn btn-danger dan" type="submit" value="Suprimer">
+                                </form>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+                {{ $promotions->links() }}
+            <!-- end content -->
+            @else
+                <h3>pas des promotions</h3>
+            @endif
         </div>
     </div>
 

@@ -22,8 +22,8 @@ class CreateOrdersTable extends Migration
             $table->boolean('verified')->default(false);
             $table->boolean('closed')->default(false);
             $table->timestamps();
-            $table->foreign('client_id')->references('user_id')->on('clients')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->foreign('technician_id')->references('user_id')->on('technicians')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('technician_id')->references('id')->on('technicians')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

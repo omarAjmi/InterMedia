@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 class AdminPromotionsCrudController extends Controller
 {
 
+    /**
+     * Afficher tous les promotions
+     *
+     * @return View
+     */
     public function browse()
     {
         $promotions = Promotion::paginate(5);
@@ -25,14 +30,19 @@ class AdminPromotionsCrudController extends Controller
      */
     public function create(Request $request)
     {
-        $promotion = Promotion::create([
-            'title' => $request->title,
-            'category' => $request->category,
-        ]);
-        $promotion->image = $this->uploadImage($promotion->id, $request);
-        $promotion->save();
-        Session::flash('success', 'promotion est cree');
-        return redirect(route('admin.promotions', ['id' => $promotion->id]));
+        try {
+            $promotion = Promotion::create([
+                'title' => $request->title,
+                'category' => $request->category,
+            ]);
+            $promotion->image = $promotion->uploadImage($request->file('image'));
+            $promotion->save();
+            Session::flash('success', "promotion est creé");
+            return back();
+        } catch (\Exception $e) {
+            Session::flash('fail', "promotion n'est pas creé");
+            return back();
+        }
     }
 
     /**
@@ -42,15 +52,20 @@ class AdminPromotionsCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {     
-        $promotion = Promotion::findOrFail($id);
-        $promotion->title = $request->title;
-        $promotion->category = $request->category;
-        if($request->has('image')) {
-            $promotion->image = $this->uploadImage($id, $request);
+        try {
+            $promotion = Promotion::findOrFail($id);
+            $promotion->title = $request->title;
+            $promotion->category = $request->category;
+            if ($request->has('image')) {
+                $promotion->image = $promotion->uploadImage($request->file('image'));
+            }
+            $promotion->save();
+            Session::flash('success', "promotion est mis à jour");
+            return back();
+        } catch (\Exception $e) {
+            Session::flash('fail', "promotion n'est pas mis à jour");
+            return back();
         }
-        $promotion->save();
-        Session::flash('success', 'promotion est edite');
-        return back();
     }
 
     /**
@@ -60,24 +75,14 @@ class AdminPromotionsCrudController extends Controller
      */
     public function delete(int $id)
     {
-        $promotion = Promotion::findOrFail($id);
-        $promotion->delete();
-        Session::flash('success', 'promotion est suprime');
-        return redirect('/admin');
-    }
-
-    /**
-     * upload l'image du profile
-     *
-     * @param integer $id
-     * @param Request $request
-     * @return void
-     */
-    private function uploadImage(int $id, Request $request)
-    {
-        $photo = $request->file('image');
-        $filename = $id . '.' . $photo->getClientOriginalExtension();
-        Image::make($photo)->resize(950, 950)->save(public_path('storage/uploads/promotions/' . $filename));
-        return $filename;
+        try {
+            $promotion = Promotion::findOrFail($id);
+            $promotion->delete();
+            Session::flash('success', "promotion est suprimé");
+            return back();
+        } catch (\Exception $e) {
+            Session::flash('fail', "promotion n'est pas suprimé");
+            return back();
+        }
     }
 }

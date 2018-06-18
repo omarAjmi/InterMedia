@@ -100,7 +100,7 @@
 						<td width="100%">
 							<table width="120" align="left" class="resp-full-table" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td width="100%" class="resp-full-td" style="text-align: center;"><a href="{{ route('user.orders', Auth::id()) }}"><img src="/images/credit-card.png" width="120px" style="border-radius:3px;" alt="Logo" border="0"></a>
+									<td width="100%" class="resp-full-td" style="text-align: center;"><a href=""><img src="/images/chat.png" width="120px" style="border-radius:3px;" alt="Logo" border="0"></a>
 									</td>
 								</tr>
 							</table>
@@ -112,23 +112,17 @@
 							<table width="480" align="right" class="resp-full-table" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td width="100%" class="resp-full-td" valign="top" style="text-align : justify;">
-										<a href="#" style="outline:none; text-decoration:none"><span style="font-size:25px; font-weight: bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131;">Panne: {{ $order->breakdown->title}}</span></a><br />
+										<a href="#" style="outline:none; text-decoration:none"><span style="font-size:25px; font-weight: bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131;">Bienvenue.</span></a><br />
 										<hr align="left" style="width:100px; margin-left:0px; text-align:left; background-color:#C00C0D; color:#C00C0D; height: 2px; border: 0 none;" />
 										<span style="line-height: 30px; font-size:16px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#313131">
-                                            Votre Commande a été payé avec succés.<br>
-											<u>Client</u>: {{ $order->client->details->first_name}}<br>
-											<u>Panne</u>: {{ $order->breakdown->title}}<br>
-											<u>Marque Machine</u>: {{ $order->breakdown->device->brand}}<br>
-											<u>Model Machine</u>: {{ $order->breakdown->device->model}}<br>
-											<u>Accessoire Machine</u>: {{ $order->breakdown->device->accessories}}<br>
-											<u>Créer le</u>: {{ $order->created_at}}<br>
-											<u>Montant</u>: {{ $order->payment->cost}} DT<br>
-											@if (!is_null($order->payment->deposit))
-												<u>Avance</u>: {{ $order->payment->deposit}} DT<br>
-											@else
-												<u>Avance</u>: Non specifié<br>
-											@endif
-											Nous vous remercions de faire affaire avec nous.
+                                            Vous avez demandé à profiter de nos services en ligne et à devenir l'un de nos clients.
+											<form action="{{ route('user.confirm') }}" method="GET">
+												@csrf
+												<input type="hidden" name="confirm_hash" value="{{ $user->confirm_hash }}" value="Cliquez ici">
+												<input type="submit" style="background-color:#43CD63; border-radius:3px; padding: 6px 24px;"
+												 value="Cliquez ici">
+											</form>
+                                            pour confirmer votre adresse email s'il vous plaît.
                                         </span>
 									</td>
 								</tr>

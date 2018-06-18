@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Order;
 use App\Technician;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -16,7 +17,8 @@ class AdminTechsCrudController extends Controller
     public function technicians()
     {
         $techs = Technician::with('details', 'orders')->get();
-        return view('admin.technicians')->with('techs', $techs);
+        $paginatedTechs = Order::pagination(6, $techs); #pagination des technicien
+        return view('admin.technicians')->with('techs', $paginatedTechs);
     }
 
     /**
@@ -35,17 +37,24 @@ class AdminTechsCrudController extends Controller
             'phone' => $request->phone
         ]);
         if($request->has('image')) {
-            $user->image = $this->updateImage($request, $user->id);
+            $user->image = $user->uploadImage($request->file('image'));
             $user->save();
         }
         Technician::create([
-            'user_id' => $user->id,
+            'id' => $user->id,
             'cin' => $request->cin,
             'post' => $request->post,
             'bio' => $request->bio
         ]);
-        Session::flash('success', 'Technicien ajoute');
-        return redirect(route('user.profile', ['id' => $user->id]));
+        Session::flash('success', 'Technicien est creé');
+        return back();
+    }
+
+    public function orders(int $id)
+    {
+        $tech = Technician::findOrFail($id); #retriver le technicien
+        $paginatedOrders = Order::pagination(6, $tech->orders); #pagination des commande du technicien
+        return view('admin.orders.all')->with(['orders' => $paginatedOrders]);
     }
 
     /**
@@ -56,10 +65,10 @@ class AdminTechsCrudController extends Controller
      */
     public function makeAdminn(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::findOrFail($id);
         $tech->admin = true;
         $tech->save();
-        Session::flash('success', 'Admin ajoute');
+        Session::flash('success', 'Technicien ajouté aux admins');
         return back();
     }
 
@@ -71,23 +80,11 @@ class AdminTechsCrudController extends Controller
      */
     public function unmakeAdminn(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::findOrFail($id);
         $tech->admin = false;
         $tech->save();
-        Session::flash('success', 'Admin ajoute');
+        Session::flash('success', 'Technicien retiré du admins');
         return back();
-    }
-
-    /**
-     * apercue du profile du technicien
-     *
-     * @param integer $id
-     * @return view
-     */
-    public function technician(int $id)
-    {
-        $tech = Technician::where('user_id', $id)->first();
-        return view('admin.technician')->with(['technician'=>$tech]);
     }
 
     /**
@@ -99,8 +96,7 @@ class AdminTechsCrudController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        // dd($request);
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $techDetails = $tech->details;
         $techDetails->first_name = $request->first_name;
         $techDetails->last_name = $request->last_name;
@@ -108,12 +104,13 @@ class AdminTechsCrudController extends Controller
         $techDetails->address = $request->address;
         $techDetails->phone = $request->phone;
         if ($request->has('image')) {
-            $techDetails->image = $this->updateImage($request, $tech->id);
+            $techDetails->image = $techDetails->uploadImage($request->file('image'));
         }
         $tech->cin = $request->cin;
         $tech->post = $request->post;
         $tech->save();
         $techDetails->save();
+        Session::flash('success', 'Technicien eté mis a jour.');
         return back();
     }
 
@@ -125,25 +122,10 @@ class AdminTechsCrudController extends Controller
      */
     public function delete(int $id)
     {
-        $tech = Technician::where('user_id', $id)->first();
+        $tech = Technician::find($id);
         $techDetails = $tech->details;
-        $tech->delete();
         $techDetails->delete();
-        Session::flash('success', 'Technicien suprime');
+        Session::flash('success', 'Technicien est suprimé');
         return back();
-    }
-    /**
-     * uplod du fichier image et retourner leur nom
-     *
-     * @param Request $request
-     * @param integer $id
-     * @return string
-     */
-    private function updateImage(Request $request, int $id) : string
-    {
-        $photo = $request->file('image');
-        $filename = $id . '.' . $photo->getClientOriginalExtension();
-        Image::make($photo)->resize(128, 128)->save(public_path('storage/uploads/users/' . $filename));
-        return $filename;
     }
 }

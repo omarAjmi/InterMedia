@@ -26,13 +26,23 @@
                                 <img class="imge" src="/storage/uploads/users/{{ $order->client->details->image }}">
                                 <h4 >{{ $order->breakdown->title }}</h4>
                                 <h5 style="color: #7f0e0e;font-weight: bolder; ">{{ $order->created_at->toFormattedDateString() }}, {{ $order->created_at->toTimeString() }}</h5>
-                                    <a href="{{ route('order.preview', $order->id) }}" class="btn button-submit"><i class="fa fa-comments"></i></a>
-                                <a href="{{ route('admin.orderDetails', ['id'=>$order->id]) }}" class="btn btn-success consulter" >Consulter</a>
-                                <form action="{{ route('admin.orderNew', ['id'=>$order->id]) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input class="btn btn-danger dan" type="submit" value="Suprimer">
-                                </form>
+
+                                <!-- <div> -->
+                                    <a href="{{ route('order.preview', $order->id) }}" class="btn btn-primary"><i class="fa fa-comments">&MediumSpace;&MediumSpace;
+                                        @if($order->discussion->history->isNotEmpty())
+                                            {{ $order->discussion->countUnread() }}
+                                            @if($order->discussion->unreadMsgs > 0)
+                                            <span class="badge">{{ $order->discussion->unreadMsgs }}</span>
+                                            @endif
+                                        @endif
+                                    </i></a>
+                                    <a href="{{ route('admin.orderDetails', ['id'=>$order->id]) }}" class="btn btn-success consulter" >Consulter</a>
+                                    <form action="{{ route('admin.orderNew', ['id'=>$order->id]) }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input class="btn btn-danger dan" type="submit" value="Suprimer">
+                                    </form>
+                                <!-- </div> -->
                             </div>
                         </li>
                     @endforeach

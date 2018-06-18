@@ -6,7 +6,17 @@
             <i class="fa fa-plus"></i> Ajouter un client
         </a>
         <div class="women_main">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('fail'))
+                <div class="alert alert-danger">
+                    {{ session('fail') }}
+                </div>
+            @endif
             <!-- start content -->
+            @if($clients->isNotEmpty())
             <ul>
                 @foreach ($clients as $key=>$client)
                     <li >
@@ -14,7 +24,7 @@
                             <img src="/storage/uploads/users/{{ $client->details->image }}" class="imge">
                             <h4 >{{ $client->details->first_name }} {{ $client->details->last_name }}</h4>
                             <a class="btn  consulter" data-toggle="modal" data-target="#dataModal{{ $key }}">Consulter</a>
-                            <form action="{{ route('admin.deleteClient', ['id'=>$client->user_id]) }}" method="POST">
+                            <form action="{{ route('admin.deleteClient', ['id'=>$client->id]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input class="btn btn-danger dan" type="submit" value="Suprimer">
@@ -23,6 +33,9 @@
                     </li>
                 @endforeach
             </ul>
+            @else
+                <h3>Pas des Clients</h3>
+            @endif
              {{ $clients->setPath(url()->current())->render() }}
         <!-- end content -->
         </div>
@@ -65,10 +78,10 @@
                                         <h3><span>Email:</span> {{ $client->details->email }}</h3>
                                         <h3><span>Adresse:</span>{{ $client->details->address }}</h3>
                                         <h3><span>Telephone:</span> {{ $client->details->phone }}</h3>
-                                        <a class="btn button-submit" href="{{ route('admin.clientOrders', $client->user_id) }}">Commandes</a>
+                                        <a class="btn button-submit" href="{{ route('admin.clientOrders', $client->id) }}">Commandes</a>
                                 </div>
                                 <div class="form">
-                                    <form method="POST" action="{{ route('admin.updateClient', $client->user_id) }}" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('admin.updateClient', $client->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="PATCH">
                                         <img src="/storage/uploads/users/{{ $client->details->image }}" style="width: 30%;height: 30%;margin-left: 10%">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Mail;
 use App\Client;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -50,13 +51,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator =  Validator::make($data, [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:8',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        if ($validator->fails()) {
+            Session::flash('registerFail');
+            return $validator;
+        } else {
+            return $validator;
+        }
     }
 
     /**
@@ -73,12 +80,13 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'confirm_hash' => Hash::make($data['password'].$data['email']),
         ]);
-        Client::create(['user_id'=>$user->id]);
-        Mail::send('emails.welcomeEmail', [], function ($message) use ($user){
+        Client::create(['id'=>$user->id]);
+        Mail::send('emails.confirmEmail', ['user'=>$user], function ($message) use ($user){
             $message->to($user->email);
             $message->from(env('MAIL_USERNAME'));
-            $message->subject('Bienvenue');
+            $message->subject('Confirmation adresse email');
         });
         return $user;
     }

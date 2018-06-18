@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'address', 'phone'
+        'first_name', 'last_name', 'email', 'password', 'address', 'phone', 'confirm_hash'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'admin'
+        'password', 'remember_token', 'confirm_hash'
     ];
 
     /**
@@ -36,7 +36,7 @@ class User extends Authenticatable
      */
     public function client()
     {
-        return $this->hasOne('App\Client');
+        return $this->hasOne('App\Client', 'id');
     }
 
     /**
@@ -46,7 +46,7 @@ class User extends Authenticatable
      */
     public function technician()
     {
-        return $this->hasOne('App\Technician');
+        return $this->hasOne('App\Technician', 'id');
     }
 
     /**
@@ -56,7 +56,7 @@ class User extends Authenticatable
      * @param array $photo
      * @return void
      */
-    public function updateImage(UploadedFile $photo)
+    public function uploadImage(UploadedFile $photo)
     {
         $filename = $this->id . '.' . $photo->getClientOriginalExtension();
         Image::make($photo)->resize(128, 128)->save(public_path('storage/uploads/users/' . $filename));

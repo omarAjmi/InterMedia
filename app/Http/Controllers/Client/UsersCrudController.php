@@ -13,14 +13,6 @@ use Illuminate\Support\Facades\Session;
 class UsersCrudController extends Controller
 {
     /**
-     * Constructor
-     */
-    function __construct()
-    {
-        $this->middleware('admin')->only(['add', 'create']);
-    }
-
-    /**
      * apercue le profile du client
      *
      * @param integer $id
@@ -48,10 +40,9 @@ class UsersCrudController extends Controller
         $user->address = $request->address;
         $user->phone = $request->phone;
         if ($request->has('image')) {
-            $user->image = $user->updateImage($request->file('image'));
+            $user->image = $user->UploadImage($request->file('image'));
         }
         $user->save();
-        Session::flash('success', 'Mis a jour est succeé!');
         return back();
     }
 
@@ -64,7 +55,7 @@ class UsersCrudController extends Controller
     public function orders(int $id)
     {
         $ordersList = collect();
-        $orders = Client::where('user_id', $id)->first()->orders;
+        $orders = Client::find($id)->orders;
         foreach ($orders as $order) {
             $count = 0;
             foreach ($order->discussion->history as $msg) {
@@ -74,7 +65,20 @@ class UsersCrudController extends Controller
             }
             $ordersList->push(['data'=>$order, 'count'=>$count]);
         }
-        // dd($ordersList);
         return view('users.orders')->with(['orders' => $ordersList]);
+    }
+
+    public function confirmInscription(Request $request)
+    {
+        $user = Auth::user();
+        if($request->confirm_hash == $user->confirm_hash)
+        {
+            // dd($request->all(), $user->confirm_hash);
+            $user->confirmed = 1;
+            $user->save();
+            return redirect('/');
+        } else {
+
+        }
     }
 }

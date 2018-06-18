@@ -27,8 +27,28 @@
     text-transform: uppercase;
     outline: none;
 }
+
+.button-danger{
+	background: #919191;
+    width: 100%;
+    border: 0;
+    padding: 10px 15px;
+    margin-bottom:   1%;
+    color: #ffffff;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    outline: none;
+}
 @media only screen and (max-width: 766px){
 .button-submit{
+
+    font-size: 0.7em;
+   
+}
+.button-danger{
 
     font-size: 0.7em;
    
@@ -39,6 +59,9 @@
 }
 .button-submit:hover{
 	background: #0aca89;
+}
+.button-danger:hover{
+	background: #B52E31;
 }
 .in-tag{
 	 outline: none;

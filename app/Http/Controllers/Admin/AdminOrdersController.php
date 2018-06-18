@@ -4,161 +4,229 @@ namespace App\Http\Controllers\Admin;
 
 use App\Order;
 use App\Client;
+use App\Device;
+use App\Payment;
+use App\Breakdown;
 use App\Technician;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CreateOrderRequest;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use App\Device;
-use App\Breakdown;
-use Illuminate\Support\Facades\Mail;
+use App\Discussion;
+use Illuminate\Support\Facades\Log;
 
 class AdminOrdersController extends Controller
 {
+    /**
+     * retriver tous les commandes ordonnes par date et paginees
+     *
+     * @return Collection
+     */
     public function browse()
     {
-        $orders = Order::all()->sortByDesc('created_at');
-        $currentPage = Paginator::resolveCurrentPage();
-        $perPage = 6;
-        $collection = collect($orders);
-        $currentPageResults = $collection->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $paginatedResults = new Paginator($currentPageResults, count($collection), $perPage);
-        return view('admin.orders.all')->with(['orders' => $paginatedResults]);
+        $orders = Order::all()->sortByDesc('created_at'); #retriver les commandes
+        $paginatedOrders = Order::pagination(6, $orders);
+        return view('admin.orders.all')->with(['orders' => $paginatedOrders]);
     }
 
+    /**
+     * afficher formulaire creer une nouvelle commande
+     *
+     * @return View
+     */
     public function new()
     {
-        $clients = Client::with('details')->get();
-        $techs = Technician::with('details')->get();
+        $clients = Client::with('details')->get(); #retriver les clients pour populer la liste des clients
+        $techs = Technician::with('details')->get(); #retriver les techs pour populer la liste des techniciens
         return view('admin.orders.orderDetails')->with(['order' => null, 'clients' => $clients, 'techs'=>$techs]);
     }
 
+    /**
+     * Prevue une commande
+     *
+     * @param integer $id
+     * @return View
+     */
     public function preview(int $id)
     {
-        $clients = Client::with('details')->get();
-        $techs = Technician::with('details')->get();
-        $order = Order::with(['breakdown', 'client', 'technician', 'payment'])->findOrFail($id);
+        $clients = Client::with('details')->get(); #retriver les clients pour populer la liste des clients
+        $techs = Technician::with('details')->get(); #retriver les techs pour populer la liste des techniciens
+        $order = Order::with(['breakdown', 'client', 'technician', 'payment'])->findOrFail($id); #retriver la commande
         return view('admin.orders.orderDetails')->with(['order' => $order, 'clients' => $clients, 'techs' => $techs]);
     }
 
+    /**
+     * Ajouter une nouvelle commande a la base des donnees
+     *
+     * @param Request $request
+     * @return Route
+     */
     public function create(Request $request)
     {
-        $order = Order::create([
-            'client' => $request->client,
-            'technician' => $request->technician,
+        $order = Order::create([ #creer une commande
+            'client_id' => $request->client,
+            'technician_id' => $request->technician,
             'nature' => $request->nature,
-            'return_date' => $request->return_date,
-            'varified' => true
+            'return_date' => \Carbon\Carbon::parse($request->return_date),
+            'verified' => true
         ]);
 
-        $device = Device::create([
+        $device = Device::create([ #creer une machine
             'brand' => $request->brand,
             'model' => $request->model,
             'color' => $request->color,
             'accessories' => $request->accessories
         ]);
 
-        $bd = Breakdown::create([
+        $bd = Breakdown::create([ #creer un panne
             'title' => $request->title,
             'order_id' => $order->id,
             'device_id' => $device->id
         ]);
 
-        Payment::create([
+        Payment::create([ #creer une payment
             'order_id' => $order->id,
             'cost' => $request->cost,
             'deposit' => $request->deposit
         ]);
 
-        Discussion::create(['order_id' => $order->id]);
-
-        Mail::send('emails.OrderCreatedEmail', [], function ($message) use ($order) {
-            $message->to($order->client->details->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Commande Creé');
-        });
+        Discussion::create(['order_id' => $order->id]); #creer une discussoin
+        try {
+            Order::notifyWithEmail('Commande a été creé', 'emails.OrderCreatedEmail', $order);
+            Session::flash('success', 'Commade est creé');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est creé mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return redirect(route('admin.orderDetails', $order->id));
     }
 
+    /**
+     * Mis a jours d'une commande
+     *
+     * @param integer $id
+     * @param Request $request
+     * @return Route
+     */
+    public function updatePayment(int $id, Request $request)
+    {
+        $payment = Payment::findOrFail($id); #retriver le payment d'une commade
+        $payment->cost = $request->cost; #mis a jour montant
+        $payment->deposit = $request->deposit; #mis a jour avance
+        $payment->save(); #enregistre #enregistre
+        try {
+            Order::notifyWithEmail('Commande a été mis à jour', 'emails.OrderUpdatedEmail', $payment->order);
+            Session::flash('success', 'Commade est mis à jour');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est mis à jour mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return back(); #revien au lien precedent #revien au lien precedent
+    }
     public function update(int $id, Request $request)
     {
-        $order = Order::with(['breakdown.device', 'payment'])->findOrFail($id);
-        $order->technician_id = $request->technician;
-        $order->nature = $request->nature;
-        $order->return_date = \Carbon\Carbon::parse($request->return_date);
-        $order->verified = true;
-        $order->save();
+        $order = Order::with(['breakdown.device', 'payment'])->findOrFail($id); #retriver la commande
+        $order->technician_id = $request->technician; #mis a jour id du technicien
+        $order->nature = $request->nature; #mis a jour nature
+        $order->return_date = \Carbon\Carbon::parse($request->return_date); #convertir chaine du date et ajouter au date_return
+        $order->verified = true; #marquer commande verifier car elle ete creer par l'admin
+        $order->save(); #enregistre
 
-        $device = $order->breakdown->device;
-        $device->brand = $request->brand;
-        $device->model = $request->model;
-        $device->color = $request->color;
-        $device->accessories = $request->accessories;
-        $device->save();
+        $device = $order->breakdown->device; #retriver la machine du commande
+        $device->brand = $request->brand; #mis a jour la marque machine
+        $device->model = $request->model; #mis a jour le model machine
+        $device->color = $request->color; #mis a jour la couleur machine
+        $device->accessories = $request->accessories; #mis a jour les accesoirs machine
+        $device->save(); #enregistre
 
-        $bd = $order->breakdown;
-        $bd->title = $request->title;
-        $bd->save();
-
-        $payment = $order->payment;
-        $payment->cost = $request->cost;
-        $payment->deposit = $request->deposit;
-        $payment->save();
-
-        Mail::send('emails.OrderUpdatedEmail', ['title'=>$bd->title], function ($message) use ($order) {
-            $message->to($order->client->details->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Commande a été mis à jour');
-        });
-        return back();        
+        $bd = $order->breakdown; #retriver le panne du commande
+        $bd->title = $request->title; #mis a jour le titre du panne
+        $bd->save(); #enregistre
+        try {
+            Order::notifyWithEmail('Commande a été mis à jour', 'emails.OrderUpdatedEmail', $order);
+            Session::flash('success', 'Commade est mis à jour');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est mis à jour mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return back(); #revien au lien precedent        
     }
 
+    /**
+     * Marquer une commande comme verifie
+     *
+     * @param integer $id
+     * @return Route
+     */
     public function verifyOrder(int $id)
     {
-        $order = Order::findOrFail($id);
-        $order->verified = true;
-        $order->save();
-
-        Mail::send('emails.OrderVerifiedEmail', ['title' => $order->breakdown->title], function ($message) use ($order) {
-            $message->to($order->client->details->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Commande Verifeé');
-        });
-        return back();
+        $order = Order::findOrFail($id); #retriver la commade
+        $order->verified = true; #marquer comme verifié
+        $order->save(); #enregistre
+        try {
+            Order::notifyWithEmail('Commande a été verifié', 'emails.OrderVerifiedEmail', $order);
+            Session::flash('success', 'Commade est verifié');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est verifié mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return back(); #revien au lien precedent
     }
 
+    /**
+     * Marquer une commande comme payee
+     *
+     * @param integer $id
+     * @return Route
+     */
     public function setAsPayed(int $id)
     {
-        $order = Order::findOrFail($id);
-        $payment = $order->payment;
-        $payment->payed = true;
-        $payment->save();
-
-        Mail::send('emails.OrderPayedEmail', ['title'=>$order->breakdown->title], function ($message) use ($order) {
-            $message->to($order->client->details->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Commande Payé');
-        });
-        return back();
+        $order = Order::findOrFail($id); #retriver la commade
+        $payment = $order->payment; #retriver lae payment du commade
+        $payment->payed = true; #marquer comme payé
+        $payment->save(); #enregistre
+        try {
+            Order::notifyWithEmail('Commande est payé', 'emails.OrderPayedEmail', $order);
+            Session::flash('success', 'Commade est payé');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est payé mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return back(); #revien au lien precedent
     }
 
+    /**
+     * Marquer une commande comme complete
+     *
+     * @param integer $id
+     * @return Route
+     */
     public function setAsClosed(int $id)
-    {
-        $order = Order::findOrFail($id);
-        $order->closed = true;
-        $order->save();
-
-        Mail::send('emails.OrderClosedEmail', ['title' => $order->breakdown->title], function ($message) use ($order) {
-            $message->to($order->client->details->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Commande Terminé');
-        });
-        return back();
+    {       
+        $order = Order::findOrFail($id); #retriver la commade
+        $order->closed = true; #marquer comme terminé
+        $order->save(); #enregistre
+        try {
+            Order::notifyWithEmail('Commande est terminé', 'emails.OrderClosedEmail', $order);
+            Session::flash('success', 'Commade est terminé');
+        } catch (\Exception $e) {
+            Session::flash('fail', "Ooops! Commade est terminé mais email n' été pas envoyé, verifier votre connection.");
+            return back(); #revien au lien precedent
+        }
+        return back(); #revien au lien precedent
     }
 
+    /**
+     * Generer fiche technique d'une commande
+     *
+     * @param integer $id
+     * @return View
+     */
     public function invoice(int $id)
     {
-        $order = Order::with(['client', 'payment', 'breakdown'])->findOrFail($id);
+        $order = Order::with(['client', 'payment', 'breakdown'])->findOrFail($id); #retriver la commande
         return view('admin.orders.invoice')->with(['order' => $order]);
     }
 }

@@ -16,7 +16,7 @@ class TechniciansTableSeeder extends Seeder
 
         for ($i = 1; $i <= 5; $i++) { 
             App\Technician::create([
-                'user_id' =>  $i,
+                'id' =>  $i,
                 'cin' => $faker->ean8 ,
                 'post' => $faker->randomElement([
                     'Technicien Hardware',

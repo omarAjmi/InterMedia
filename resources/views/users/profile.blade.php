@@ -139,7 +139,7 @@
 			</form>
 		@if(Auth::user()->technician and Auth::user()->technician->admin)
 			@if(!is_null($user->technician) and !$user->technician->admin)
-				<form action="{{ route('admin.makeAdmin', ['id'=>$user->id]) }}" method="post">
+				<form action="{{ route('admin.makeAdmin', ['id'=>$user->id]) }}" method="POST">
 					@csrf
 					<input type="hidden" name="_method" value="PATCH">
 					<div class="container-contact100-form-btn">
