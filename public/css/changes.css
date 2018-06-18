@@ -1,3 +1,44 @@
+.section-h3 p{
+  padding-bottom: 1%;
+  padding-left: 35%;
+  padding-top: 20%;
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing:1px;
+  word-wrap: break-word;
+  width: 90%;
+  font-size:16px;
+  color: black;
+
+}
+.section-h3 button{
+   margin-left: 35%;
+   margin-bottom: 2%;
+  }
+@media only screen and (max-width: 766px){
+  .section-h3 img{
+    width: 50%;
+    height: 50%;
+    margin-top: 10%;
+  }
+  .section-h3 p{
+  padding-bottom: 1%;
+  padding-left: 40%;
+  padding-top: 20%;
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing:1px;
+  word-wrap: break-word;
+  width: 90%;
+  font-size:14px;
+  color: black;
+
+}
+.section-h3 button{
+   margin-left: 40%;
+   margin-bottom: 2%;
+  }
+}
 .form span{
 	color: #B52E31;
 	font-weight: bolder;
@@ -137,6 +178,15 @@ margin-top: -8%;
 float: left;
  background: #5cb85c;
  color: white;
+}
+.consulter-msg{
+margin-left: 72%;
+margin-right: 1%;
+margin-top: -8%;
+float: left;
+ background: #5cb85c;
+ color: white;
+ 
 }
 .dan{
 	margin-top: -15%;

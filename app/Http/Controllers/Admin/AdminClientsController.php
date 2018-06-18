@@ -39,6 +39,7 @@ class AdminClientsController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'address' => $request->address,
+            'confirm_hash' => Hash::make('12345678'.$request->email),
             'phone' => $request->phone,
             'password' => Hash::make('12345678'),
         ]);

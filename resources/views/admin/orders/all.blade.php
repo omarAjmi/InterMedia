@@ -28,7 +28,7 @@
                                 <h5 style="color: #7f0e0e;font-weight: bolder; ">{{ $order->created_at->toFormattedDateString() }}, {{ $order->created_at->toTimeString() }}</h5>
 
                                 <!-- <div> -->
-                                    <a href="{{ route('order.preview', $order->id) }}" class="btn btn-primary"><i class="fa fa-comments">&MediumSpace;&MediumSpace;
+                                    <a href="{{ route('order.preview', $order->id) }}" class="btn btn-primary consulter-msg" ><i class="fa fa-comments">&MediumSpace;&MediumSpace;
                                         @if($order->discussion->history->isNotEmpty())
                                             {{ $order->discussion->countUnread() }}
                                             @if($order->discussion->unreadMsgs > 0)

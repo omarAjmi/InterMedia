@@ -83,11 +83,15 @@ class RegisterController extends Controller
             'confirm_hash' => Hash::make($data['password'].$data['email']),
         ]);
         Client::create(['id'=>$user->id]);
-        Mail::send('emails.confirmEmail', ['user'=>$user], function ($message) use ($user){
-            $message->to($user->email);
-            $message->from(env('MAIL_USERNAME'));
-            $message->subject('Confirmation adresse email');
-        });
+        try {
+            Mail::send('emails.confirmEmail', ['user'=>$user], function ($message) use ($user){
+                $message->to($user->email);
+                $message->from(env('MAIL_USERNAME'));
+                $message->subject('Confirmation adresse email');
+            });
+        } catch (\Exception $e) {
+            Session::flash('registerFail');
+        }
         return $user;
     }
 }

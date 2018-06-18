@@ -670,8 +670,10 @@
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>  
             </div>
-            <section style="background-image: url(images/police.png)">
-               <h3>{{ Session::get('notConfirmed') }}</h3>
+            <section class="section-h3" style="max-height: 700px;">
+               <img src="images/police.png" style="position: absolute;">
+               <p style="">{{ Session::get('notConfirmed') }}</p>
+               <button class="btn btn-primary">re-envoyer</button>
             </section>
          </div>
       </div>

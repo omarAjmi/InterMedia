@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'admin' => 1,
             'cin' => '12345678',
             'post' => 'Technicien Informatique',
-            'bio' => $faker->text($maxNbChars = 200)
+            'bio' => $faker->text($maxNbChars = 50)
         ]);
         /* $this->call(UsersTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
