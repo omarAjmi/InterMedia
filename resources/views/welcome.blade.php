@@ -411,7 +411,7 @@
       <!--testimonials -->
       <div class="testimonials" id="testimonials">
          <div class="container">
-            <h3 class="title">Interior<span class="sub-text"> Clients</span></h3>
+            <h3 class="title">Inter Media<span class="sub-text"> Clients</span></h3>
             <div id="myCarouselbanner" class="carousel slide" data-ride="carousel">
                <!-- Indicators -->
                <ol class="carousel-indicators">
@@ -525,57 +525,6 @@
          </div>
          <div class="clearfix"> </div>
       </div>
-      <div class="info-contact">
-         <div class="container">
-            <div class="contact-us">
-               <form action="#" method="post">
-                  <div class="col-md-6 col-sm-6 col-xs-6 styled-input">
-                    <div class="wrap-input100 validate-input" data-validate="champ requis">
-
-                        <input class="input100" type="text" name="name" placeholder="nom">
-                        <span class="focus-input100"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 styled-input">
-                     <div class="wrap-input100 validate-input" data-validate="champ requis">
-
-                        <input class="input100" type="text" name="name" placeholder="prenom">
-                        <span class="focus-input100"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 styled-input">
-                    <div class="wrap-input100 validate-input" data-validate="champ requis">
-
-                        <input class="input100" type="email" name="name" placeholder="email">
-                        <span class="focus-input100"></span>
-                     </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-6 styled-input">
-                    <div class="wrap-input100 validate-input" data-validate="champ requis">
-
-                        <input class="input100" type="text" name="name" placeholder="">
-                        <span class="focus-input100"></span>
-                     </div>
-                  </div>
-                  <div class="clearfix"> </div>
-                  <div class="styled-input">
-                     <div class="wrap-input100 validate-input" data-validate="champ requis">
-
-                          <textarea name="Message" class="input100" placeholder="Message" required=""></textarea>
-                        <span class="focus-input100"></span>
-                     </div>
-                  
-                  </div>
-                  <div>
-                     <div class="click">
-                        <input type="submit" value="SEND" style="border-radius: 25px;">
-                     </div>
-                  </div>
-               </form>
-            </div>
-            <div class="clearfix"> </div>
-         </div>
-      </div>
 
 <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
       <div class="modal-dialog" role="document">
@@ -673,7 +622,7 @@
             <section class="section-h3" style="max-height: 700px;">
                <img src="images/police.png" style="position: absolute;">
                <p style="">{{ Session::get('notConfirmed') }}</p>
-               <button class="btn btn-primary">re-envoyer</button>
+               <a href="{{ route('user.resendConfirm') }}" class="btn btn-primary">re-envoyer</a>
             </section>
          </div>
       </div>

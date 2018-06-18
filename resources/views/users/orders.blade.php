@@ -206,7 +206,7 @@
          <div class="container">
             <div class="col-md-7 header-side">
                <p>© 
-                  2018 Make Over. All Rights Reserved | Design by <a href="http://www.W3Layouts.com" target="_blank">W3Layouts</a>
+                  2018 . All Rights Reserved <a href="{{ route('welcome') }}" target="_blank">Inter Media</a> Monastir</a>
                </p>
             </div>
             <div class="col-md-5 header-side">

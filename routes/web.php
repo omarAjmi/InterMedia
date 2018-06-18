@@ -112,6 +112,7 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth'], 'namespace' => 'Cli
     Route::get('{id}/orders', ['as' => 'user.orders', 'uses' => 'UsersCrudController@orders'])->middleware('authacc');
     
     Route::get('confirm/email', ['as' => 'user.confirm', 'uses' => 'UsersCrudController@confirmInscription'])->middleware('authacc');
+    Route::get('resend/confirm/email', ['as' => 'user.resendConfirm', 'uses' => 'UsersCrudController@resendConfirm']);
     
     Route::patch('{id}', ['as' => 'user.update', 'uses' => 'UsersCrudController@update']);
 });

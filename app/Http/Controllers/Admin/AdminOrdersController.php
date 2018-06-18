@@ -229,4 +229,13 @@ class AdminOrdersController extends Controller
         $order = Order::with(['client', 'payment', 'breakdown'])->findOrFail($id); #retriver la commande
         return view('admin.orders.invoice')->with(['order' => $order]);
     }
+
+    public function delete(int $id)
+    {
+        $order = Order::findOrFail($id);
+        Order::notifyWithEmail('Commande est irréparable ', 'emails.OrderUnreparableEmail', $order);
+        $order->delete();
+        Session::flash('success', 'Commande est suprimé');
+        return back();
+    }
 }

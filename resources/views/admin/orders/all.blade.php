@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="content">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (session('fail'))
+        <div class="alert alert-danger">
+            {{ session('fail') }}
+        </div>
+    @endif        
         <div>
             <a class="btn btn-primary"  href="{{ route('admin.order.filter.notVerified') }}" >
                 <i class="fa fa-search"></i> Voir Non Verifiés
@@ -37,7 +46,7 @@
                                         @endif
                                     </i></a>
                                     <a href="{{ route('admin.orderDetails', ['id'=>$order->id]) }}" class="btn btn-success consulter" >Consulter</a>
-                                    <form action="{{ route('admin.orderNew', ['id'=>$order->id]) }}" method="POST">
+                                    <form action="{{ route('admin.orderDelete', ['id'=>$order->id]) }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input class="btn btn-danger dan" type="submit" value="Suprimer">

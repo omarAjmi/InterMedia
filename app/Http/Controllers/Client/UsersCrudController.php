@@ -7,9 +7,8 @@ use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-// use App\Http\Requests\CreateClientPublicRequest;
-
 class UsersCrudController extends Controller
 {
     /**
@@ -73,12 +72,26 @@ class UsersCrudController extends Controller
         $user = Auth::user();
         if($request->confirm_hash == $user->confirm_hash)
         {
-            // dd($request->all(), $user->confirm_hash);
             $user->confirmed = 1;
             $user->save();
             return redirect('/');
         } else {
 
         }
+    }
+
+    public function resendConfirm()
+    {
+        $user = Auth::user();
+        try {
+            Mail::send('emails.confirmEmail', ['user'=>$user], function ($message) use ($user) {
+                $message->to($user->email);
+                $message->from(env('MAIL_USERNAME'));
+                $message->subject('Confirmation Adresse Email');
+            });
+        } catch (Exception $e) {
+            
+        }
+        return back();
     }
 }
